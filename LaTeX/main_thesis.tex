@@ -1,0 +1,92 @@
+\documentclass[12pt,a4paper]{book}
+
+%%% PREAMBLE   
+\input{preamble_thesis}
+\addbibresource{sources/bib_thesis.bib}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%
+%%% FRONT MATTER %%%
+%%% ============ %%%
+
+\frontmatter
+
+%%% FRONTPAGE
+\include{pages/frontpage}
+\thispagestyle{empty}
+
+%%% TITLEPAGE 
+\include{pages/titlepage_de}
+\thispagestyle{empty}
+\include{pages/titlepage_en}
+\thispagestyle{empty}
+
+%%% SUPERVISORS
+\include{pages/supervisors}
+\thispagestyle{empty}
+
+%%% ACKNOWLEDGEMENT
+%\include{pages/acknowledgement}
+%\thispagestyle{empty}
+
+%%% NOTATION AND CONVENTIONS
+\include{pages/notation-and-conventions}
+\thispagestyle{empty}
+
+%%% ABSTRACT
+\include{pages/abstract}
+\thispagestyle{empty}
+
+%%% TABLE OF CONTENT
+\pdfbookmark{\contentsname}{Contents}
+\tableofcontents 
+\clearpage
+\thispagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% MAIN MATTER %%%%
+%%% =========== %%%%
+
+\mainmatter
+
+%%% INTRODUCTION 
+\include{chapters/introduction}
+%%% CHAPTER 02
+\include{chapters/chapter-02}
+
+%%% CHAPTER 03
+\include{chapters/chapter-03}
+
+%%% CONCLUSION
+\include{chapters/conclusion}
+
+
+%%% APPENDIX
+\include{appendix/appendix}
+
+
+%%%%%%%%%%%%%%%%%%%
+%%% BACK MATTER %%%
+%%% =========== %%%
+
+\backmatter
+
+%%% BIBLIOGRAPHY
+\nocite{*}
+\phantomsection\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+
+%%% LIST OF FIGURES
+% \listoffigures
+
+%%% LIST OF TABLES
+% \listoftables
+
+
+%%% DECLARATION OF AUTHORSHIP 
+\include{pages/declaration-of-authorship}
+
+
+\end{document}
