@@ -1,11 +1,43 @@
 \begin{appendix}
 
-\chapter{The first appendix}
+\chapter{Detailed Calculations}
 \thispagestyle{empty}
 
-Here is the first appendix.
-
-
+\section{Deriving the flow equations in the case of no n-dependence}
+First the canonical generator $\hat\eta$ has to be evaluated:
+\begin{align}
+\hat\eta&\defeq\hat\eta(\lambda)\defeq\left[\ham_0,\ham_{\mathrm{int}}\right] = \left[\Sum_k \omega_k \CR_k\AN_k,\Sum_{q\neq q^\prime}V_{q,q^\prime}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}\CR_p\CR_{p^\prime}+W_{p,p^\prime}^*\AN_p\AN_{p^\prime}\right)\right]  \\ \quad& 
+= \Sum_k\Sum_{q,q^\prime}\omega_kV_{q,q^\prime}\left[\CR_k\AN_k,\CR_q\AN_{q^\prime}\right]+\Sum_k\Sum_{p,p^\prime}\left(\omega_k W_{p,p^\prime}\left[\CR_k\AN_k,\CR_p\CR_{p^\prime}\right]+\omega_k W_{p,p^\prime}^*\left[\CR_k\AN_k,\AN_p\AN_{p^\prime}\right]\right) \nonumber \\ \quad& 
+=\Sum_k\Sum_{q,q^\prime}\omega_kV_{q,q^\prime}\left(\CR_k\AN_{q^\prime}\delta_{k,q}-\CR_q\AN_k\delta_{k,q^\prime}\right) \nonumber \\ \quad& +\Sum_k\Sum_{p,p^\prime}\left(\omega_k W_{p,p^\prime}\left(\CR_k\CR_p\delta_{k,p^\prime}+\CR_k\CR_{p^\prime}\delta_{k,p}\right)-\omega_k W_{p,p^\prime}^*\left(\AN_p\AN_k\delta_{k,p^\prime}+\AN_{p^\prime}+\AN_{p^\prime}\AN_k\delta_{k,p}\right)\right) \nonumber \\ \quad& = \Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\right) \label{eta_wo_n_final}
+\end{align}
+Since $\hat\eta$ has the same form as $\ham_{\mathrm{int}}$, $\left[\hat\eta,\ham_0\right]$ follows by inspection of \ref{eta_wo_n_final}:
+\begin{align}
+\left[\hat\eta,\ham_0\right]&=-\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})^2\CR_q\AN_{q^\prime}\\ \quad& -\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})^2\CR_p\CR_{p^\prime}+W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})^2\AN_p\AN_{p^\prime}\right) \nonumber
+\end{align}
+The commutator of the generator and $\ham_{\mathrm{int}}$ needs more work:
+\begin{align}
+\left[\hat\eta,\ham_{\mathrm{int}}\right]&=\Bigg[\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime} +\Sum_{p,p^\prime}\big(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}\\ \quad&-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\big),
+\Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}\CR_{\tilde q}\AN_{\tilde q^\prime}+\Sum_{\tilde p,\tilde p^\prime}\left(W_{\tilde p,\tilde p^\prime}\CR_{\tilde p}\CR_{\tilde p^\prime}+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\AN_{\tilde p^\prime}\right)\Bigg]\nonumber\\ \quad& 
+=\left[\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime} , \Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}\CR_{\tilde q}\AN_{\tilde q^\prime} \right] \label{wo_n_I} \\ \quad&
++\left[\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime},\Sum_{\tilde p,\tilde p^\prime}\left(W_{\tilde p,\tilde p^\prime}\CR_{\tilde p}\CR_{\tilde p^\prime}+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\AN_{\tilde p^\prime}\right)\right] \label{wo_n_II} \\ \quad&
++\left[\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\right),\Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}\CR_{\tilde q}\AN_{\tilde q^\prime}\right] \label{wo_n_III}\\ \quad&
++\left[\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\right),\Sum_{\tilde p,\tilde p^\prime}\left(W_{\tilde p,\tilde p^\prime}\CR_{\tilde p}\CR_{\tilde p^\prime}+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\AN_{\tilde p^\prime}\right)\right] \label{wo_n_IV}
+\end{align}
+In the following, \ref{wo_n_I}-\ref{wo_n_IV} will be evaluated separately:
+\begin{itemize}
+\item [\textbf{\ref{wo_n_I}:}] \begin{align}&\left[\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime} , \Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}\CR_{\tilde q}\AN_{\tilde q^\prime} \right] \nonumber \\ \quad& = \Sum_{q\neq q^\prime}\Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\left[\CR_q\AN_{q^\prime} , \CR_{\tilde q}\AN_{\tilde q^\prime} \right] \nonumber \\ \quad& =  \Sum_{q\neq q^\prime}\Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\left(\CR_q\AN_{\tilde q^\prime}\delta_{q^\prime,\tilde q}-\CR_{\tilde q}\AN_{q^\prime}\delta_{q,\tilde q^\prime}\right) \nonumber \\ \quad& 
+= \Sum_{q\neq q^\prime}\Sum_{\tilde q^\prime}V_{q^\prime,\tilde q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{\tilde q^\prime} - \Sum_{q\neq q^\prime}\Sum_{\tilde q}V_{\tilde q,q}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_{\tilde q}\AN_{q^\prime} \nonumber \\ \quad& 
+= \Sum_{q, q^\prime}\Sum_{\tilde q^\prime}V_{q^\prime,\tilde q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{\tilde q^\prime} - \Sum_{q,q^\prime}\Sum_{\tilde q}V_{\tilde q,q}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_{\tilde q}\AN_{q^\prime} \nonumber \\ \quad& 
+=  \Sum_{q, q^\prime}\Sum_{\tilde q}V_{\tilde q,q^\prime}V_{q,\tilde q}(\omega_q-\omega_{\tilde q})\CR_q\AN_{q^\prime} - \Sum_{q,q^\prime}\Sum_{\tilde q}V_{q,\tilde q}V_{\tilde q,q^\prime}(\omega_{\tilde q}-\omega_{q^\prime})\CR_{q}\AN_{q^\prime} \nonumber \\ \quad& 
+=\Sum_{q\neq q^\prime}\Sum_{\tilde q}V_{\tilde q,q^\prime}V_{q,\tilde q}(\omega_q-\omega_{\tilde q})\CR_q\AN_{q^\prime} - \Sum_{q\neq q^\prime}\Sum_{\tilde q}V_{q,\tilde q}V_{\tilde q,q^\prime}(\omega_{\tilde q}-\omega_{q^\prime})\CR_{q}\AN_{q^\prime} \nonumber \\ \quad& + \Sum_{k}\Sum_{\tilde q}V_{\tilde q,k}V_{k,\tilde q}(\omega_k-\omega_{\tilde q})\CR_k\AN_{k} - \Sum_{k}\Sum_{\tilde q}V_{k,\tilde q}V_{\tilde q,k}(\omega_{\tilde q}-\omega_{k})\CR_{k}\AN_{k} \nonumber \\ \quad& 
+=\Sum_{q\neq q^\prime}\Sum_{\tilde q}V_{\tilde q,q^\prime}V_{q,\tilde q}(\omega_q-\omega_{\tilde q})\CR_q\AN_{q^\prime} - \Sum_{q\neq q^\prime}\Sum_{\tilde q}V_{q,\tilde q}V_{\tilde q,q^\prime}(\omega_{\tilde q}-\omega_{q^\prime})\CR_{q}\AN_{q^\prime} \nonumber \\ \quad& + \Sum_{k}\Sum_{\tilde q}2V_{\tilde q,k}V_{k,\tilde q}(\omega_k-\omega_{\tilde q})\CR_k\AN_{k}
+\end{align}
+\item [\textbf{\ref{wo_n_II}:}]
+\begin{align}
+&\left[\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime},\Sum_{\tilde p,\tilde p^\prime}\left(W_{\tilde p,\tilde p^\prime}\CR_{\tilde p}\CR_{\tilde p^\prime}+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\AN_{\tilde p^\prime}\right)\right] \\ \quad&
+= \Sum_{q\neq q^\prime}\Sum_{\tilde p,\tilde p^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\left(W_{\tilde p,\tilde p^\prime}\left[\CR_q\AN_{q^\prime},\CR_{\tilde p}\CR_{\tilde p^\prime}\right]+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\left[\CR_q\AN_{q^\prime},\AN_{\tilde p^\prime}\right]\right)\nonumber
+\end{align}
+\end{itemize}
 \chapter{The second appendix}
 \thispagestyle{empty}
 
