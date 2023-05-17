@@ -34,10 +34,90 @@ In the following, \ref{wo_n_I}-\ref{wo_n_IV} will be evaluated separately:
 \end{align}
 \item [\textbf{\ref{wo_n_II}:}]
 \begin{align}
-&\left[\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime},\Sum_{\tilde p,\tilde p^\prime}\left(W_{\tilde p,\tilde p^\prime}\CR_{\tilde p}\CR_{\tilde p^\prime}+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\AN_{\tilde p^\prime}\right)\right] \\ \quad&
-= \Sum_{q\neq q^\prime}\Sum_{\tilde p,\tilde p^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\left(W_{\tilde p,\tilde p^\prime}\left[\CR_q\AN_{q^\prime},\CR_{\tilde p}\CR_{\tilde p^\prime}\right]+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\left[\CR_q\AN_{q^\prime},\AN_{\tilde p^\prime}\right]\right)\nonumber
+&\left[\Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime},\Sum_{\tilde p,\tilde p^\prime}\left(W_{\tilde p,\tilde p^\prime}\CR_{\tilde p}\CR_{\tilde p^\prime}+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\AN_{\tilde p^\prime}\right)\right] \nonumber \\ \quad&
+= \Sum_{q\neq q^\prime}\Sum_{\tilde p,\tilde p^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\left(W_{\tilde p,\tilde p^\prime}\left[\CR_q\AN_{q^\prime},\CR_{\tilde p}\CR_{\tilde p^\prime}\right]+W_{\tilde p,\tilde p^\prime}^*\left[\CR_q\AN_{q^\prime},\AN_{\tilde p}\AN_{\tilde p^\prime}\right]\right)\nonumber \\ \quad& 
+= \Sum_{q,q^\prime}\Sum_{\tilde p,\tilde p^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\left(W_{\tilde p,\tilde p^\prime}\left(\CR_q\CR_{\tilde p}\delta_{q^\prime,\tilde p^\prime}+ \CR_q\CR_{\tilde p^\prime}\delta_{q^\prime,\tilde p}\right)-W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\left(\AN_{\tilde p^\prime}\AN_{q^\prime}\delta_{q,\tilde p}+\AN_{\tilde p}\AN_{q^\prime}\delta_{\tilde p^\prime,q}\right)\right)\nonumber \\ \quad&
+= \Sum_{ p, p^\prime}\Sum_{q}V_{q,p^\prime}(\omega_q-\omega_{p^\prime}) W_{ p, p^\prime}\CR_q\CR_{ p}
++\Sum_{ p, p^\prime}\Sum_{q}V_{q,p}(\omega_q-\omega_{p}) W_{ p, p^\prime} \CR_q\CR_{ p^\prime} \nonumber \\ \quad& 
+-\Sum_{ p, p^\prime}\Sum_{q^\prime}V_{p,q^\prime}(\omega_p-\omega_{q^\prime}) W_{ p, p^\prime}^* \AN_{ p^\prime}\AN_{q^\prime}
+-\Sum_{ p, p^\prime}\Sum_{q^\prime}V_{p^\prime,q^\prime}(\omega_{p^\prime}-\omega_{q^\prime}) W_{ p, p^\prime}^* \AN_{ p}\AN_{q^\prime} \nonumber \\ \quad& 
+= \Sum_{ p, p^\prime}\Sum_{q}V_{{p^\prime},q}(\omega_{p^\prime}-\omega_{q}) W_{ p, q}\CR_{ p}\CR_{p^\prime}
++\Sum_{ p, p^\prime}\Sum_{q}V_{p,q}(\omega_p-\omega_{q}) W_{ q, p^\prime} \CR_p\CR_{ p^\prime} \nonumber \\ \quad& 
+-\Sum_{ p, p^\prime}\Sum_{q}V_{q,p}(\omega_{q}-\omega_{p}) W_{ q, p^\prime}^* \AN_{p}\AN_{ p^\prime}
+-\Sum_{ p, p^\prime}\Sum_{q}V_{q,p^\prime}(\omega_{q}-\omega_{p^\prime}) W_{ p, {q}}^* \AN_{ p}\AN_{p^\prime} \nonumber \\ \quad& 
+= \Sum_{ p, p^\prime}\Sum_{q}V_{{p^\prime},q}(\omega_{p^\prime}-\omega_{q}) W_{ p, q}\CR_{ p}\CR_{p^\prime}
++\Sum_{ p, p^\prime}\Sum_{q}V_{p,q}(\omega_p-\omega_{q}) W_{ q, p^\prime} \CR_p\CR_{ p^\prime} \nonumber \\ \quad& 
+-\Sum_{ p, p^\prime}\Sum_{q}V_{q,p}(\omega_{q}-\omega_{p}) W_{ q, p^\prime}^* \AN_{p}\AN_{ p^\prime}
+-\Sum_{ p, p^\prime}\Sum_{q}V_{q,p^\prime}(\omega_{q}-\omega_{p^\prime}) W_{ p, {q}}^* \AN_{ p}\AN_{p^\prime} \nonumber \\ \quad& 
+=\Sum_{ p, p^\prime}\Sum_{q}V_{{p},q}(\omega_{p}-\omega_{q}) (W_{ q, p^\prime}+W_{ p^\prime, q})\CR_{ p}\CR_{p^\prime}\nonumber \\ \quad& 
++\Sum_{ p, p^\prime}\Sum_{q}V_{q,p}(\omega_{p}-\omega_{q}) (W_{ q, p^\prime}^*+W_{ p^\prime, {q}}^*) \AN_{p}\AN_{ p^\prime}
+%= \Sum_{ p, p^\prime}\Sum_{q}V_{p,q}(\omega_{p^\prime}+\omega_p-2\omega_{q}) W_{ q, p^\prime} \CR_p\CR_{ p^\prime} \nonumber \\ \quad& 
+%+\Sum_{ p, p^\prime}\Sum_{q}V_{q,p^\prime}(\omega_{p^\prime}+\omega_p-2\omega_{q}) W_{ p, {q}}^* \AN_{ p}\AN_{p^\prime} \nonumber \\ \quad& 
+%= \Sum_{ p, p^\prime}\Sum_{q}V_{p,q}(\omega_{p^\prime}+\omega_p-2\omega_{q}) W_{ q, p^\prime} \CR_p\CR_{ p^\prime} \nonumber \\ \quad& 
+%+\Sum_{ p, p^\prime}\Sum_{q}V_{q,p}(\omega_{p^\prime}+\omega_p-2\omega_{q}) W_{ p^\prime, {q}}^* \AN_{ p}\AN_{p^\prime}
+\end{align}
+\item [\textbf{\ref{wo_n_III}:}]
+\begin{align}
+&\left[\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\right),\Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}\CR_{\tilde q}\AN_{\tilde q^\prime}\right]\nonumber \\ \quad& 
+=\Sum_{p,p^\prime}\Sum_{\tilde q\neq \tilde q^\prime}V_{\tilde q,\tilde q^\prime}(\omega_p+\omega_{p^\prime})\left(W_{p,p^\prime}\left[\CR_p\CR_{p^\prime},\CR_{\tilde q}\AN_{\tilde q^\prime}\right]-W_{p,p^\prime}^*\left[\AN_p\AN_{p^\prime},\CR_{\tilde q}\AN_{\tilde q^\prime}\right]\right)\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{ q\neq  q^\prime}V_{ q, q^\prime}(\omega_p+\omega_{p^\prime})W_{p,p^\prime}\left(\CR_q\CR_p\delta_{q^\prime,p^\prime}+\CR_q\CR_{p^\prime}\delta_{q^\prime,p}\right)\nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{ q\neq  q^\prime}V_{ q, q^\prime}(\omega_p+\omega_{p^\prime})W_{p,p^\prime}^*\left(\AN_p\AN_{q^\prime}\delta_{q,p^\prime}+\AN_{p^\prime}\AN_{q^\prime}\delta_{q,p}\right)\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{q}V_{ q, p^\prime}(\omega_p+\omega_{p^\prime})W_{p,p^\prime}\CR_q\CR_p
+-\Sum_{p,p^\prime}\Sum_{ q}V_{ q, p}(\omega_p+\omega_{p^\prime})W_{p,p^\prime}\CR_q\CR_{p^\prime} \nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{ q^\prime}V_{ p^\prime, q^\prime}(\omega_p+\omega_{p^\prime})W_{p,p^\prime}^*\AN_p\AN_{q^\prime}
+-\Sum_{p,p^\prime}\Sum_{ q^\prime}V_{ p, q^\prime}(\omega_p+\omega_{p^\prime})W_{p,p^\prime}^*\AN_{p^\prime}\AN_{q^\prime}\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{q}V_{ {p^\prime},q}(\omega_p+\omega_{q})W_{p,q}\CR_p\CR_{p^\prime}
+-\Sum_{p,p^\prime}\Sum_{ q}V_{ p, q}(\omega_q+\omega_{p^\prime})W_{q,p^\prime}\CR_p\CR_{p^\prime} \nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{ q^\prime}V_{ q^\prime, p^\prime}(\omega_p+\omega_{q^\prime})W_{p,q^\prime}^*\AN_p\AN_{p^\prime}
+-\Sum_{p,p^\prime}\Sum_{ q^\prime}V_{ q^\prime, p}(\omega_{q^\prime}+\omega_{p^\prime})W_{q^\prime,p^\prime}^*\AN_{p}\AN_{p^\prime}\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{ q}V_{ p, q}(\omega_q+\omega_{p^\prime})(W_{p^\prime,q}+W_{q,p^\prime})\CR_p\CR_{p^\prime} \nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{ q}V_{ q, p}(\omega_{q}+\omega_{p^\prime})(W_{p^\prime,q}^*+W_{q,p^\prime}^*)\AN_{p}\AN_{p^\prime}
+\end{align}
+\item [\textbf{\ref{wo_n_IV}:}]
+\begin{align}
+&\left[\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\right),\Sum_{\tilde p,\tilde p^\prime}\left(W_{\tilde p,\tilde p^\prime}\CR_{\tilde p}\CR_{\tilde p^\prime}+W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\AN_{\tilde p^\prime}\right)\right] \nonumber \\ \quad& 
+=\Sum_{p,p^\prime}\Sum_{\tilde p,\tilde p^\prime}W_{p,p^\prime}(\omega_p+\omega_{p^\prime})W_{\tilde p,\tilde p^\prime}^*\left[\CR_p\CR_{p^\prime},\AN_{\tilde p}\AN_{\tilde p^\prime}\right]
+-\Sum_{p,p^\prime}\Sum_{\tilde p,\tilde p^\prime} W_{p,p^\prime}^*W_{\tilde p,\tilde p^\prime}(\omega_p+\omega_{p^\prime})\left[\AN_p\AN_{p^\prime},\CR_{\tilde p}\CR_{\tilde p^\prime}\right] \nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{\tilde p,\tilde p^\prime}W_{p,p^\prime}(\omega_p+\omega_{p^\prime}+\omega_{\tilde p}+\omega_{\tilde p^\prime})W_{\tilde p,\tilde p^\prime}^*\left[\AN_{\tilde p}\AN_{\tilde p^\prime},\CR_p\CR_{p^\prime}\right] \nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{\tilde p,\tilde p^\prime}W_{p,p^\prime}(\omega_p+\omega_{p^\prime}+\omega_{\tilde p}+\omega_{\tilde p^\prime})W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\CR_p\delta_{\tilde p^\prime,p^\prime}\nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{\tilde p,\tilde p^\prime}W_{p,p^\prime}(\omega_p+\omega_{p^\prime}+\omega_{\tilde p}+\omega_{\tilde p^\prime})W_{\tilde p,\tilde p^\prime}^*\AN_{\tilde p}\CR_{p^\prime}\delta_{\tilde p^\prime,p}\nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{\tilde p,\tilde p^\prime}W_{p,p^\prime}(\omega_p+\omega_{p^\prime}+\omega_{\tilde p}+\omega_{\tilde p^\prime})W_{\tilde p,\tilde p^\prime}^*\CR_p\AN_{\tilde p^\prime}\delta_{\tilde p,p^\prime}\nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{\tilde p,\tilde p^\prime}W_{p,p^\prime}(\omega_p+\omega_{p^\prime}+\omega_{\tilde p}+\omega_{\tilde p^\prime})W_{\tilde p,\tilde p^\prime}^*\CR_{p^\prime}\AN_{\tilde p^\prime}\delta_{\tilde p,p}\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{\tilde p}W_{p,p^\prime}(\omega_p+2\omega_{p^\prime}+\omega_{\tilde p})W_{\tilde p,p^\prime}^*\AN_{\tilde p}\CR_p
+-\Sum_{p,p^\prime}\Sum_{\tilde p}W_{p,p^\prime}(2\omega_p+\omega_{p^\prime}+\omega_{\tilde p})W_{\tilde p,p}^*\AN_{\tilde p}\CR_{p^\prime}\nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{\tilde p^\prime}W_{p,p^\prime}(\omega_p+2\omega_{p^\prime}+\omega_{\tilde p^\prime})W_{p^\prime,\tilde p^\prime}^*\CR_p\AN_{\tilde p^\prime}
+-\Sum_{p,p^\prime}\Sum_{\tilde p^\prime}W_{p,p^\prime}(2\omega_p+\omega_{p^\prime}+\omega_{\tilde p^\prime})W_{p,\tilde p^\prime}^*\CR_{p^\prime}\AN_{\tilde p^\prime}\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{\tilde p}W_{p,\tilde p}(\omega_p+2\omega_{\tilde p}+\omega_{p^\prime})W_{p^\prime,\tilde p}^*\AN_{p^\prime}\CR_p
+-\Sum_{p,p^\prime}\Sum_{\tilde p}W_{\tilde p,p}(2\omega_{\tilde p}+\omega_{p}+\omega_{p^\prime})W_{p^\prime,\tilde p}^*\AN_{p^\prime}\CR_{p}\nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{\tilde p^\prime}W_{p,\tilde p^\prime}(\omega_p+2\omega_{\tilde p^\prime}+\omega_{ p^\prime})W_{\tilde p^\prime, p^\prime}^*\CR_p\AN_{ p^\prime}
+-\Sum_{p,p^\prime}\Sum_{\tilde p^\prime}W_{\tilde p^\prime,p}(2\omega_{\tilde p^\prime}+\omega_p+\omega_{p^\prime})W_{\tilde p^\prime,{p^\prime}}^*\CR_p\AN_{p^\prime}\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{\tilde p}(W_{p,\tilde p}+W_{\tilde p,p})(\omega_p+2\omega_{\tilde p}+\omega_{p^\prime})W_{p^\prime,\tilde p}^*\AN_{p^\prime}\CR_p\nonumber \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{\tilde p^\prime}(W_{p,\tilde p^\prime}+W_{\tilde p^\prime,p})(\omega_p+2\omega_{\tilde p^\prime}+\omega_{ p^\prime})W_{\tilde p^\prime, p^\prime}^*\CR_p\AN_{ p^\prime}\nonumber \\ \quad& 
+=-\Sum_{p,p^\prime}\Sum_{\tilde p}(W_{p,\tilde p}+W_{\tilde p,p})(\omega_p+2\omega_{\tilde p}+\omega_{p^\prime})W_{p^\prime,\tilde p}^*(\delta_{p,p^\prime}+\CR_p\nonumber\AN_{p^\prime}) \\ \quad& 
+-\Sum_{p,p^\prime}\Sum_{\tilde p}(W_{p,\tilde p}+W_{\tilde p,p})(\omega_p+2\omega_{\tilde p}+\omega_{ p^\prime})W_{\tilde p, p^\prime}^*\CR_p\AN_{ p^\prime}\nonumber \\ \quad& 
+= -\Sum_{p,p^\prime}\Sum_{\tilde p}(W_{p,\tilde p}+W_{\tilde p,p})(\omega_p+2\omega_{\tilde p}+\omega_{ p^\prime})(W_{\tilde p, p^\prime}^*+W_{p^\prime,\tilde p}^*)\CR_p\AN_{ p^\prime}\nonumber \\ \quad& 
+-2\Sum_{k}\Sum_{\tilde p}(W_{k,\tilde p}+W_{\tilde p,k})(\omega_k+\omega_{\tilde p})W_{k,\tilde p}^*\nonumber \\ \quad& 
+= -\Sum_{q\neq q^\prime}\Sum_{\tilde p}(W_{q,\tilde p}+W_{\tilde p,q})(\omega_q+2\omega_{\tilde p}+\omega_{ q^\prime})(W_{\tilde p, q^\prime}^*+W_{q^\prime,\tilde p}^*)\CR_q\AN_{ q^\prime}\nonumber \\ \quad& 
+-2\Sum_{k}\Sum_{\tilde p}(W_{k,\tilde p}+W_{\tilde p,k})(\omega_k+\omega_{\tilde p})(W_{\tilde p, k}^*+W_{k,\tilde p}^*)\CR_k\AN_{ k}\nonumber \\ \quad& 
+-2\Sum_{k}\Sum_{\tilde p}(W_{k,\tilde p}+W_{\tilde p,k})(\omega_k+\omega_{\tilde p})W_{k,\tilde p}^*
 \end{align}
 \end{itemize}
+Using the expressions for the commutators of the generator and $\ham_0$ respectively $\ham_{\mathrm{int}}$ derived above, the flow $\partial_\lambda\ham(\lambda)=[\hat\eta(\lambda),\ham(\lambda)]$ yields the following flow equations:
+\begin{flushleft}
+\begin{subequations}
+\begin{align}
+\partial_\lambda\omega_k&= \Sum_{\tilde q}2V_{\tilde q,k}V_{k,\tilde q}(\omega_k-\omega_{\tilde q})\CR_k\AN_{k}-2\Sum_{\tilde p}(W_{k,\tilde p}+W_{\tilde p,k})(\omega_k+\omega_{\tilde p})(W_{\tilde p, k}^*+W_{k,\tilde p}^*)\CR_k\AN_{ k} \label{feq_won_I}\\ 
+\partial_\lambda V_{q,q^\prime}&=-V_{q,q^\prime}(\omega_q-\omega_{q^\prime})^2\CR_q\AN_{q^\prime}-\Sum_{\tilde p}(W_{q,\tilde p}+W_{\tilde p,q})(\omega_q+2\omega_{\tilde p}+\omega_{ q^\prime})(W_{\tilde p, q^\prime}^*+W_{q^\prime,\tilde p}^*) \nonumber\\ \quad&
++ \Sum_{\tilde q}V_{\tilde q,q^\prime}V_{q,\tilde q}(\omega_q-\omega_{\tilde q}) - \Sum_{\tilde q}V_{q,\tilde q}V_{\tilde q,q^\prime}(\omega_{\tilde q}-\omega_{q^\prime})\label{feq_won_II} \\ 
+\partial_\lambda W_{p,p^\prime}&=-W_{p,p^\prime}(\omega_p+\omega_{p^\prime})^2-\Sum_{ q}V_{ p, q}(\omega_q+\omega_{p^\prime})(W_{p^\prime,q}+W_{q,p^\prime}) \nonumber\\ \quad&
++ \Sum_{q}V_{{p},q}(\omega_{p}-\omega_{q}) (W_{ q, p^\prime}+W_{ p^\prime, q})\label{feq_won_III}\\ 
+\partial_\lambda W_{p,p^\prime}^*&=-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})^2-\Sum_{ q}V_{ q, p}(\omega_{q}+\omega_{p^\prime})(W_{p^\prime,q}^*+W_{q,p^\prime}^*)\nonumber\\ \quad& 
++\Sum_{q}V_{q,p}(\omega_{p}-\omega_{q}) (W_{ q, p^\prime}^*+W_{ p^\prime, {q}}^*)\label{feq_won_III'}\\ 
+\partial_\lambda \varepsilon&=-2\Sum_{p,p^\prime}(W_{p,p^\prime}+W_{p^\prime,p})(\omega_p+\omega_{p^\prime})W_{p,p^\prime}^*\label{feq_won_IV}
+\end{align}
+\end{subequations}
+\end{flushleft}
+Obviously, equations \ref{feq_won_III} and \ref{feq_won_III'} are not independent from each other, since they are related by complex conjugation. It is nevertheless a good consistency check to see that the two independently derived equations are equivalent.
 \chapter{The second appendix}
 \thispagestyle{empty}
 
