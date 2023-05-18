@@ -96,6 +96,7 @@
 \newcommand{\eqdef}{=\vcentcolon}
 \newcommand{\ham}{\hat{\mathcal{H}}}
 \newcommand{\Sum}{\sum\limits}
+\newcommand{\NO}{\vcentcolon}
 
 
 
@@ -335,3 +336,9 @@
 % source: https://tex.stackexchange.com/questions/5787/table-of-contents-with-page-style-empty
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{empty}}} 
 %%%%%%%%%%%%%%%%%
+
+% Change Chapter xy to sth else
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+
