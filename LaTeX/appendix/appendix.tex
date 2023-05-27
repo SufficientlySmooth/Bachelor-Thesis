@@ -8,7 +8,7 @@ First the canonical generator $\hat\eta$ has to be evaluated:
 \begin{align}
 \hat\eta&\defeq\hat\eta(\lambda)\defeq\left[\ham_0,\ham_{\mathrm{int}}\right] = \left[\Sum_k \omega_k \CR_k\AN_k,\Sum_{q\neq q^\prime}V_{q,q^\prime}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}\CR_p\CR_{p^\prime}+W_{p,p^\prime}^*\AN_p\AN_{p^\prime}\right)\right]  \\ \quad& 
 = \Sum_k\Sum_{q,q^\prime}\omega_kV_{q,q^\prime}\left[\CR_k\AN_k,\CR_q\AN_{q^\prime}\right]+\Sum_k\Sum_{p,p^\prime}\left(\omega_k W_{p,p^\prime}\left[\CR_k\AN_k,\CR_p\CR_{p^\prime}\right]+\omega_k W_{p,p^\prime}^*\left[\CR_k\AN_k,\AN_p\AN_{p^\prime}\right]\right) \nonumber \\ \quad& 
-=\Sum_k\Sum_{q,q^\prime}\omega_kV_{q,q^\prime}\left(\CR_k\AN_{q^\prime}\delta_{k,q}-\CR_q\AN_k\delta_{k,q^\prime}\right) \nonumber \\ \quad& +\Sum_k\Sum_{p,p^\prime}\left(\omega_k W_{p,p^\prime}\left(\CR_k\CR_p\delta_{k,p^\prime}+\CR_k\CR_{p^\prime}\delta_{k,p}\right)-\omega_k W_{p,p^\prime}^*\left(\AN_p\AN_k\delta_{k,p^\prime}+\AN_{p^\prime}+\AN_{p^\prime}\AN_k\delta_{k,p}\right)\right) \nonumber \\ \quad& = \Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\right) \label{eta_wo_n_final}
+=\Sum_k\Sum_{q,q^\prime}\omega_kV_{q,q^\prime}\left(\CR_k\AN_{q^\prime}\delta_{k,q}-\CR_q\AN_k\delta_{k,q^\prime}\right) \nonumber \\ \quad& +\Sum_k\Sum_{p,p^\prime}\left(\omega_k W_{p,p^\prime}\left(\CR_k\CR_p\delta_{k,p^\prime}+\CR_k\CR_{p^\prime}\delta_{k,p}\right)-\omega_k W_{p,p^\prime}^*\left(\AN_p\AN_k\delta_{k,p^\prime}+\AN_{p^\prime}\AN_k\delta_{k,p}\right)\right) \nonumber \\ \quad& = \Sum_{q\neq q^\prime}V_{q,q^\prime}(\omega_q-\omega_{q^\prime})\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}(\omega_p+\omega_{p^\prime})\CR_p\CR_{p^\prime}-W_{p,p^\prime}^*(\omega_p+\omega_{p^\prime})\AN_p\AN_{p^\prime}\right) \label{eta_wo_n_final}
 \end{align}
 Since $\hat\eta$ has the same form as $\ham_{\mathrm{int}}$, $\left[\hat\eta,\ham_0\right]$ follows by inspection of \ref{eta_wo_n_final}:
 \begin{align}
@@ -119,7 +119,71 @@ Using the expressions for the commutators of the generator and $\ham_0$ respecti
 \end{subequations}
 \end{flushleft}
 Obviously, equations \ref{feq_won_III} and \ref{feq_won_III'} are not independent from each other, since they are related by complex conjugation. Seeing this is a good consistency check because complex conjugation was not explicitly used in the derivation of the these two equations.\\
-Further note that the flow equations \ref{feq_won_I}-\ref{feq_won_IV} are exact in the sense that if the flow is completely traversed, the flow Hamiltonian will be exactly diagonal.
+Furthermore note that the flow equations \ref{feq_won_I}-\ref{feq_won_IV} are exact in the sense that if the flow is completely traversed, the flow Hamiltonian will be exactly diagonal.
+
+\section{Deriving the flow equations with n-dependence}
+\subsection{Useful preliminaries}
+Consider some operator $\hat f$ which depends on a number operator $\hat n=\CR\AN$. The following relations will be used later:
+\begin{subequations}
+\label{fcom}
+\begin{align}
+\left[\CR,\hat f(\hat n) \right] &= \CR\left(\hat f(\hat n)-\hat f(\hat n+1)\right)\\ 
+\left[\AN,\hat f(\hat n) \right] &= \AN\left(\hat f(\hat n)-\hat f(\hat n-1)\right)\\
+\left[\hat f(\hat n),\CR \right] &= \left(\hat f(\hat n)-\hat f(\hat n-1)\right)\CR\\
+\left[\hat f(\hat n),\AN \right] &= \left(\hat f(\hat n)-\hat f(\hat n+1)\right)\AN
+\end{align}
+\end{subequations}
+These can be proved by induction for $\hat f(\hat n)=\hat n^k, k\in\N$ and from there simply extended to well-behaved $\hat f$ via power series. Equations \ref{fcom} are still valid for functions depending on $\left\{\hat n_k\right\}_k$, because all $\hat n_k$ pairwise commute.\\
+We will write $\hat f\left(\hat n_1,\hat n_2,\hdots\right)\eqdef \hat f$ and $\hat f\left(\hat n_1,\hat n_2,\hdots,\hat n_k\pm 1,\hat n_{k+1},\hdots\right)\eqdef \hat f(\hat n_k\pm1)$ where it is understood that $\hat f(\hat n_k\pm1,\hat n_{k}\pm1)\eqdef\hat f(\hat n_k\pm2)$.\\
+Using this notation, it is evident that a simple induction for $n_1,n_2\in\N_0$ yields the following relation:
+\begin{align}
+&\left[\hat f(\hat n),\CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}} \right] \nonumber \\ \quad& 
+= \left(\hat f-\hat f\left(\hat n_{k_1}-1,\hat n_{k_2}-1,\hdots,\hat n_{k_{n_1}},\hat n_{k_1}+1,\hat n_{k_2}+1\hdots\hat n_{k_{n_2}}+1\right)\right)\CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}
+\end{align}
+Furthermore, applying the recurrence relation introduced to define the normal ordering procedure can be used to successively normal order operators. Let $\hat O\defeq \CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}$. Then:
+\begin{subequations}
+\begin{align}
+\AN_q\NO\hat O\NO &=\NO\hat O\AN_q\NO + \sum\limits_{k}\NO \frac{\partial \hat O}{\partial\CR_k}\NO \nonumber \\
+ &= \NO\hat O\AN_q\NO + \sum\limits_{i=1}^{n_1}\delta_{k_i,q}\NO \CR_{k_1}\CR_{k_2}\cdots\CR_{k_{i-1}}\CR_{k_{i+1}}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}\NO \\
+\CR_q\NO\hat O\NO &= \NO \CR_q\hat O\NO
+\end{align}
+\end{subequations}
+\subsection{The canonical generator}
+The first step in the calculating the flow equations is again to calculate the canonical commutator $\hat\eta\defeq\left[\ham_0,\ham_{\mathrm{int}}\right]$:
+\begin{align}
+\hat\eta &= \left[\Sum_k \hat\omega_k \NO\CR_k\AN_k\NO,\Sum_{q\neq q^\prime}\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right)\right]  \nonumber\\ \quad& 
+= \Sum_k \Sum_{q\neq q^\prime}\left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO\right] \label{eta_with_n_I}\\ \quad& 
++ \Sum_k\Sum_{p,p^\prime}\left[\hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO\right] \label{eta_with_n_II} \\ \quad& 
++ \Sum_k\Sum_{p,p^\prime}\left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime} \NO \right] \label{eta_with_n_III}
+\end{align}
+In the following, the terms \ref{eta_with_n_I}-\ref{eta_with_n_III} will be evaluated separately:
+
+\begin{itemize}
+\item[\textbf{\ref{eta_with_n_I}}] 
+\begin{align}
+& \left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO\right]\nonumber\\
+&= \hat\omega_k \hat V_{q,q^\prime} \left[ \NO\CR_k\AN_k\NO,\NO \CR_q\AN_{q^\prime}\NO\right] + \hat\omega_k   \underbrace{\left[ \NO\CR_k\AN_k\NO,\hat V_{q,q^\prime}\right]}_{=0} \NO \CR_q\AN_{q^\prime}\NO \nonumber \\ 
+&+ \hat V_{q,q^\prime} \left[ \hat\omega_k,\NO \CR_q\AN_{q^\prime}\NO\right]  \NO\CR_k\AN_k\NO + \underbrace{\left[ \hat\omega_k ,\hat V_{q,q^\prime}\right]}_{=0}\NO \CR_q\AN_{q^\prime}\NO \NO\CR_k\AN_k\NO \nonumber \\
+&= \hat\omega_k \hat V_{q,q^\prime} \left(\NO\CR_k\AN_{q^\prime}\NO\delta_{k,q}-\NO\CR_q\AN_k\NO\delta_{k,q^\prime}\right) + \hat V_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right) \NO \CR_q\AN_{q^\prime}\NO \NO\CR_k\AN_k\NO\nonumber\\
+&= \hat\omega_k \hat V_{q,q^\prime} \left(\NO\CR_k\AN_{q^\prime}\NO\delta_{k,q}-\NO\CR_q\AN_k\NO\delta_{k,q^\prime}\right) \nonumber \\
+& + \hat V_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right) \left(\NO \CR_q\CR_k\AN_{q^\prime}\AN_k\NO\right)+\delta_{q^\prime,k}\NO\CR_{q}\AN_k\NO
+\end{align}
+\item[\textbf{\ref{eta_with_n_II}}] 
+\begin{align}
+&\left[\hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO\right] \nonumber \\
+&=\hat W_{p,p^\prime} \left[\hat\omega_k ,\NO \CR_p\CR_{p^\prime}\NO\right] \NO\CR_k\AN_k\NO + \hat W_{p,p^\prime}\hat\omega_k \left[ \NO\CR_k\AN_k\NO,\NO \CR_p\CR_{p^\prime}\NO\right] \nonumber\\
+&= \hat W_{p,p^\prime} \left(\omega_k-\hat\omega(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\NO\NO\CR_k\AN_k\NO + \hat W_{p,p^\prime}\hat\omega_k \left(\NO\CR_k\CR_p\NO\delta_{k,p^\prime}+\NO\CR_k\CR_{p^\prime}\NO\delta_{k,p}\right)\nonumber\\
+&= \hat W_{p,p^\prime} \left(\omega_k-\hat\omega(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\CR_k\AN_k\NO + \hat W_{p,p^\prime}\hat\omega_k \left(\NO\CR_k\CR_p\NO\delta_{k,p^\prime}+\NO\CR_k\CR_{p^\prime}\NO\delta_{k,p}\right)
+\end{align}
+\item[\textbf{\ref{eta_with_n_III}}] 
+\begin{align}
+&\left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime} \NO \right]\nonumber \\
+&=\hat W_{p,p^\prime}^\dagger \left[ \hat\omega_k ,\NO\AN_p\AN_{p^\prime} \NO \right]\NO\CR_k\AN_k\NO+\hat W_{p,p^\prime}^\dagger \hat\omega_k\left[  \NO\CR_k\AN_k\NO,\NO\AN_p\AN_{p^\prime} \NO \right] \nonumber \\
+&=\hat W_{p,p^\prime}^\dagger \left(\omega_k-\hat\omega(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \AN_p\AN_{p^\prime}\NO\NO\CR_k\AN_k\NO+\hat W_{p,p^\prime}^\dagger \hat\omega_k\left(\NO\AN_p\AN_k\NO\delta_{k,p^\prime}+\NO\AN_{p^\prime}\AN_k\NO\delta_{k,p}\right) \nonumber \\
+&=\hat W_{p,p^\prime}^\dagger \left(\omega_k-\hat\omega(\hat n_{p^\prime}+1,\hat n_p +1)\right)\left(\NO \CR_k\AN_k\AN_p\AN_{p^\prime}\NO+\delta_{k,p}\NO\AN_{p^\prime}\AN_k\NO+\delta_{k,p^\prime}\NO\AN_p\AN_k\NO\right) \nonumber \\
+&+\hat W_{p,p^\prime}^\dagger \hat\omega_k\left(\NO\AN_p\AN_k\NO\delta_{k,p^\prime}+\NO\AN_{p^\prime}\AN_k\NO\delta_{k,p}\right) \nonumber \\
+\end{align}
+\end{itemize}
 \chapter{The second appendix}
 \thispagestyle{empty}
 
