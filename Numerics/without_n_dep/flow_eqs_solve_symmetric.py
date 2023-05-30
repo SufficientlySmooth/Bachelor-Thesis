@@ -8,7 +8,6 @@ import numpy as np
 from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 from numba import jit
-from copy import deepcopy
 
 @jit
 def flat_arr(om,V,W,eps):
@@ -48,7 +47,7 @@ def deriv(t,flat,N):
     eps_ret = -2*np.sum([   (W[p,p_]+W[p_,p])*(om[p]+om[p_])*Wdag[p,p_] 
                 for p in range(N) for p_ in range(N)])
     
-    return flat_arr(om_ret,V_ret,W_ret,eps_ret)
+    return flat_arr(om_ret,(V_ret+ np.transpose(V_ret))/2,W_ret,eps_ret)
 
 
 n = int(200) #number of t where the flow will be evaluated
@@ -67,13 +66,7 @@ flat = flat_arr(om,V,W,eps)
 
 y0 = flat_arr(om,V,W,eps)
 
-#sol = odeint(deriv, y0, np.linspace(0,100,1000),args=(N,),tfirst=True,full_output=1)
-
-#result =  unpack_arr(np.array(sol[0][-1]),N)
-
 sol2 = solve_ivp(deriv,(0,tmax),y0,args=(N,),t_eval=np.linspace(0,tmax,int(n)),method='Radau')
-
-#om_res, V_res, W_res, eps_res = unpack_arr(sol2["y"],N)
 
 t = sol2["t"]
 for i in range(N):
@@ -107,3 +100,7 @@ print('Maximal absolute value of the Vs:', max(abs(V10.flatten())))
 print('Maximal absolute value of the Ws:', max(abs(W10.flatten())))
 
 print((abs(V10.flatten())<.001).reshape((N,N)))
+
+
+#sol = odeint(deriv, y0, np.linspace(0,100,1000),args=(N,),tfirst=True,full_output=1)
+#om_res, V_res, W_res, eps_res = unpack_arr(sol2["y"],N)
