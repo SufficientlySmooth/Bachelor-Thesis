@@ -8,7 +8,6 @@ import numpy as np
 from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 from numba import jit
-from copy import deepcopy
 
 @jit
 def flat_arr(om,V,W,eps):
@@ -30,17 +29,18 @@ def deriv(t,flat,N):
     om, V, W, eps = unpack_arr(flat,N)
     Wdag = np.conjugate(W)
     
-    om_ret = np.array([np.sum([2*V[q,k]*V[k,q]*(om[k]-om[q])    -   2*(W[k,q]+W[q,k])*(om[k]+om[q])*(Wdag[q,k]+Wdag[k,q]) for q in range(N)]) for k in range(N)])
+    om_ret = 0*om #+ np.array([np.sum([2*V[q,k]*V[k,q]*(om[k]-om[q])    -   2*(W[k,q]+W[q,k])*(om[k]+om[q])*(Wdag[q,k]+Wdag[k,q]) for q in range(N)]) for k in range(N)])
 
     V_ret = np.array(
-        [[-V[q,q_]*(om[q]-om[q_])**2    +   sum([-(W[q,p]+W[p,q])*(Wdag[p,q_]+Wdag[q_,p])*(om[q]+om[q_]+2*om[p])     +   V[p,q_]*V[q,p]*(om[q]+om[q_]-2*om[p]) 
-                                             for p in range(N)]) 
+        [[-V[q,q_]*(om[q]-om[q_])**2  #  +   sum([-(W[q,p]+W[p,q])*(Wdag[p,q_]+Wdag[q_,p])*(om[q]+om[q_]+2*om[p])     +   V[p,q_]*V[q,p]*(om[q]+om[q_]-2*om[p]) 
+                                     #        for p in range(N) if not p in (q,q_)]) 
          for q_ in range(N)] 
          for q in range(N)]
         )
     V_ret = V_ret * (1 - np.diag(np.ones(N)))
+    print(V_ret.T[0])
     W_ret = np.array(
-        [[  -W[p,p_]*(om[p]+om[p_])**2      +   sum([-V[p,q]*(om[q]+om[p_])*(W[p_,q]+W[q,p_])    +   V[p,q]*(om[p]-om[q])*(W[q,p_]+W[p_,q]) for q in range(N)]) 
+        [[  -W[p,p_]*(om[p]+om[p_])**2    #  +   sum([-V[p,q]*(om[q]+om[p_])*(W[p_,q]+W[q,p_])    +   V[p,q]*(om[p]-om[q])*(W[q,p_]+W[p_,q]) for q in range(N) if not q==p]) 
           for p_ in range(N)] 
          for p in range(N)]
         )
@@ -51,16 +51,15 @@ def deriv(t,flat,N):
     return flat_arr(om_ret,V_ret,W_ret,eps_ret)
 
 
-n = int(200) #number of t where the flow will be evaluated
-tmax = .1 #we will calculate the flow until that point
-N = 11 #the numer of modes
-W = np.random.rand(N,N)*14-10#*np.array(list(range(N)))#np.ones((N,N))+(np.random.rand(N,N)-0.5)/2
+n = int(500) #number of t where the flow will be evaluated
+tmax = 5 #we will calculate the flow until that point
+N = 5 #the numer of modes
+W = (np.random.rand(N,N)-0.5)*10#*np.array(list(range(N)))#np.ones((N,N))+(np.random.rand(N,N)-0.5)/2
 W = (W+np.transpose(W))/2
-V = np.random.rand(N,N)*14-10#*np.array(list(range(N)))
-for i in range(N):
-    V[i,i]=0
+V = (np.random.rand(N,N)-0.5)* (1 - np.diag(np.ones(N)))#*np.array(list(range(N)))
+
 V = (V+ np.transpose(V))/2
-om = np.array(list(range(N)))**2*(1+np.random.rand(N)/2)+10
+om = np.array(list(range(1,N+1)))**2#np.array([0.34264895, 0.72567923, 0.60045584, 0.2441956 , 0.59295209])*10#array(list(range(N)))+1#**2*(1+np.random.rand(N)/2)+np.pi
 eps = 0
 
 flat = flat_arr(om,V,W,eps)
@@ -71,7 +70,7 @@ y0 = flat_arr(om,V,W,eps)
 
 #result =  unpack_arr(np.array(sol[0][-1]),N)
 
-sol2 = solve_ivp(deriv,(0,tmax),y0,args=(N,),t_eval=np.linspace(0,tmax,int(n)),method='Radau')
+sol2 = solve_ivp(deriv,(0,tmax),y0,args=(N,),t_eval=np.linspace(0,tmax,int(n)),method='RK45')
 
 #om_res, V_res, W_res, eps_res = unpack_arr(sol2["y"],N)
 

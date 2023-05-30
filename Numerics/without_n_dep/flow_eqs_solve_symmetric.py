@@ -47,19 +47,17 @@ def deriv(t,flat,N):
     eps_ret = -2*np.sum([   (W[p,p_]+W[p_,p])*(om[p]+om[p_])*Wdag[p,p_] 
                 for p in range(N) for p_ in range(N)])
     
-    return flat_arr(om_ret,(V_ret+ np.transpose(V_ret))/2,W_ret,eps_ret)
+    return flat_arr(om_ret,(V_ret+ np.transpose(V_ret))/2,(W_ret+ np.transpose(W_ret))/2,eps_ret)
 
 
-n = int(200) #number of t where the flow will be evaluated
-tmax = .1 #we will calculate the flow until that point
+n = int(1e3) #number of t where the flow will be evaluated
+tmax = .5 #we will calculate the flow until that point
 N = 11 #the numer of modes
-W = np.random.rand(N,N)*14-10#*np.array(list(range(N)))#np.ones((N,N))+(np.random.rand(N,N)-0.5)/2
+W = np.random.rand(N,N)#*np.array(list(range(N)))#np.ones((N,N))+(np.random.rand(N,N)-0.5)/2
 W = (W+np.transpose(W))/2
-V = np.random.rand(N,N)*14-10#*np.array(list(range(N)))
-for i in range(N):
-    V[i,i]=0
+V = np.random.rand(N,N)* (1 - np.diag(np.ones(N)))
 V = (V+ np.transpose(V))/2
-om = np.array(list(range(N)))**2*(1+np.random.rand(N)/2)+10
+om = np.array(list(range(N)))**2*(1+np.random.rand(N))+10
 eps = 0
 
 flat = flat_arr(om,V,W,eps)
