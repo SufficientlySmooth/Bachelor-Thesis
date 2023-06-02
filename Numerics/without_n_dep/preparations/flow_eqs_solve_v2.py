@@ -40,24 +40,24 @@ def eval(sol):
     sol2 = sol
     t = sol2["t"]
     for i in range(N):
-        y = sol2["y"][i]
+        y = np.abs(sol2["y"][i])
         plt.plot(t,y)
     plt.title('omegas')
     plt.show()
 
     for i in range(N,N+N**2):
-        y = sol2["y"][i]
+        y = np.abs(sol2["y"][i])
         plt.plot(t,y)
     plt.title('V')
     plt.show()
 
     for i in range(N+N**2,N+2*N**2):
-        y = sol2["y"][i]
+        y = np.abs(sol2["y"][i])
         plt.plot(t,y)
     plt.title('W')
     plt.show()
 
-    y = sol2["y"][-1]
+    y = np.abs(sol2["y"][-1])
     plt.plot(t,y)
     plt.title('epsilon')
     plt.show()
@@ -73,16 +73,16 @@ def eval(sol):
     print("Signature of W")
     print((abs(W10.flatten())<.001).reshape((N,N)))
 
-n = int(1000) #number of t where the flow will be evaluated
-tmax = 10 #we will calculate the flow until that point
-N = 7 #the numer of modes
-v_max = 10
-W = (np.random.rand(N,N)-1/2)*v_max#*np.array(list(range(N)))#np.ones((N,N))+(np.random.rand(N,N)-0.5)/2
+n = int(500) #number of t where the flow will be evaluated
+tmax = 2 #we will calculate the flow until that point
+N = 5 #the numer of modes
+v_max = 2
+W = (np.random.rand(N,N)-1/2)*v_max+(np.random.rand(N,N)-1/2)*v_max*1j#*np.array(list(range(N)))#np.ones((N,N))+(np.random.rand(N,N)-0.5)/2
 #W = (W+np.transpose(W))/2
-V = (np.random.rand(N,N)-1/2) * v_max * (1 - np.diag(np.ones(N)))#*np.array(list(range(N)))
+V = (np.random.rand(N,N)-1/2) * v_max * (1 - np.diag(np.ones(N))) #+ (np.random.rand(N,N)-1/2) * v_max * (1 - np.diag(np.ones(N)))*1j#*np.array(list(range(N)))
 
 #V = (V+ np.transpose(V))/2
-om = (np.array(list(range(N)))+1)*v_max#**2*(1+np.random.rand(N)/2)+np.pi
+om = (np.random.rand(N)+1)*v_max#**2*(1+np.random.rand(N)/2)+np.pi
 eps = 0
 
 y0 = flat_arr(om,V,W,eps)
