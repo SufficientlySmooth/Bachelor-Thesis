@@ -34,7 +34,7 @@ def om(k):
          free Bogoliubov dispersion
 
     """
-    return cc*k*np.sqrt(1+(k**2*xi**2)/2)
+    return cc*np.abs(k)*np.sqrt(1+(k**2*xi**2)/2)
 
 def W(k):
     """
@@ -157,7 +157,7 @@ def eps0(grid):
     """
     dk = (grid[-1]-grid[-2])
     L = 2*np.pi/dk    
-    return g_ib*n0+2*np.pi*g_ib/L*np.array([s(k)**2 for k in grid])
+    return g_ib*n0+2*np.pi*g_ib/L*np.sum(np.array([s(k)**2 for k in grid]))
 
 def omega0(k,L):
     """
@@ -210,6 +210,7 @@ def V0_arr(grid):
 def func(alphas,grid):
     dk = (grid[-1]-grid[-2])
     L = 2*np.pi/dk  
+    
     def alpha_(index): # returns alpha(-k)
         return alphas[len(grid)-(index+1)]
     return np.array([
@@ -243,6 +244,17 @@ def get_quadratic_Hamiltonian(grid):
     eps = eps0(grid) + np.sum([W0_tilde(k,L)*(alphas[i]+np.conj(alpha_(i))) for i in range(len(grid)) if (k:=grid[i])]) +np.sum(eps_help_arr.flatten())
     
     return omega0_arr(grid),V0_arr(grid),W0_arr(grid),eps
+
+"""
+for i in np.linspace(-10,10,100)[::-1]:
+    import  quadratic_solver_wrapper as qs
+    eta = i
+    g_ib = eta*g_bb
+    grid = gen_1Dgrid(lamb_IR,lamb_UV,dk = 1e-1)
+    sol = get_quadratic_Hamiltonian(grid)
+    out = qs.flat_arr(*sol)
+    np.save('eta=%.3f,N=200.npy'%eta,out)
+"""
 
     
 

@@ -18,7 +18,12 @@ eigvals, eigvecs = np.linalg.eig(H)
 pos = []
 
 for i in range(len(eigvals)):
-    
+    vec = eigvecs[i]
+    #print(np.conj(vec.T)@Omega@vec)
+    mel = np.conj(vec.T)@Omega@vec
+    print(mel)
+    if mel>0 and not np.isclose(mel,0):
+        pos.append(eigvals[i])
 
-
+print(pos)
 

@@ -7,6 +7,7 @@ Created on Thu Jun  1 16:36:02 2023
 
 import numpy as np
 from scipy.integrate import solve_ivp
+#from numba import njit
 
 status = -1
 
@@ -27,9 +28,10 @@ def deriv(t,flat,N):
     global status
     om, V, W, eps = unpack_arr(flat,N)
     Wdag = np.conjugate(W)
-    if int(t) > status:
-        status = int(t)
-        print("Current flow parameter: ",t)
+    #if round(t,2) > status:
+    #    status = int(t)
+    #    print("Current flow parameter: ",t)
+    print("Current flow parameter: ",t)
     om_ret =  np.array([np.sum([2*V[q,k]*V[k,q]*(om[k]-om[q])    -   2*(W[k,q]+W[q,k])*(om[k]+om[q])*(Wdag[q,k]+Wdag[k,q]) for q in range(N)]) for k in range(N)])
     V_ret = np.array([[-V[q,q_]*(om[q]-om[q_])**2 +   sum([-(W[q,p]+W[p,q])*(Wdag[p,q_]+Wdag[q_,p])*(om[q]+om[q_]+2*om[p])     +   V[p,q_]*V[q,p]*(om[q]+om[q_]-2*om[p]) 
                                          for p in range(N) if not p in (q,q_)]) 
@@ -54,7 +56,8 @@ def solve(om,V,W,eps,n,lambda_max, method = "RK45"):
     ---------------
     returns sol object (see solve_ivp)
     """
-
+    
+    print("Called solve function")
     N = int(len(om))
     tmax = lambda_max
     eps = 0

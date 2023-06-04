@@ -154,80 +154,62 @@ Furthermore, applying the recurrence relation introduced to define the normal or
 \end{align}
 \end{subequations}
 \subsection{The canonical generator}
+Our Hamiltonian $\ham$ is of the form:
+\begin{align}
+\ham = \Sum_k \hat\omega_k \NO\CR_k\AN_k\NO+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right)+\hat\epsilon
+\end{align}
+Upon realizing that $\Sum_k \hat\omega_k \NO\CR_k\AN_k\NO$ is also just a function of the number operators, we can consider $\ham_0\defeq\hat H\defeq \Sum_k \hat\omega_k \NO\CR_k\AN_k\NO+\hat\epsilon$ as the diagonal part of $\ham$. \\
 The first step in the calculating the flow equations is again to calculate the canonical commutator $\hat\eta\defeq\left[\ham_0,\ham_{\mathrm{int}}\right]$:
 \begin{subequations}
 \begin{align}
-\hat\eta &= \left[\Sum_k \hat\omega_k \NO\CR_k\AN_k\NO,\Sum_{q\neq q^\prime}\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right)\right]  \nonumber\\ \quad& 
-= \Sum_k \Sum_{q\neq q^\prime}\left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO\right] \label{eta_with_n_I}\\ \quad& 
-+ \Sum_k\Sum_{p,p^\prime}\left[\hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO\right] \label{eta_with_n_II} \\ \quad& 
-+ \Sum_k\Sum_{p,p^\prime}\left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime} \NO \right] \label{eta_with_n_III}
+\hat\eta &= \left[\hat H,\Sum_{q\neq q^\prime}\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right)\right]  \nonumber\\ \quad& 
+=  \Sum_{q\neq q^\prime}\left[\hat H,\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO\right] \label{eta_with_n_I}\\ \quad& 
++ \Sum_{p,p^\prime}\left[\hat H,\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO\right] \label{eta_with_n_II} \\ \quad& 
++ \Sum_{p,p^\prime}\left[\hat H,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime} \NO \right] \label{eta_with_n_III}
 \end{align}
 \end{subequations}
 In the following, the terms \ref{eta_with_n_I}-\ref{eta_with_n_III} will be evaluated separately:
-
 \begin{itemize}
 \item[\textbf{\ref{eta_with_n_I}}] 
 \begin{align}
-& \left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO\right]\nonumber\\
-&= \hat\omega_k \hat V_{q,q^\prime} \left[ \NO\CR_k\AN_k\NO,\NO \CR_q\AN_{q^\prime}\NO\right] + \hat\omega_k   \underbrace{\left[ \NO\CR_k\AN_k\NO,\hat V_{q,q^\prime}\right]}_{=0} \NO \CR_q\AN_{q^\prime}\NO \nonumber \\ 
-&+ \hat V_{q,q^\prime} \left[ \hat\omega_k,\NO \CR_q\AN_{q^\prime}\NO\right]  \NO\CR_k\AN_k\NO + \underbrace{\left[ \hat\omega_k ,\hat V_{q,q^\prime}\right]}_{=0}\NO \CR_q\AN_{q^\prime}\NO \NO\CR_k\AN_k\NO \nonumber \\
-&= \hat\omega_k \hat V_{q,q^\prime} \left(\NO\CR_k\AN_{q^\prime}\NO\delta_{k,q}-\NO\CR_q\AN_k\NO\delta_{k,q^\prime}\right) + \hat V_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right) \NO \CR_q\AN_{q^\prime}\NO \NO\CR_k\AN_k\NO\nonumber\\
-&= \hat\omega_k \hat V_{q,q^\prime} \left(\NO\CR_k\AN_{q^\prime}\NO\delta_{k,q}-\NO\CR_q\AN_k\NO\delta_{k,q^\prime}\right) \nonumber \\
-& + \hat V_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right) \left(\NO \CR_q\CR_k\AN_{q^\prime}\AN_k\NO+\delta_{q^\prime,k}\NO\CR_{q}\AN_k\NO\right)
+&\Sum_{q\neq q^\prime}\left[\hat H,\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO\right]\nonumber\\
+&= \Sum_{q\neq q^\prime}V_{q,q^\prime}\left[\hat H,\hat \NO \CR_q\AN_{q^\prime}\NO\right] \nonumber \\ 
+&=  \Sum_{q\neq q^\prime}\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right) \NO \CR_q\AN_{q^\prime}\NO \\
 \end{align}
 \item[\textbf{\ref{eta_with_n_II}}] 
 \begin{align}
-&\left[\hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO\right] \nonumber \\
-&=\hat W_{p,p^\prime} \left[\hat\omega_k ,\NO \CR_p\CR_{p^\prime}\NO\right] \NO\CR_k\AN_k\NO + \hat W_{p,p^\prime}\hat\omega_k \left[ \NO\CR_k\AN_k\NO,\NO \CR_p\CR_{p^\prime}\NO\right] \nonumber\\
-&= \hat W_{p,p^\prime} \left(\omega_k-\hat\omega(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\NO\NO\CR_k\AN_k\NO + \hat W_{p,p^\prime}\hat\omega_k \left(\NO\CR_k\CR_p\NO\delta_{k,p^\prime}+\NO\CR_k\CR_{p^\prime}\NO\delta_{k,p}\right)\nonumber\\
-&= \hat W_{p,p^\prime} \left(\omega_k-\hat\omega(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\CR_k\AN_k\NO + \hat W_{p,p^\prime}\hat\omega_k \left(\NO\CR_k\CR_p\NO\delta_{k,p^\prime}+\NO\CR_k\CR_{p^\prime}\NO\delta_{k,p}\right)
+&\Sum_{p,p^\prime}\left[\hat H,\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO\right] \nonumber \\
+&=\Sum_{p,p^\prime}\hat W_{p,p^\prime}\left[\hat H,\NO \CR_p\CR_{p^\prime}\NO\right] \nonumber\\
+&= \Sum_{p,p^\prime}\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\NO
 \end{align}
 \item[\textbf{\ref{eta_with_n_III}}] 
 \begin{align}
-&\left[ \hat\omega_k \NO\CR_k\AN_k\NO,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime} \NO \right]\nonumber \\
-&=\hat W_{p,p^\prime}^\dagger \left[ \hat\omega_k ,\NO\AN_p\AN_{p^\prime} \NO \right]\NO\CR_k\AN_k\NO+\hat W_{p,p^\prime}^\dagger \hat\omega_k\left[  \NO\CR_k\AN_k\NO,\NO\AN_p\AN_{p^\prime} \NO \right] \nonumber \\
-&=\hat W_{p,p^\prime}^\dagger \left(\hat\omega_k-\hat\omega_k(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \AN_p\AN_{p^\prime}\NO\NO\CR_k\AN_k\NO-\hat W_{p,p^\prime}^\dagger \hat\omega_k\left(\NO\AN_p\AN_k\NO\delta_{k,p^\prime}+\NO\AN_{p^\prime}\AN_k\NO\delta_{k,p}\right) \nonumber \\
-&=\hat W_{p,p^\prime}^\dagger \left(\hat\omega_k-\hat\omega_k(\hat n_{p^\prime}+1,\hat n_p +1)\right)\left(\NO \CR_k\AN_k\AN_p\AN_{p^\prime}\NO+\delta_{k,p}\NO\AN_{p^\prime}\AN_k\NO+\delta_{k,p^\prime}\NO\AN_p\AN_k\NO\right) \nonumber \\
-&-\hat W_{p,p^\prime}^\dagger \hat\omega_k\left(\NO\AN_p\AN_k\NO\delta_{k,p^\prime}+\NO\AN_{p^\prime}\AN_k\NO\delta_{k,p}\right)
+&\Sum_{p,p^\prime}\left[\hat H,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime} \NO \right] \nonumber \\
+&= \Sum_{p,p^\prime}\hat W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \AN_p\AN_{p^\prime}\NO
 \end{align}
 \end{itemize}
 This gives the canonical generator as:
 \begin{align}
-\hat\eta &= \Sum_k \Sum_{q\neq q^\prime}\Bigg(\hat\omega_k \hat V_{q,q^\prime} \left(\NO\CR_k\AN_{q^\prime}\NO\delta_{k,q}-\NO\CR_q\AN_k\NO\delta_{k,q^\prime}\right) \nonumber \\
-& + \hat V_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right) \left(\NO \CR_q\CR_k\AN_{q^\prime}\AN_k\NO+\delta_{q^\prime,k}\NO\CR_{q}\AN_k\NO\right)\Bigg)\nonumber\\ \quad& 
-+ \Sum_k\Sum_{p,p^\prime}\Bigg(\hat W_{p,p^\prime} \left(\hat\omega_k-\hat\omega_k(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\CR_k\AN_k\NO + \hat W_{p,p^\prime}\hat\omega_k \left(\NO\CR_k\CR_p\NO\delta_{k,p^\prime}+\NO\CR_k\CR_{p^\prime}\NO\delta_{k,p}\right)\Bigg)\nonumber\\ \quad& 
-+ \Sum_k\Sum_{p,p^\prime}\Bigg(\hat W_{p,p^\prime}^\dagger \left(\omega_k-\hat\omega_k(\hat n_{p^\prime}+1,\hat n_p +1)\right)\left(\NO \CR_k\AN_k\AN_p\AN_{p^\prime}\NO+\delta_{k,p}\NO\AN_{p^\prime}\AN_k\NO+\delta_{k,p^\prime}\NO\AN_p\AN_k\NO\right) \nonumber \\
-&-\hat W_{p,p^\prime}^\dagger \hat\omega_k\left(\NO\AN_p\AN_k\NO\delta_{k,p^\prime}+\NO\AN_{p^\prime}\AN_k\NO\delta_{k,p}\right)\Bigg) \nonumber \\ \quad&
-= \Sum_{q\neq q^\prime}(\hat\omega_q-\hat\omega_{q^\prime}(\hat n_q-1,\hat n_{q^\prime}+1))\hat V_{q,q^\prime}\NO\CR_q\AN_{q^\prime}\NO \nonumber \\\quad&
-+\Sum_{q\neq q^\prime}\Sum_k \hat V_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right)\NO \CR_q\CR_k\AN_{q^\prime}\AN_k\NO \nonumber \\\quad&
-+ \Sum_k\Sum_{p,p^\prime}\hat W_{p,p^\prime} \left(\omega_k-\hat\omega_k(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\CR_k\AN_k\NO \nonumber \\\quad& 
-+ \Sum_{p,p^\prime}\hat W_{p,p^\prime}(\hat\omega_p+\hat\omega_{p^\prime}) \NO\CR_{p^\prime}\CR_p\NO\nonumber\\ \quad& 
-+ \Sum_k\Sum_{p,p^\prime}\hat W_{p,p^\prime}^\dagger \left(\hat\omega_k-\hat\omega_k(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \CR_k\AN_k\AN_p\AN_{p^\prime}\NO\nonumber \\ \quad&
--\Sum_{p,p^\prime} \hat W_{p,p^\prime}^\dagger (\hat\omega_p(\hat n_{p^\prime}+1,\hat n_p +1)+\hat\omega_{p^\prime}(\hat n_{p^\prime}+1,\hat n_p +1))\NO\AN_p\AN_{p^\prime}\NO\nonumber \\ \quad&
-\eqdef \Sum_{q\neq q^\prime}\hat \theta_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO+\Sum_{p,p^\prime}\left(\hat \phi_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat \psi_{p,p^\prime}\NO\AN_p\AN_{p^\prime}\NO\right)\label{psiphitheta_def} \\ \quad&
-+\Sum_{q\neq q^\prime}\Sum_k \hat V_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right)\NO \CR_q\CR_k\AN_{q^\prime}\AN_k\NO \nonumber \\\quad&
-+ \Sum_k\Sum_{p,p^\prime}\hat W_{p,p^\prime} \left(\omega_k-\hat\omega_k(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\CR_k\AN_k\NO \nonumber \\\quad& 
-+ \Sum_k\Sum_{p,p^\prime}\hat W_{p,p^\prime}^\dagger \left(\hat\omega_k-\hat\omega_k(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \CR_k\AN_k\AN_p\AN_{p^\prime}\NO\nonumber \\ \quad&
-\eqdef \eta^{(2)}+\eta^{(4)}
+\hat\eta &=  \Sum_{q\neq q^\prime}\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right) \NO \CR_q\AN_{q^\prime}\NO \\
+&+\Sum_{p,p^\prime}\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\NO\nonumber\\
+&+ \Sum_{p,p^\prime}\hat W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \AN_p\AN_{p^\prime}\NO\nonumber\\
+&\eqdef \Sum_{q\neq q^\prime}\hat \theta_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO+\Sum_{p,p^\prime}\left(\hat \phi_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat \psi_{p,p^\prime}\NO\AN_p\AN_{p^\prime}\NO\right) \label{psiphitheta_def}
 \end{align}
-Here $\eta^{(2)}$ is the part of $\hat\eta$ which contains only quadratic terms and $\eta^{(4)}$ with quartic terms. The latter will be neglected for now, i.e. we assume $\hat\eta\approx\hat\eta^{(2)}$ for which we write $\hat\eta\overset{\CircledTop{2}}{=}\hat\eta^{(2)}$ because equality holds up to second order. The accuracy of this approximation will vary from model to model and must always be justified in a specific situation.
+%The latter will be neglected for now, i.e. we assume $\hat\eta\approx\hat\eta^{(2)}$ for which we write $\hat\eta\overset{\CircledTop{2}}{=}\hat\eta^{(2)}$ because equality holds up to second order. The accuracy of this approximation will vary from model to model and must always be justified in a specific situation.
 \subsection{Evaluating the commutator of the generator with the Hamiltonian}
-If one notices that $\eta^{(2)}$ is structurally identical to $\ham_{\mathrm{int}}$, the commutator of $\ham_0$ and $\eta^{(2)}$ can be written down immediately:
+If one notices that $\eta$ is structurally identical to $\ham_{\mathrm{int}}$, the commutator of $\ham_0$ and $\eta$ can be written down immediately:
 \begin{align}
-\left[\eta^{(2)},\ham_0\right] &= -\Sum_{q\neq q^\prime}(\hat\omega_q-\hat\omega_{q^\prime}(\hat n_q-1,\hat n_{q^\prime}+1))\hat \theta_{q,q^\prime}\NO\CR_q\AN_{q^\prime}\NO \nonumber \\\quad&
-- \Sum_{p,p^\prime}\hat\phi_{p,p^\prime}(\hat\omega_p+\hat\omega_{p^\prime}) \NO\CR_{p^\prime}\CR_p\NO\nonumber\\ \quad& 
-+\Sum_{p,p^\prime} \hat\psi_{p,p^\prime} (\hat\omega_p(\hat n_{p^\prime}+1,\hat n_p +1)+\hat\omega_{p^\prime}(\hat n_{p^\prime}+1,\hat n_p +1))\NO\AN_p\AN_{p^\prime}\NO\nonumber \\ \quad&
-- \Sum_k\Sum_{p,p^\prime}\hat  \psi_{p,p^\prime} \left(\hat\omega_k-\hat\omega_k(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \CR_k\AN_k\AN_p\AN_{p^\prime}\NO\nonumber \\ \quad&
--\Sum_{q\neq q^\prime}\Sum_k \hat \theta_{q,q^\prime} \left(\hat\omega_k - \hat\omega_k(\hat n_q-1,\hat n_{q^\prime}+1)\right)\NO \CR_q\CR_k\AN_{q^\prime}\AN_k\NO \nonumber \\\quad&
-- \Sum_k\Sum_{p,p^\prime}\hat\phi_{p,p^\prime} \left(\omega_k-\hat\omega_k(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\CR_k\AN_k\NO \nonumber \\\quad&
-\overset{\CircledTop{2}}{=} -\Sum_{q\neq q^\prime}(\hat\omega_q-\hat\omega_{q^\prime}(\hat n_q-1,\hat n_{q^\prime}+1))\hat \theta_{q,q^\prime}\NO\CR_q\AN_{q^\prime}\NO \nonumber \\\quad&
-- \Sum_{p,p^\prime}\hat\phi_{p,p^\prime}(\hat\omega_p+\hat\omega_{p^\prime}) \NO\CR_{p^\prime}\CR_p\NO\nonumber\\ \quad& 
-+\Sum_{p,p^\prime} \hat\psi_{p,p^\prime} (\hat\omega_p(\hat n_{p^\prime}+1,\hat n_p +1)+\hat\omega_{p^\prime}(\hat n_{p^\prime}+1,\hat n_p +1))\NO\AN_p\AN_{p^\prime}\NO
+\left[\eta^{(2)},\ham_0\right] &= -\Sum_{q\neq q^\prime}\hat \theta_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right) \NO \CR_q\AN_{q^\prime}\NO \\
+&-\Sum_{p,p^\prime}\hat \phi_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)\NO \CR_p\CR_{p^\prime}\NO\nonumber\\
+&- \Sum_{p,p^\prime}\hat \psi_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)\NO \AN_p\AN_{p^\prime}\NO\nonumber\\
+&= - \Sum_{q\neq q^\prime}\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right)^2 \NO \CR_q\AN_{q^\prime}\NO \\
+&-\Sum_{p,p^\prime}\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)^2\NO \CR_p\CR_{p^\prime}\NO\nonumber\\
+&- \Sum_{p,p^\prime}\hat W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)^2\NO \AN_p\AN_{p^\prime}\NO\nonumber
 \end{align}
-The commutator of $\ham_{\mathrm{int}}$ and $\eta^{(2)}$ requires significantly more work:
+The commutator of $\ham_{\mathrm{int}}$ and $\eta$ requires significantly more work:
 \begin{subequations}
 \begin{align}
-\left[\eta^{(2)},\ham_0\right] &= \Sum_{q\neq q^\prime}\Sum_{\tilde q\neq\tilde q^\prime} \left[\hat\theta_{\tilde q,\tilde q^\prime}\NO\CR_{\tilde q}\AN_{\tilde q^\prime}\NO,\hat V_{q,q^\prime}\NO\CR_q\AN_{q^\prime}\NO\right] \label{com_eta_Hint_A} \\
+\left[\eta^{(2)},\ham_{\mathrm{int}}\right] &= \Sum_{q\neq q^\prime}\Sum_{\tilde q\neq\tilde q^\prime} \left[\hat\theta_{\tilde q,\tilde q^\prime}\NO\CR_{\tilde q}\AN_{\tilde q^\prime}\NO,\hat V_{q,q^\prime}\NO\CR_q\AN_{q^\prime}\NO\right] \label{com_eta_Hint_A} \\
 &+ \Sum_{p, p^\prime}\Sum_{\tilde q\neq\tilde q^\prime} \left[\hat\theta_{\tilde q,\tilde q^\prime}\NO\CR_{\tilde q}\AN_{\tilde q^\prime}\NO,\hat W_{p,p^\prime}\NO\CR_p\CR_{p^\prime}\NO\right] \label{com_eta_Hint_B} \\
 &+ \Sum_{p, p^\prime}\Sum_{\tilde q\neq\tilde q^\prime} \left[\hat\theta_{\tilde q,\tilde q^\prime}\NO\CR_{\tilde q}\AN_{\tilde q^\prime}\NO,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right] \label{com_eta_Hint_C} \\
 &+ \Sum_{q\neq q^\prime}\Sum_{\tilde p,\tilde p^\prime} \left[\hat\phi_{\tilde p,\tilde p^\prime}\NO\CR_{\tilde p}\CR_{\tilde p^\prime}\NO,\hat V_{q,q^\prime}\NO\CR_q\AN_{q^\prime}\NO\right] \label{com_eta_Hint_D} \\
@@ -284,6 +266,7 @@ For the sake of clarity, the terms \ref{com_eta_Hint_A}-\ref{com_eta_Hint_I} wil
 &-\Sum_{q\neq q^\prime}\Sum_{\tilde q} \hat \theta_{q,\tilde q}\left(\hat V_{\tilde q,q^\prime}-\hat V_{\tilde q,q^\prime}(\hat n_{\tilde q}+1,\hat n_q-1)\right)\NO\CR_{q}\AN_{q^\prime}\NO\nonumber \\
 &-\Sum_{k}\Sum_{\tilde q} \hat \theta_{k,\tilde q}\left(\hat V_{\tilde q,k}-\hat V_{\tilde q,k}(\hat n_{\tilde q}+1,\hat n_k-1)\right)\NO\CR_{k}\AN_{k}\NO\nonumber
 \end{align}
+Here we introduced the symbol $\overset{\CircledTop{2}}{=}$ which is used for equalities which are exact up to second order.
 \item[\textbf{\ref{com_eta_Hint_B}:}]
 \begin{subequations}
 \begin{align}
@@ -480,7 +463,7 @@ Collecting all terms in $\partial_\lambda\ham(\lambda)=[\hat\eta(\lambda),\ham(\
 &-\Sum_{\tilde p}\hat \psi_{\tilde p,k} \left(\hat W_{k,\tilde p}-\hat W_{k,\tilde p}(\hat n_{\tilde p}+1,\hat n_{k}+1)\right) \nonumber\\
 &-\Sum_{\tilde p}\hat \psi_{k,\tilde p} \left(\hat W_{\tilde p,k}-\hat W_{\tilde p,k}(\hat n_{k}+1,\hat n_{\tilde p}+1)\right) \nonumber\\
 &-\Sum_{\tilde p}\hat \psi_{k,\tilde p} \left(\hat W_{k, \tilde p}-\hat W_{k, \tilde p}(\hat n_{k}+1,\hat n_{\tilde p}+1)\right) \nonumber\\
-\partial_\lambda\hat V_{q,q^\prime}&\eqsec -(\hat\omega_q-\hat\omega_{q^\prime}(\hat n_q-1,\hat n_{q^\prime}+1))\hat \theta_{q,q^\prime}\\
+\partial_\lambda\hat V_{q,q^\prime}&\eqsec -\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right)^2\\
 &+ \Sum_{\tilde q} \left(\hat\theta_{q,q^\prime}\hat V_{q^\prime,\tilde q}-\hat\theta_{\tilde q,q^\prime}\hat V_{q,\tilde q}\right) \nonumber\\
 &+\Sum_{\tilde q} \hat V_{q,\tilde q}\left(\hat\theta_{\tilde q,q^\prime}-\hat\theta_{\tilde q,q^\prime}(\hat n_{\tilde q}+1,\hat n_q-1)\right)\nonumber \\
 &-\Sum_{\tilde q} \hat \theta_{q,\tilde q}\left(\hat V_{\tilde q,q^\prime}-\hat V_{\tilde q,q^\prime}(\hat n_{\tilde q}+1,\hat n_q-1)\right)\nonumber \\
@@ -495,14 +478,14 @@ Collecting all terms in $\partial_\lambda\ham(\lambda)=[\hat\eta(\lambda),\ham(\
 &-\Sum_{\tilde q}\hat \psi_{q^\prime,\tilde q} \left(\hat W_{\tilde q,q}-\hat W_{\tilde q,q}(\hat n_{q^\prime}+1,\hat n_{\tilde q}+1)\right) \nonumber\\
 &-\Sum_{\tilde q}\hat \psi_{q^\prime,\tilde q} \left(\hat W_{q, \tilde q}-\hat W_{q, \tilde q}(\hat n_{q^\prime}+1,\hat n_{\tilde q}+1)\right) \nonumber\\
 %%%%%%%%%%%%%%%%%%%%%
-\partial_\lambda\hat W_{p,p^\prime}&\eqsec -\hat\phi_{p,p^\prime}(\hat\omega_p+\hat\omega_{p^\prime})\\
+\partial_\lambda\hat W_{p,p^\prime}&\eqsec -\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)^2\\
 &+\Sum_{q}\left(\hat\theta_{ p^\prime, q}\hat W_{p,q}+\hat\theta_{ p,q}\hat W_{q,p^\prime}\right) \nonumber\\
 &+  \Sum_{ q} \hat\theta_{ p,q}\left(\hat W_{q,p^\prime}(\hat n_{q}+1,\hat n_p-1)- \hat W_{q,p^\prime}\right)                         \nonumber\\
 &+        \Sum_{ q} \hat\theta_{ p^\prime,q}\left(\hat W_{p,q}(\hat n_{q}+1,\hat n_{p^\prime}-1)- \hat W_{p,q}\right)                   \nonumber\\
 &-       \Sum_{q}\left(\hat V_{ p^\prime, q}\hat \phi_{p,q}+\hat V_{ p,q}\hat \phi_{q,p^\prime}\right)                    \nonumber\\
 &-         \Sum_{ q} \hat V_{ p,q}\left(\hat \phi_{q,p^\prime}(\hat n_{q}+1,\hat n_p-1)- \hat \phi_{q,p^\prime}\right)                  \nonumber\\
 &-          \Sum_{ q} \hat V_{ p^\prime,q}\left(\hat \phi_{p,q}(\hat n_{q}+1,\hat n_{p^\prime}-1)- \hat \phi_{p,q}\right)                 \nonumber\\
-\partial_\lambda\hat W_{p,p^\prime}^\dagger&\eqsec \hat\psi_{p,p^\prime} (\hat\omega_p(\hat n_{p^\prime}+1,\hat n_p +1)+\hat\omega_{p^\prime}(\hat n_{p^\prime}+1,\hat n_p +1))\\
+\partial_\lambda\hat W_{p,p^\prime}^\dagger&\eqsec -W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)^2\\
 &+     \Sum_{q}\left(\hat\theta_{ q, p^\prime}\hat W_{p,q}^\dagger+\hat\theta_{ q, p}\hat W_{q,p^\prime}^\dagger\right)                      \nonumber\\
 &+      \Sum_{q}\left(\hat W_{q,p^\prime}^\dagger+\hat W_{p^\prime,q}^\dagger\right) \left(\hat\theta_{ q,p}-\hat\theta_{ q,p}(\hat n_{p^\prime}+1^,\hat n_{q}+1)\right)                     \nonumber\\
 &-      \Sum_{q}\left(\hat \psi_{q,p^\prime}+\hat \psi_{p^\prime,q}\right) \left(\hat V_{ q,p}-\hat V_{ q,p}(\hat n_{p^\prime}+1,\hat n_{q}+1)\right)                     \nonumber\\
@@ -519,10 +502,11 @@ Collecting all terms in $\partial_\lambda\ham(\lambda)=[\hat\eta(\lambda),\ham(\
 \end{subequations}
 The three operators $\hat\psi,\hat\theta,\hat\phi$ are based on their definition in equation \ref{psiphitheta_def}:
 \begin{align}
-\hat\theta_{q,q^\prime}&=(\hat\omega_q-\hat\omega_{q^\prime}(\hat n_q-1,\hat n_{q^\prime}+1))\hat V_{q,q^\prime}\\
-\hat\phi_{p,p^\prime}&=\hat W_{p,p^\prime}(\hat\omega_p+\hat\omega_{p^\prime})\\
-\hat\psi_{p,p^\prime}&=-\hat W_{p,p^\prime}^\dagger (\hat\omega_p(\hat n_{p^\prime}+1,\hat n_p +1)+\hat\omega_{p^\prime}(\hat n_{p^\prime}+1,\hat n_p +1))
+\hat\theta_{q,q^\prime}&=\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right)\\
+\hat\phi_{p,p^\prime}&=\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)\\
+\hat\psi_{p,p^\prime}&=W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)
 \end{align}
+In first order, we can expect the off-diagonal elements to vanish if $\hat H \neq \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\ \forall q,q^\prime$ and $\hat H \neq \hat H(\hat n_p\pm 1,\hat n_{p^\prime}\pm 1)\ \forall p,p^\prime$
 \chapter{The second appendix}
 \thispagestyle{empty}
 

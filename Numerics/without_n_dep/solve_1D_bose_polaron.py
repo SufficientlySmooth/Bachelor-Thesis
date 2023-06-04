@@ -11,21 +11,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 eta = 1 #parameter which we will vary between -10...10
-lambda_max = 10 #how far we want to traverse the flow
+lambda_max = 20 #how far we want to traverse the flow
 n = 200 #for how many points in the flow we want to save the Hamiltonian
-
-grid = rlt.gen_1Dgrid(rlt.lamb_IR,rlt.lamb_UV)
-N = len(grid)
+N = 200
+#grid = rlt.gen_1Dgrid(rlt.lamb_IR,rlt.lamb_UV,dk=(1e-1)/5)
+#N = len(grid)
 #sol = remove_linear(grid)
 
-om0,V0,W,eps = rlt.get_quadratic_Hamiltonian(grid)
+#om0,V0,W,eps = rlt.get_quadratic_Hamiltonian(grid)
+om0,V0,W,eps = qs.unpack_arr(np.load('quadratic Hamiltonians N=200, different etas\\eta=8.182,N=200.npy'),200)
+print(om0)
 
 om = om0 + np.diag(V0)
 V = V0 - np.diag(np.diag(V0))
 
-print("Removed linear terms")
+#print("Successfully removed linear terms")
 
-sol = qs.solve(om,V,W,eps,n,lambda_max, method = "Radau")
+sol = qs.solve(om,V,W,eps,n,lambda_max, method = "RK45")
 
 def eval(sol):
     sol2 = sol
@@ -55,5 +57,5 @@ def eval(sol):
     plt.show()
     om10,V10,W10,eps10 = qs.unpack_arr(sol2["y"].transpose()[n-1],N)
 
-eval(sol)
+#eval(sol)
     
