@@ -13,16 +13,16 @@ plt.rcParams.update({
 })
 
 
-eta = -2.929
-N = 100
-path_inp = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas\\sol_eta=-2.929,N=200.npy"
-path_t = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas\\sol_t_eta=-2.929,N=200.npy"
+eta = -0.303
+N = 200
+path_inp = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas\\sol_full_eta=%.3f,N=200.npy"%eta
+path_t = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas\\sol_full_t_eta=%.3f,N=200.npy"%eta
 #path_inp = "C:\\Users\\Jan-Philipp\\sol_01.npy"
 #path_t = "C:\\Users\\Jan-Philipp\\sol_01_t.npy"
 
 inp = np.load(path_inp)
 t = np.load(path_t)
-
+lambda_UV = 10
 
 
 
@@ -38,13 +38,17 @@ def visualize(sol,t,N):
     fig, axes = plt.subplots(nrows=2, ncols=2)
     
     axes = axes.flatten()
-    im1 = axes[0].imshow(V_beg, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log')
-    im2 = axes[1].imshow(V_end, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log')
-    im3 = axes[2].imshow(W_beg, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log')
-    im4 = axes[3].imshow(W_end, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log')
-    axes[2].set_xlabel(r"$\lambda = 0$")
-    axes[3].set_xlabel(r"$\lambda = %.2f$"%t[-1])
+    im1 = axes[0].imshow(V_beg, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im2 = axes[1].imshow(V_end, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im3 = axes[2].imshow(W_beg, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im4 = axes[3].imshow(W_end, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    
+
+    axes[2].set_xlabel(r"$k\xi$")
+    axes[3].set_xlabel(r"$k\xi$")
+    axes[1].set_title(r"$\lambda = %.2f$"%t[-1])
     axes[0].set_ylabel(r"$V$")
+    axes[0].set_title(r"$\lambda = 0$")
     axes[2].set_ylabel(r"$W$")
     fig.suptitle(r"$\eta = %.3f$"%eta)
     

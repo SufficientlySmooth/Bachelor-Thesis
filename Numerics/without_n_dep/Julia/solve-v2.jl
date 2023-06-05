@@ -6,7 +6,7 @@ import BlockArrays
 using NPZ,DifferentialEquations, LinearAlgebra, BlockArrays
 
 N = 200
-n = 1000 #for how many time steps we want to save the solution
+n = 500 #for how many time steps we want to save the solution
 
 name = "eta=-2.929,N=200.npy"
 flat = npzread("C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelor-Thesis/Numerics/without_n_dep/quadratic Hamiltonians N=200, different etas/"*name)
@@ -38,9 +38,9 @@ function f(u,p,t)
     om_ret2 = om_ret1[end:-1:1]
     om_ret = vcat(om_ret1,om_ret2)
     
-    V_ret11 = reshape([-V[q,q_]*(om[q]-om[q_])^2+sum([-(W[Int(q),p]+W[p,Int(q)])*(Wdag[p,Int(q_)]+Wdag[Int(q_),p])*(om[Int(q)]+om[Int(q_)]+2*om[p])+V[p,Int(q_)]*V[Int(q),p]*(om[Int(q)]+om[Int(q_)]-2*om[p]) for p in 1:N_ if p ∉ (Int(q),Int(q_))]) for q_ in 1:N for q in 1:N],(N,N)).*(ones(N,N)-Diagonal(ones(N)))
+    V_ret11 = reshape([-V[q,q_]*(om[q]-om[q_])^2+sum([-(W[(q),p]+W[p,(q)])*(Wdag[p,(q_)]+Wdag[(q_),p])*(om[(q)]+om[(q_)]+2*om[p])+V[p,(q_)]*V[(q),p]*(om[(q)]+om[(q_)]-2*om[p]) for p in 1:N_ if p ∉ ((q),(q_))]) for q_ in 1:N for q in 1:N],(N,N)).*(ones(N,N)-Diagonal(ones(N)))
     
-    V_ret12 = reshape([-V[q,q_]*(om[q]-om[q_])^2+sum([-(W[Int(q),p]+W[p,Int(q)])*(Wdag[p,Int(q_)]+Wdag[Int(q_),p])*(om[Int(q)]+om[Int(q_)]+2*om[p])+V[p,Int(q_)]*V[Int(q),p]*(om[Int(q)]+om[Int(q_)]-2*om[p]) for p in 1:N_ if p ∉ (Int(q),Int(q_))]) for q_ in (N+1):N_ for q in 1:N],(N,N))
+    V_ret12 = reshape([-V[q,q_]*(om[q]-om[q_])^2+sum([-(W[(q),p]+W[p,(q)])*(Wdag[p,(q_)]+Wdag[(q_),p])*(om[(q)]+om[(q_)]+2*om[p])+V[p,(q_)]*V[(q),p]*(om[(q)]+om[(q_)]-2*om[p]) for p in 1:N_ if p ∉ ((q),(q_))]) for q_ in (N+1):N_ for q in 1:N],(N,N))
     
     V_ret21 = transpose(V_ret12)
     V_ret22 = V_ret11[end:-1:1,end:-1:1]
@@ -78,7 +78,7 @@ V0 = V0 - Diagonal(diag(V0))
 
 u0 = flat_arr(om0,V0,W0,eps0)
 
-tspan = (0.0,20)
+tspan = (0.0,0.1)
 
 prob = ODEProblem(f,u0,tspan,[N])
 sol = solve(prob, Tsit5(), reltol = 1e-8, abstol = 1e-8,saveat=LinRange(tspan[1],tspan[2],n))
