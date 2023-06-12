@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Jun  4 21:21:34 2023
+Created on Wed Jun  7 12:45:44 2023
 
 @author: Jan-Philipp
 """
+
 import numpy as np
 
 import matplotlib
@@ -16,18 +17,11 @@ plt.rcParams.update({
     "text.usetex": True
 })
 
-N = 200
-#eta = 10
+
 lambda_UV = 10
-
-
-path_inp = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas, full, V_diag is zero\\sol_quadrant_Ham_eta=10.0,N=200,lambda_IR=0.1,lambda_UV=10.0.npy"
-path_t = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas, full, V_diag is zero\\sol_full_tHam_eta=10.0,N=200,lambda_IR=0.1,lambda_UV=10.0.npy"
-#path_inp = "C:\\Users\\Jan-Philipp\\sol_01.npy"
-#path_t = "C:\\Users\\Jan-Philipp\\sol_01_t.npy"
-
-inp = np.load(path_inp)
-t = np.load(path_t)
+lambda_IR = .1
+N = 100
+PATH = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas, one quadrant\\"
 
 def animate_VW(inp,t,eta):
     fps = 50
@@ -41,8 +35,8 @@ def animate_VW(inp,t,eta):
         
     axes = axes.flatten()
     
-    im1 = axes[0].imshow(snapshots_V[0], aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
-    im2 = axes[1].imshow(snapshots_W[0], aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im1 = axes[0].imshow(snapshots_V[0], aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,-lambda_IR,-lambda_UV,-lambda_IR])
+    im2 = axes[1].imshow(snapshots_W[0], aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,-lambda_IR,-lambda_UV,-lambda_IR])
     
     axes[0].set_xlabel(r"$k\xi$")
     axes[1].set_xlabel(r"$k\xi$")
@@ -71,19 +65,20 @@ def animate_VW(inp,t,eta):
                                    interval = 500 / fps, # in ms
                                    )
     
-    anim.save('test_anim,eta=%.3f_full.mp4'%eta, fps=fps, extra_args=['-vcodec', 'libx264'])
-    
-#animate_VW(inp,t)
-PATH  = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas, full, V_diag is zero\\"
-for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file]:
+    anim.save('V_W_animations\\test_anim,eta=%.3f.mp4'%eta, fps=fps, extra_args=['-vcodec', 'libx264'])
+
+"""
+for FILENAME in [file for file in os.listdir(PATH) if not "_t_" in file]:
     print("Animating "+FILENAME)
     eta = float(FILENAME.split(',')[0].split('=')[-1])
-    t_filename = "sol_full_t"+FILENAME[13:]
-    path_inp = PATH+FILENAME
-    path_t = PATH+t_filename
+    t_filename = FILENAME[0:12]+"_t"+FILENAME[12:]
+    path_inp = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas, one quadrant\\"+FILENAME
+    path_t = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas, one quadrant\\"+t_filename
 
     
     inp = np.load(path_inp)
     t = np.load(path_t)
     
     animate_VW(inp,t,eta)
+"""
+    

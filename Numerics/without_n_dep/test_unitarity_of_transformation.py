@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jun  2 15:16:21 2023
+Created on Sat Jun 10 09:02:16 2023
 
 @author: Jan-Philipp
 """
@@ -8,39 +8,13 @@ Created on Fri Jun  2 15:16:21 2023
 import numpy as np
 import  quadratic_solver_wrapper as qs
 import matplotlib.pyplot as plt
-from matplotlib import rc
-import scipy
+import os
+
 plt.rcParams.update({
     "text.usetex": True
 })
 
-rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
-rc('text', usetex=True)
-
-eta = 1 #parameter which we will vary between -10...10
-lambda_max = 40 #how far we want to traverse the flow
-n = 200 #for how many points in the flow we want to save the Hamiltonian
-#grid = rlt.gen_1Dgrid(rlt.lamb_IR,rlt.lamb_UV,dk=(1e-1)/5)
-#N = len(grid)
-#sol = remove_linear(grid)
-
-#om0,V0,W,eps = rlt.get_quadratic_Hamiltonian(grid)
-
-
 N = 200
-
-lambda_UV = 10
-
-
-#om0,V0,W,eps = qs.unpack_arr(np.load("C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit Quadratic Hamiltonians\\Ham_eta=1.200000000000001,N=200,lambda_IR=0.1,lambda_UV=10.0.npy"),100)
-
-#V = V0 + np.diag(np.diag(om0)) # - np.diag(np.diag(V0)) #
-
-
-#A = V
-#B = W
-
-
 
 Omega = np.block([[np.diag(np.ones(N)),np.zeros((N,N))],[np.zeros((N,N)),-np.diag(np.ones(N))]])
 theta = np.block([[np.zeros((N,N)),np.diag(np.ones(N))],[np.diag(np.ones(N)),np.zeros((N,N))]])
@@ -49,7 +23,7 @@ theta = np.block([[np.zeros((N,N)),np.diag(np.ones(N))],[np.diag(np.ones(N)),np.
 
 def get_eigvals(A,B):
     H = np.block([[A,B],[-np.conj(B),-np.conj(A)]])
-    eigvals, eigvecs = scipy.linalg.eig(H)
+    eigvals, eigvecs = np.linalg.eig(H)
     eigvecs = eigvecs.T
     sorted_vals = np.array([val for _, val in sorted(zip(eigvals,eigvals),key = lambda tup: np.real(tup[0]))])#np.sort(np.real(eigvals))
     sorted_vecs = np.array([vec for _, vec in sorted(zip(eigvals,eigvecs),key = lambda tup: np.real(tup[0]))])
@@ -74,7 +48,7 @@ def find_right_eigvals(eigvals_ord,eigvecs_ord):
             right_eigvals.append(eigvals_ord[i][1])
         else:
             if not (np.isclose(matrix_element_1,0) and np.isclose(matrix_element_0,0)):
-                if not np.abs(eigvals_ord[i][0])<1e-10:
+                if not np.abs(eigvals_ord[i][0])<1e-5:
                     print("First matrix element: ",matrix_element_0,"\n Second matrix element: ",matrix_element_1," \n")
                     raise ValueError("Both Matrix Elements have the same sign and are not small!!!")
             else:
@@ -84,33 +58,38 @@ def find_right_eigvals(eigvals_ord,eigvecs_ord):
 def ground_state_energy(right_eigvals,E_0,A):
     return E_0-1/2*np.sum(np.diag(A))+1/2*np.sum(right_eigvals) #see eq. 33 in Practial Course manual
 
-
-
-import os
-PATH = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit Quadratic Hamiltonians\\"
+lambda_UV = 10
+lambda_IR = .1
+PATH = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas, full, V_diag is zero\\"
 
 
 etas = []
 epss = []
-for FILENAME in [file for file in os.listdir(PATH) if not "_t_" in file]:
-    eta = float(FILENAME.split(',')[0].split('=')[-1])
-    path_inp = PATH+FILENAME
-    om0,V0,W,eps = qs.unpack_arr(np.load(path_inp),200)
-    V = V0 + np.diag(np.diag(om0)) # - np.diag(np.diag(V0)) #
-    
-    A = V
-    B = W
-  
-    eigvals_ord, eigvecs_ord = get_eigvals(A,B)
-    right_eigvals = find_right_eigvals(eigvals_ord,eigvecs_ord)
-    #print(right_eigvals)
-    print("Maximal right eigenvalue: ", max(np.abs(right_eigvals)))
-    etas.append(eta)
-    epss.append(np.real(ground_state_energy(right_eigvals,eps,A)))
 
-plt.plot(etas,epss,linestyle='None',marker='x',color='black',label=r'via Bogliubov Transformation')
-plt.xlabel(r'$\eta=g_{IB}/g_{BB}$')
-plt.ylabel(r'$E_0$')
-plt.legend()
-plt.savefig('E_0-eta_via_Bogliubov_Trafo.pdf',dpi=300)
+for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file][::-1]:
+    eta = float(FILENAME.split(',')[0].split('=')[-1])
+    if not eta == 0 and not eta == 2:
+        t_filename = "sol_full_t"+FILENAME[13:]
+        path_inp = PATH+FILENAME
+        path_t = PATH+t_filename
+        
+        inp = np.load(path_inp)
+        om0,V0,W,eps = qs.unpack_arr(inp.T[-1],200)
+        
+        
+        
+        V = V0 + np.diag(np.diag(om0)) # - np.diag(np.diag(V0)) #
+        
+        A = V
+        B = W
+      
+        eigvals_ord, eigvecs_ord = get_eigvals(A,B)
+        right_eigvals = find_right_eigvals(eigvals_ord,eigvecs_ord)
+        #print(right_eigvals)
+        #print("Maximal right eigenvalue: ", max(np.abs(right_eigvals)))
+        etas.append(eta)
+        epss.append(np.real(ground_state_energy(right_eigvals,eps,A)))
+    
+plt.plot(etas,epss,linestyle='None',marker='x')
+plt.title('Test Unitarity')
 plt.show()

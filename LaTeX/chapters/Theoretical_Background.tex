@@ -1,5 +1,138 @@
-\chapter{Theoretical Background}
+\chapter{Theoretical Background}\label{Theoretical Background}
 \section{The Flow Equation Approach}
-\section{Normal Ordering}
+This section is intended to be a concise and rather operational overview of the flow equation approach. S. Kehrein provides an excellent in-depth introduction \cite{kehrein2006flow} on which most of the discussion in this section is based.
+\subsection{General Mechanism}\label{General Mechanism}
+We start with a Hamiltonian $\ham$ and our goal is to continuously transform $\ham$ into an unitarily equivalent diagonal Hamiltonian. This transformation $\hat U$ is a function of a flow parameter $\lambda$ with $\left[\lambda\right]=\mathrm{Energy}^{-2}$ and will be chosen such that the off-diagonal elements in  
+\begin{equation}\label{FEQ_U_def}
+\ham(\lambda)=\hat U(\lambda)\ham (\lambda = 0)\hat U^\dagger (\lambda)
+\end{equation}
+vanish in the limit $\lambda\rightarrow\infty$. Stone's theorem on one-parameter unitary groups guarantees the existence of $\hat \eta(\lambda)$ which is anti-hermitian, i.e. $\hat\eta(\lambda) = -\hat\eta^\dagger(\lambda)$, and fulfills 
+\begin{equation}
+\hat U(\lambda) = e^{\hat\eta(\lambda)}.
+\end{equation} 
+$\hat\eta(\lambda)$ is called the generator of the unitary transformation $\hat U(\lambda)$. Applying the Baker-Campbell-Hausdorff formula to equation \ref{FEQ_U_def}, or simply differentiating both sides of equation \ref{FEQ_U_def} with respect to $\lambda$, yields
+\begin{equation}\label{FEQ_ODE_def}
+\frac{\mathrm d\ham(\lambda)}{\mathrm d\lambda} = \left[\hat\eta(\lambda),\ham(\lambda)\right].
+\end{equation}
+This is what we will refer to as the flow equation for the Hamiltonian $\ham (\lambda)$. From now on, the $\lambda-$dependence of $\hat\eta,\ham$ and $\hat U$ will usually be omitted. \\
+For every $\hat U$ there exists one and only one $\hat\eta$ which generates the unitary transformations defined by $\hat U$. However, there may be several $\hat U$ which let $\ham(\lambda = 0)\eqdef \ham^{(0)}$ flow to (the same) diagonal Hamiltonian $\ham(\lambda=\infty)\eqdef \ham^{(\infty)}$ so there is in general more than one good choice for $\hat\eta$. \\
+It turns out that in most cases 
+\begin{equation}\label{FEQ_eta_def}
+\hat\eta = \left[\ham_{\mathrm{diag.}},\ham \right],
+\end{equation}
+where $\ham_{\mathrm{diag.}}$ is the diagonal part of the Hamiltonian, achieves the desired diagonalization.  \\
+We are often in a situation where a given system described by $\ham_0$ with known eigenenergies  and eigenstates is well understood if certain interaction terms $\ham_{\mathrm{int}}$ are neglected. In this case, we can write $\ham = \ham_0 + \ham_{\mathrm{int}}$ and thus
+\begin{equation}\label{FEQ_can_eta_def}
+\hat\eta = \left[\ham_0, \ham_{\mathrm{int}}\right].
+\end{equation}
+This choice is called the canonical generator and is also the choice for the generator that will be adopted in this thesis.. \\
+A good benchmark that indicates how diagonal the interaction Hamiltonian is at a given point in the flow, is to check if the the trace of its square becomes smaller in the flow:
+\begin{equation}\label{check_trace}
+\frac{\mathrm d}{\mathrm d \lambda}\mathrm{Tr}\left(\ham^2_{\mathrm{int}}\right)\leq 0
+\end{equation}
+It can be proved \cite[pp. 27-28]{kehrein2006flow} that this is always the case iff 
+\begin{align}\label{useless_check}
+\mathrm{Tr}\left(\ham_0\ham_{\mathrm{int}}\right)=\mathrm{Tr}\left(\frac{\mathrm d\ham_0}{\mathrm d\lambda} \ham_{\mathrm{int}}\right)=0
+\end{align}
+\subsection{Normal Ordering}
+Normal ordering plays an essential role in successfully applying to flow equation approach to realistic Hamiltonians. In our definition of normal ordering, we follow \cite[pp. 62-63]{kehrein2006flow} which in turn is based upon unpublished notes by F. Wegner.\\
+Let $\hat\alpha_k\in\{\AN_k,\CR_k\}$ and consider some normalized reference state $|\psi_{NO}\rangle$. Moreover, we define the contractions 
+\begin{equation}\label{contractions_def}
+C_{k,l}\defeq \langle \psi_{NO}|\hat\alpha_k\hat\alpha_l|\psi_{NO}\rangle.
+\end{equation}
+Then it follows that
+\begin{equation}
+\left[\hat\alpha_k,\hat\alpha_l\right] = C_{k,l}-C_{l,k}
+\end{equation}
+which can be proved readily by applying the canonical commutation relations to equation \ref{contractions_def} and by using the normalization of $|\psi_{NO}\rangle$.
+Normal ordering of a operator $\hat O$ composed of creation and annihilation operators is defined by the following three rules:
+\begin{enumerate}
+\item c-numbers are unaffected by normal ordering:
+\begin{equation}
+\NO 1\NO = 1
+\end{equation}
+\item Linearity:
+\begin{equation}
+\NO c\ \hat O_1+\hat O_2\NO = c \NO \hat O_1\NO+\NO \hat O_2\NO\ \forall c\in\C
+\end{equation}
+\item Recurrence relation:
+\begin{equation}\label{recurrence relation}
+\hat\alpha_k\NO\hat O\NO=\NO\hat\alpha_k\hat O\NO + \Sum_l C_{k,l}\NO{\partial_{\hat\alpha_l}\hat O}\NO 
+\end{equation}
+The derivative is performed symbolically w.r.t. $\hat\alpha_l$.
+\end{enumerate}
+An important property of normal ordered operators is that within an normal ordered expression, products of operators can be permuted arbitrarily.\\
+Furthermore, if the normal ordering is performed with respect to the vacuum, normal ordering an operator is equivalent to successively commuting all creation operators to the left and all annihilation operators to the right. 
+\subsection{Truncation Schemes}\label{Truncation Schemes}
+The crux of the flow equation approach lies in the fact that for many Hamiltonians, the flow creates higher and higher interaction terms. To illustrate this, consider a Hamiltonian which can be split into a quadratic $\ham_0$ and a quartic $\ham_{\mathrm{int}}$, i.e. they contain terms with two respectively four creation or annihilation operators. \\
+Evaluating the commutator \ref{FEQ_can_eta_def} yields a generator which is still of the same structure as the original Hamiltonian. However, evaluating equation \ref{FEQ_ODE_def}  yields fourth order terms from the commutators of quadratic and quartic terms and sixth order terms from the commutators of quartic and quartic terms. This might suggest that the flow Hamiltonian is of order six, but then also the commutators of these sixth order terms with the canonical generator with terms up to quartic order have to be considered, which in turn creates terms of order eight and so forth. \par
+It follows that, for practical purposes, this sequence must be truncated at some point. Normal ordering can be thought of as a procedure to organize the higher order terms generated in the flow, because the normal ordered expression consisting of all quadratic creation or annihilation operator terms contains all the information about the particle energies, and the normal ordered expression consisting of all quartic creation or annihilation operator terms contains all the information about the two-particle interaction and so on. Without normal ordering, fourth-order terms could also contribute to second-order terms. Thus, a normally ordered expression organizes its terms by the order of their interaction. Since higher order interactions generally contribute less than lower order interactions, this is the correct way to truncate a sequence. \par
+With respect to which state the Hamiltonian should be normal ordered, i.e. with respect to which state the contractions \ref{contractions_def} should be defined, is subtle. It should be defined with respect to the ground state $|GS\rangle$ of the diagonal Hamiltonian $\ham^{(\infty)}$, because we want the interaction terms to be ordered by their interaction order in our actual physical system. But there are two problems with this: First, the ground state of the diagonal Hamiltonian is not necessarily known; second, this state changes because the basis changes at each step of the flow, i.e. 
+\begin{equation}
+|GS(\lambda)\rangle = \hat U(\lambda)\hat U^\dagger(\lambda=\infty)|GS\rangle.
+\end{equation}
+Intuitively, this is clear: We first let the flow run backwards from $\lambda=\infty$ to $\lambda = 0$ and then let $|GS(\lambda=0)\rangle$ flow until $|GS(\lambda)\rangle$ which is the correct ground state in the basis of a given point in the flow.\\
+A possible solution to our two problems is to first start with normal ordering w.r.t. some arbitrary state (e.g. the vacuum) to get a first guess for the ground state of the diagonal Hamiltonian and to iteratively improve that guess by repeatedly traversing the flow. \par
+Although this method has not found widespread adoption when using the flow equation approach because the error induced by a \grqq na\"ive\grqq\  normal ordering prescription is usually not large, and it may sometimes be easier just to consider more terms in the flow instead of working with the correct normal ordering prescription, it is important not to forget that not all normal ordered expansions and truncation schemes are equally good and can introduce differently sized errors.
+
+\section{The Bose Polaron Problem}
+\subsection{(Beyond) The Fröhlich Hamiltonian}\label{(Beyond) The Fröhlich Hamiltonian}
+The Fröhlich Hamiltonian is a model that describes the interaction between a single quantum particle and a phonon reservoir, such as a crystal lattice or a Bose-Einstein condensate (BEC). It was introduced by Herbert Fröhlich in 1954 to study the effect of electron-phonon coupling on the electrical conductivity of polar crystals \cite{doi:10.1080/00018735400101213}. The Fröhlich Hamiltonian can also be used to describe the interaction of an impurity with the Bogoliubov phonons of an BEC, which leads to the formation of a quasiparticle called the Bose polaron because the impurity atom becomes \grqq dressed\grqq\ in a cloud of phonons. This dressing changes the properties of the impurity, such as its effective mass and mobility.\par 
+We follow \cite{Grusdt_2017} and write the Fröhlich Hamiltonian in one dimension in the following form:
+\begin{equation}\label{Fröhlich}
+\ham_F = g_{IB}n_0+\frac{\hat p^2}{2M}+\int\mathrm d k\omega_{ k}\CR_{ k}\AN_{ k}+\sqrt{\frac{n_0}{2\pi}}g_{IB}\int\mathrm d k W_k e^{ik\hat x}\left(\AN_{ k}+\CR_{- k}\right)
+\end{equation}
+Here $g_{IB}$ is the boson-impurity coupling constant which characterizes the strength of their interaction and $n_0$ is the density of the Bose gas. The second term describes the kinetic energy of the impurity of mass $M$ in first quantized form. The third term accounts for the energy of the Bogoliubov phonons with the Bogoliubov dispersion given by 
+\begin{equation}\label{bog_disp}
+w_k=ck\sqrt{1+\frac12\xi^2k^2}
+\end{equation}
+where we introduced $\xi$ as the healing length of the Bose condensate and $c$ as the speed of sound in the condensate. The last term describes interactions between the impurity and the phonons. It can be thought of modeling a process where a phonon in mode $k$ is first absorbed and then reemitted as a phonon in mode $-k$ with an appropriate change in both amplitude and phase. For this process, the scattering amplitude is
+\begin{equation}\label{W_k_def}
+W_k = \left(\frac{(\xi k)^2}{2+(\xi k)^2}\right)^{1/4}
+\end{equation}
+and the change in phase depends on the position operator of the impurity (again in first quantization).\par
+It has been shown that in order to accurately describe the effective mass of Bose polarons, the Fröhlich Hamiltonian alone does not suffice and two-phonon scattering terms have to be included in the Hamiltonian \cite{Grusdt_2017}. The inclusion of those leads to very good agreement of experiment and theory. It should be noted at this point that a 1D model is not only interesting from a theoretical perspective, since experimental setups in one dimension are possible and have successfully been realized \cite{Catani}.\\
+The aforementioned two-phonon scattering terms are quadratic and are again proportional to the boson-impurity coupling constant:
+\begin{equation}
+\ham_{2\mathrm{ph}}=\frac{g_{IB}}{2\pi}\int\mathrm d k\mathrm d k^\prime \left(c_k\CR_k-s_k\AN_{-k}\right)\left(c_{k^\prime}\AN_{k^\prime}-s_{k^\prime}\CR_{-k^\prime}\right)e^{i(k-k^\prime)x}
+\end{equation}
+The coefficients $c_k$ and $s_k$ can be obtained from 
+\begin{subequations}
+\begin{align}
+W_k &= c_k - s_k\\
+W_k^{-1} &= c_k + s_k
+\end{align}
+\end{subequations}
+In principle, additional interactions between the Bogoliubov phonons have to be accounted for. However, those only become relevant when the boson-boson interaction constant $g_{BB}$ becomes large, the density $n_0$ becomes small or, equivalently, the coupling strength \begin{equation}\gamma\defeq\frac{m_B g_{BB}}{n_0}\end{equation} is large. Because this regime will not be considered in this thesis, $\ham_F$ and $\ham_{2\mathrm{ph}}$ model the polaron problem well for our purposes.\\
+For future reference, we will now also introduce the 1D boson–boson s-wave scattering length 
+\begin{equation}
+a_{BB}=-\frac{2}{m_Bg_{BB}}
+\end{equation}
+where \begin{equation}m_B = \frac{1}{\sqrt{2c\xi}}\end{equation} is the mass of the bosons
+and the dimenionless parameter 
+\begin{equation}
+\eta\defeq \frac{g_{IB}}{g_{BB}}
+\end{equation}
+to quantify how the interaction strength between impurity and boson compares to the strength of the boson-boson interactions.\\
+For small $\eta$, the Fröhlich Hamiltonian describes the physics of the impurity accurately. For strong coupling, however, two-phonon terms must be included and our full Hamiltonian reads
+\begin{equation}\label{full_ham}
+\ham = \ham_F + \ham_{2\mathrm{ph}}
+\end{equation}
+\subsection{The Lee-Low-Pine (LLP) Transformation}
+The Lee-Low-Pine (LLP) transformation \cite{LLP} dramatically simplifies the solving the full Hamiltonian \ref{full_ham}. By making use of the fact that the total system momentum is conserved (which follows from the translational invariance of $\ham$) it allows us to transform to a reference frame co-moving to the impurity with the impurity in its center. \\
+We take advantage of the fact that the total momentum operator is 
+\begin{equation}
+\hat P_{\mathrm{tot}} = \int\mathrm d k k \CR_k\AN_k + \hat p
+\end{equation}
+and then define
+\begin{equation}
+\hat U_{\mathrm{LLP}}\defeq \exp\left(-i\hat x\cdot \left(\hat P - \int\mathrm d k k \CR_k\AN_k\right)\right)
+\end{equation}
+This is the desired transformation because $\hat p$ is the generator of (infinitesimal) translations of the impurity and $\hat x$ generates translations of the impurity in momentum space.\\
+The transformed Hamiltonian as a function of the total conserved system momentum $P$ then reads:
+\begin{align}\label{ham_LLP}
+\hat U_{\mathrm{LLP}}^\dagger\ham\hat U_{\mathrm{LLP}} &\defeq \ham_{\mathrm{LLP}}(P) =g_{IB}n_0+\frac{1}{2M}\left(P-\int\mathrm d k k \CR_k\AN_k \right)^2+\int\mathrm d k\omega_{ k}\CR_{ k}\AN_{ k}\\
+&+\sqrt{\frac{n_0}{2\pi}}g_{IB}\int \mathrm d k W_k \left(\AN_{ k}+\CR_{- k}\right) + \frac{g_{IB}}{2\pi}\int\mathrm d k\mathrm d k^\prime \left(c_k\CR_k-s_k\AN_{-k}\right)\left(c_{k^\prime}\AN_{k^\prime}-s_{k^\prime}\CR_{-k^\prime}\right)\nonumber
+\end{align}
 
 

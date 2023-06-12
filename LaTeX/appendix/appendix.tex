@@ -1,9 +1,9 @@
 \begin{appendix}
 
-\chapter{Detailed Calculations}
+\chapter{Detailed Calculations}\label{Detailed Calculations}
 \thispagestyle{empty}
 
-\section{Deriving the flow equations in the case of no n-dependence}
+\section{Deriving the flow equations in the case of no n-dependence}\label{Deriving the flow equations in the case of no n-dependence}s
 First the canonical generator $\hat\eta$ has to be evaluated:
 \begin{align}
 \hat\eta&\defeq\hat\eta(\lambda)\defeq\left[\ham_0,\ham_{\mathrm{int}}\right] = \left[\Sum_k \omega_k \CR_k\AN_k,\Sum_{q\neq q^\prime}V_{q,q^\prime}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}\CR_p\CR_{p^\prime}+W_{p,p^\prime}^*\AN_p\AN_{p^\prime}\right)\right]  \\ \quad& 
@@ -124,39 +124,12 @@ Using the expressions for the commutators of the generator and $\ham_0$ respecti
 \end{subequations}
 \end{flushleft}
 Obviously, equations \ref{feq_won_III} and \ref{feq_won_III'} are not independent from each other, since they are related by complex conjugation. Seeing this is a good consistency check because complex conjugation was not explicitly used in the derivation of the these two equations.\\
-Furthermore note that in first order the flow equations \ref{feq_won_I}-\ref{feq_won_IV} suggest that they are exact in the sense that if the flow is completely traversed, the flow Hamiltonian will be exactly diagonal.
+\section{Deriving the Flow Equations with n-dependence}
 
-\section{Deriving the flow equations with n-dependence}
-\subsection{Useful preliminaries}
-Consider some operator $\hat f$ which depends on a number operator $\hat n=\CR\AN$. The following relations will be used later:
-\begin{subequations}
-\label{fcom}
-\begin{align}
-\left[\CR,\hat f(\hat n) \right] &= \CR\left(\hat f(\hat n)-\hat f(\hat n+1)\right)\\ 
-\left[\AN,\hat f(\hat n) \right] &= \AN\left(\hat f(\hat n)-\hat f(\hat n-1)\right)\\
-\left[\hat f(\hat n),\CR \right] &= \left(\hat f(\hat n)-\hat f(\hat n-1)\right)\CR\\
-\left[\hat f(\hat n),\AN \right] &= \left(\hat f(\hat n)-\hat f(\hat n+1)\right)\AN
-\end{align}
-\end{subequations}
-These can be proved by induction for $\hat f(\hat n)=\hat n^k, k\in\N$ and from there simply extended to well-behaved $\hat f$ via power series. Equations \ref{fcom} are still valid for functions depending on $\left\{\hat n_k\right\}_k$, because all $\hat n_k$ pairwise commute.\\
-We will write $\hat f\left(\hat n_1,\hat n_2,\hdots\right)\eqdef \hat f$ and $\hat f\left(\hat n_1,\hat n_2,\hdots,\hat n_k\pm 1,\hat n_{k+1},\hdots\right)\eqdef \hat f(\hat n_k\pm1)$. In this notation it is understood that $\hat f(\hat n_k\pm1,\hat n_{k}\pm1)\eqdef\hat f(\hat n_k\pm2)$.\\
-Using this notation, it is evident that a simple induction for $n_1,n_2\in\N_0$ yields the following relation:
-\begin{align}
-&\left[\hat f(\hat n),\CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}} \right] \nonumber \\ \quad& 
-= \left(\hat f-\hat f\left(\hat n_{k_1}-1,\hat n_{k_2}-1,\hdots,\hat n_{k_{n_1}},\hat n_{k_1}+1,\hat n_{k_2}+1\hdots\hat n_{k_{n_2}}+1\right)\right)\CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}
-\end{align}
-Furthermore, applying the recurrence relation introduced to define the normal ordering procedure can be used to successively normal order operators. Let $\hat O\defeq \CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}$. Then normal ordering w.r.t. the vacuum yields:
-\begin{subequations}
-\begin{align}
-\AN_q\NO\hat O\NO &=\NO\hat O\AN_q\NO + \sum\limits_{k}\NO \frac{\partial \hat O}{\partial\CR_k}\NO \nonumber \\
- &= \NO\hat O\AN_q\NO + \sum\limits_{i=1}^{n_1}\delta_{k_i,q}\NO \CR_{k_1}\CR_{k_2}\cdots\CR_{k_{i-1}}\CR_{k_{i+1}}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}\NO \\
-\CR_q\NO\hat O\NO &= \NO \CR_q\hat O\NO
-\end{align}
-\end{subequations}
-\subsection{The canonical generator}
+\subsection{The Canonical Generator}
 Our Hamiltonian $\ham$ is of the form:
 \begin{align}
-\ham = \Sum_k \hat\omega_k \NO\CR_k\AN_k\NO+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right)+\hat\epsilon
+\ham = \Sum_k \hat\omega_k \NO\CR_k\AN_k\NO+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\Sum_{q\neq q^\prime}\hat V_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO+\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right)+\hat\epsilon
 \end{align}
 Upon realizing that $\Sum_k \hat\omega_k \NO\CR_k\AN_k\NO$ is also just a function of the number operators, we can consider $\ham_0\defeq\hat H\defeq \Sum_k \hat\omega_k \NO\CR_k\AN_k\NO+\hat\epsilon$ as the diagonal part of $\ham$. \\
 The first step in the calculating the flow equations is again to calculate the canonical commutator $\hat\eta\defeq\left[\ham_0,\ham_{\mathrm{int}}\right]$:
@@ -196,7 +169,7 @@ This gives the canonical generator as:
 &\eqdef \Sum_{q\neq q^\prime}\hat \theta_{q,q^\prime}\NO \CR_q\AN_{q^\prime}\NO+\Sum_{p,p^\prime}\left(\hat \phi_{p,p^\prime}\NO \CR_p\CR_{p^\prime}\NO+\hat \psi_{p,p^\prime}\NO\AN_p\AN_{p^\prime}\NO\right) \label{psiphitheta_def}
 \end{align}
 %The latter will be neglected for now, i.e. we assume $\hat\eta\approx\hat\eta^{(2)}$ for which we write $\hat\eta\overset{\CircledTop{2}}{=}\hat\eta^{(2)}$ because equality holds up to second order. The accuracy of this approximation will vary from model to model and must always be justified in a specific situation.
-\subsection{Evaluating the commutator of the generator with the Hamiltonian}
+\subsection{Evaluating the Commutator of the Generator with the Hamiltonian}
 If one notices that $\eta$ is structurally identical to $\ham_{\mathrm{int}}$, the commutator of $\ham_0$ and $\eta$ can be written down immediately:
 \begin{align}
 \left[\eta^{(2)},\ham_0\right] &= -\Sum_{q\neq q^\prime}\hat \theta_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right) \NO \CR_q\AN_{q^\prime}\NO \\
@@ -440,30 +413,17 @@ Similiarly, \ref{com_eta_Hint_E2} also gives no quadratic contribution.
 \Sum_{p, p^\prime}\Sum_{\tilde p,\tilde p^\prime} \left[\hat\psi_{\tilde p,\tilde p^\prime}\NO\AN_{\tilde p}\AN_{\tilde p^\prime}\NO,\hat W_{p,p^\prime}^\dagger\NO\AN_p\AN_{p^\prime}\NO\right]\eqsec 0
 \end{align}
 \end{itemize}
-\section{The flow equations}
+\subsection{The Flow Equations}
 We conclude that $\ham(\lambda)$ is of the form 
 \begin{align}
-\ham(\lambda)&\eqsec\Sum_k \hat\omega_k(\lambda) \NO\CR_k\AN_k\NO+\Sum_{q\neq q^\prime}\hat V_{q,q^\prime}(\lambda)\NO\CR_q\AN_{q^\prime}\NO\\
-&+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}(\lambda)\NO\CR_p\CR_{p^\prime}\NO+\hat W_{p,p^\prime}^\dagger(\lambda)\NO\AN_p\AN_{p^\prime}\NO\right)+\epsilon(\lambda)\nonumber
+\ham(\lambda)&\eqsec\hat H+\Sum_{q\neq q^\prime}\hat V_{q,q^\prime}(\lambda)\NO\CR_q\AN_{q^\prime}\NO\\
+&+\Sum_{p,p^\prime}\left(\hat W_{p,p^\prime}(\lambda)\NO\CR_p\CR_{p^\prime}\NO+\hat W_{p,p^\prime}^\dagger(\lambda)\NO\AN_p\AN_{p^\prime}\NO\right)\nonumber
 \end{align}
-where $\epsilon(\lambda)$ is a constant which indicates a shift in the energy scale.\\
+where $\hat\epsilon(\lambda)$ is an operator which indicates a shift in the energy scale.\\
 Collecting all terms in $\partial_\lambda\ham(\lambda)=[\hat\eta(\lambda),\ham(\lambda)]$ gives the following flow equations $\forall k, p,p^\prime, q, q^\prime$ where $q\neq q^\prime$:
 \begin{subequations}
 \begin{align}
-\partial_\lambda\hat\omega_k&\eqsec \Sum_{\tilde q} \left(\hat\theta_{k,k}\hat V_{k,\tilde q}-\hat\theta_{\tilde q,k}\hat V_{k,\tilde q}\right)  \\
-&+\Sum_{\tilde q} \hat V_{k,\tilde q}\left(\hat\theta_{\tilde q,k}-\hat\theta_{\tilde q,k}(\hat n_{\tilde q}+1,\hat n_k-1)\right)\nonumber \\
-&-\Sum_{\tilde q} \hat \theta_{k,\tilde q}\left(\hat V_{\tilde q,k}-\hat V_{\tilde q,k}(\hat n_{\tilde q}+1,\hat n_k-1)\right)\nonumber\\
-&-\Sum_{\tilde p} \left(\hat\phi_{k,\tilde p}\hat W_{k,\tilde p}^\dagger+\hat\phi_{\tilde p,k}\hat W_{k,\tilde p}^\dagger+\hat\phi_{k,\tilde p}\hat W_{\tilde p,k}^\dagger  + \hat\phi_{\tilde p,k}\hat W_{\tilde p,k}^\dagger\right)\nonumber\\
-&+\Sum_{\tilde p}\hat W_{\tilde p,k}^\dagger \left(\hat\phi_{ \tilde p,k}-\hat\phi_{ \tilde p,k}(\hat n_{\tilde p}+1,\hat n_{k}+1)\right) \nonumber\\
-&+\Sum_{\tilde p}\hat W_{\tilde p,k}^\dagger \left(\hat\phi_{k,\tilde p}-\hat\phi_{k,\tilde p}(\hat n_{\tilde p}+1,\hat n_{k}+1)\right) \nonumber\\
-&+\Sum_{\tilde p}\hat W_{k,\tilde p}^\dagger \left(\hat\phi_{\tilde p,k}-\hat\phi_{\tilde p,k}(\hat n_{k}+1,\hat n_{\tilde p}+1)\right) \nonumber\\
-&+\Sum_{\tilde p}\hat W_{k,\tilde p}^\dagger \left(\hat\phi_{k, \tilde p}-\hat\phi_{k, \tilde p}(\hat n_{k}+1,\hat n_{\tilde p}+1)\right) \nonumber\\
-&+\Sum_{\tilde p} \left(\hat W_{k,\tilde p}\hat \psi_{k,\tilde p}+\hat W_{\tilde p,k}\hat \psi_{k,\tilde p}+\hat W_{k,\tilde p}\hat \psi_{\tilde p,k}  + \hat W_{\tilde p,k}\hat \psi_{\tilde p,k}\right) \nonumber\\
-&- \Sum_{\tilde p}\hat \psi_{\tilde p,k} \left(\hat W_{ \tilde p,k}-\hat W_{ \tilde p,k}(\hat n_{\tilde p}+1,\hat n_{k}+1)\right)\nonumber\\
-&-\Sum_{\tilde p}\hat \psi_{\tilde p,k} \left(\hat W_{k,\tilde p}-\hat W_{k,\tilde p}(\hat n_{\tilde p}+1,\hat n_{k}+1)\right) \nonumber\\
-&-\Sum_{\tilde p}\hat \psi_{k,\tilde p} \left(\hat W_{\tilde p,k}-\hat W_{\tilde p,k}(\hat n_{k}+1,\hat n_{\tilde p}+1)\right) \nonumber\\
-&-\Sum_{\tilde p}\hat \psi_{k,\tilde p} \left(\hat W_{k, \tilde p}-\hat W_{k, \tilde p}(\hat n_{k}+1,\hat n_{\tilde p}+1)\right) \nonumber\\
-\partial_\lambda\hat V_{q,q^\prime}&\eqsec -\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right)^2\\
+\partial_\lambda\hat V_{q,q^\prime}&\eqsec -\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right)^2\label{feq_ndep_I}\\
 &+ \Sum_{\tilde q} \left(\hat\theta_{q,q^\prime}\hat V_{q^\prime,\tilde q}-\hat\theta_{\tilde q,q^\prime}\hat V_{q,\tilde q}\right) \nonumber\\
 &+\Sum_{\tilde q} \hat V_{q,\tilde q}\left(\hat\theta_{\tilde q,q^\prime}-\hat\theta_{\tilde q,q^\prime}(\hat n_{\tilde q}+1,\hat n_q-1)\right)\nonumber \\
 &-\Sum_{\tilde q} \hat \theta_{q,\tilde q}\left(\hat V_{\tilde q,q^\prime}-\hat V_{\tilde q,q^\prime}(\hat n_{\tilde q}+1,\hat n_q-1)\right)\nonumber \\
@@ -490,7 +450,7 @@ Collecting all terms in $\partial_\lambda\ham(\lambda)=[\hat\eta(\lambda),\ham(\
 &+      \Sum_{q}\left(\hat W_{q,p^\prime}^\dagger+\hat W_{p^\prime,q}^\dagger\right) \left(\hat\theta_{ q,p}-\hat\theta_{ q,p}(\hat n_{p^\prime}+1^,\hat n_{q}+1)\right)                     \nonumber\\
 &-      \Sum_{q}\left(\hat \psi_{q,p^\prime}+\hat \psi_{p^\prime,q}\right) \left(\hat V_{ q,p}-\hat V_{ q,p}(\hat n_{p^\prime}+1,\hat n_{q}+1)\right)                     \nonumber\\
 &-      \Sum_{q}\left(\hat V_{ q, p^\prime}\hat \psi_{p,q}+\hat\theta_{ q, p}\hat \psi_{q,p^\prime}\right)                     \nonumber\\
-\partial_\lambda\epsilon&\eqsec -\Sum_{p, p^\prime}\left( \hat\phi_{ p, p^\prime}\hat W_{p,p^\prime}^\dagger+ \hat\phi_{p^\prime,p}\hat W_{p,p^\prime}^\dagger\right) \\
+\partial_\lambda\hat H&\eqsec -\Sum_{p, p^\prime}\left( \hat\phi_{ p, p^\prime}\hat W_{p,p^\prime}^\dagger+ \hat\phi_{p^\prime,p}\hat W_{p,p^\prime}^\dagger\right) \label{feq_ndep_IV}\\
 &+\Sum_{p, p^\prime}\hat W_{p,p^\prime}^\dagger \left(\hat\phi_{p^\prime,p}-\hat\phi_{p^\prime,p}(\hat n_p+1,\hat n_{p^\prime}+1)\right) \nonumber\\
 &+\Sum_{p, p^\prime}\hat W_{p,p^\prime}^\dagger \left(\hat\phi_{ p, p^\prime}-\hat\phi_{ p, p^\prime}(\hat n_p+1,\hat n_{p^\prime}+1)\right)\nonumber\\
 &-\Sum_{q}\left(\hat \psi_{q,p^\prime}+\hat \psi_{p^\prime,q}\right) \left(\hat V_{ q,p}-\hat V_{ q,p}(\hat n_{p^\prime}+1,\hat n_{q}+1)\right)                           \nonumber\\
@@ -506,7 +466,6 @@ The three operators $\hat\psi,\hat\theta,\hat\phi$ are based on their definition
 \hat\phi_{p,p^\prime}&=\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)\\
 \hat\psi_{p,p^\prime}&=W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)
 \end{align}
-In first order, we can expect the off-diagonal elements to vanish if $\hat H \neq \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\ \forall q,q^\prime$ and $\hat H \neq \hat H(\hat n_p\pm 1,\hat n_{p^\prime}\pm 1)\ \forall p,p^\prime$
 \chapter{The second appendix}
 \thispagestyle{empty}
 

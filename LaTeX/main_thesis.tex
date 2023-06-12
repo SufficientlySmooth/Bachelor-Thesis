@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{book}
+\documentclass[12pt,a4paper,oneside]{book}
 
 %%% PREAMBLE   
 \input{preamble_thesis}
@@ -36,13 +36,20 @@
 
 %%% ABSTRACT
 \include{pages/abstract}
-\thispagestyle{empty}
+%\thispagestyle{empty}
 
 %%% TABLE OF CONTENT
 \pdfbookmark{\contentsname}{Contents}
 \tableofcontents 
 \clearpage
 \thispagestyle{empty}
+
+%%% LIST OF FIGURES
+\cleardoublepage
+% \phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -57,7 +64,10 @@
 \include{chapters/Theoretical_Background}
 
 %%% CHAPTER 03
-\include{chapters/chapter-03}
+\include{chapters/Determining_the_flow_equations}
+
+%%% CHAPTER 03
+\include{chapters/Results}
 
 %%% CONCLUSION
 \include{chapters/conclusion}
@@ -74,7 +84,7 @@
 \backmatter
 
 %%% BIBLIOGRAPHY
-\nocite{*}
+%\nocite{*}
 \phantomsection\addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
 

@@ -1,0 +1,228 @@
+\chapter{Determining the Flow Equations}\label{Determining the Flow Equations}
+\section{Purely Quadratic Case}
+\subsection{Deriving the Flow Equations}
+In the purely quadratic case where the coefficients do not depend on the occupation numbers and where a static impurity is considered, exact flow equations \ref{feq_won_I}-\ref{feq_won_IV} can be derived. In particular, the flow Hamiltonian $\ham(\lambda)$ is of the same quadratic form as the original Hamiltonian
+\begin{equation}\label{def_purely_quadratic_hamiltonian}
+\ham \defeq \ham_0+\ham_{\mathrm{int}} \defeq \Sum_k \omega_k \CR_k\AN_k+\Sum_{q\neq q^\prime}V_{q,q^\prime}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}\CR_p\CR_{p^\prime}+\mathrm{h.c.}\right)
+\end{equation}
+ and no truncation scheme as discussed in section \ref{Truncation Schemes} has to be employed. For details of the calculations consult section \ref{Deriving the flow equations in the case of no n-dependence}.\par 
+There we followed precisely the recipe described in section \ref{General Mechanism}: First the canonical generator \ref{FEQ_eta_def} is calculated. Then the derivative of the flow Hamiltonian is calculated via the commutator of the generator and the Hamiltonian in equation \ref{FEQ_ODE_def}. The flow equations then follow by a simple comparison of coefficients from the quadratic Hamiltonian (plus a constant energy $\epsilon$) ansatz for the flow Hamiltonian.
+Furthermore note that the flow equations \ref{feq_won_I}-\ref{feq_won_IV} suggest that they are exact in the sense that if the flow is completely traversed, the flow Hamiltonian will be exactly diagonal because in first order
+\begin{subequations}
+\begin{align}
+V_{q,q^\prime}&\sim \exp\left(-(\omega_q-\omega_{q^\prime})^2\right)\xlongrightarrow{\lambda\rightarrow\infty}0\\
+W_{p,p^\prime}&\sim \exp\left(-(\omega_p+\omega_{p^\prime})^2\right)\xlongrightarrow{\lambda\rightarrow\infty}0,
+\end{align}
+\end{subequations}
+assuming that there are no degeneracies present. If there were, it would mean that  $(\omega_q-\omega_{q^\prime})^2=0$ for some pair $q,q^\prime$. However, even the occurence of (near-)degeneracies does not necessarily imply that the corresponding matrix elements do not decay \cite{PhysRevD.49.4214}. This is because the second order terms coupling the ODEs for the different matrix elements are non-trivial and might, depending on the initial condition, even sufficiently suppress degenerate matrix elements. \\
+Consequently, applying the equations to a concrete problem provides the best test of their performance and convergence properties.\\
+Checking the condition \ref{check_trace} is a strong indicator for good convergence properties but does not necessarily imply that all elements in $\ham_{\mathrm{int}}$ converge to 0, which is why we waive the explicit evaluation of the conditions \ref{useless_check}.
+\subsection{Application to the 1D Bose Polaron Model}
+In the heavy impurity limit $M\rightarrow \infty$, the dependence of the occupation numbers in the LLP-Hamiltonian \ref{ham_LLP} vanishes and we almost have a purely quadratic Hamiltonian as discussed in the previous  section. Before we discuss the significance of the the linear term in the LLP-Hamiltonian we will address the fact that the integrals in there have to discretized for numerical treatment.\\
+To this end, we will restrict ourselves to a discrete number of modes $k$ where $0<\Lambda_{IR}\leq |k|\leq\Lambda_{UV}<\infty$ . $\Lambda_{IR}$ denotes the infrared and $\Lambda_{UV}$ denotes the ultraviolet cut-off. We will work with values $\Lambda_{IR}\xi= 10^{-1}$ and $\Lambda_{UV}\xi= 10^1$. \\
+Considering a larger number of $k$ values is generally better, but involves significant computational cost. The spacing between two adjacent $k$ values will be $\Delta k=\frac{2\pi}{L}$ where $L$ is a constant which describes the size of the system. \\
+This allows us to write integrals as sums according to 
+\begin{equation}
+\int\mathrm d k\rightarrow \Delta k\Sum_k
+\end{equation}
+The commutation relations of the creation and annihilation operators in $\ham_{\mathrm{LLP}}$ are $\left[\AN_k,\CR_{k^\prime}\right]=\delta(k-k^\prime)$. Our new discrete operators will obey the same commutation relation with a Kronecker-delta instead of the Dirac-delta.
+The transition from the continuous to the discrete case is done by coarsening the annihilation and creation operators
+\begin{equation}
+\AN_k^{\left(\dagger\right)}\rightarrow \frac1{\sqrt{\Delta k}}\AN_k^{\left(\dagger\right)}
+\end{equation}
+and the LLP-Hamiltonian becomes:
+\begin{align}\label{ham_LLP_discrete}
+\ham_{\mathrm{LLP}}^{\mathrm{discr.}} &=g_{IB}n_0+\Sum_k \omega_{ k}\CR_{ k}\AN_{ k}+\sqrt{\frac{n_0\Delta k}{2\pi}}g_{IB}\Sum_k W_k \left(\AN_{ k}+\CR_{- k}\right) \\ &+ \frac{g_{IB}\Delta k}{2\pi}\Sum_{k,k^\prime} \left(c_k\CR_k-s_k\AN_{-k}\right)\left(c_{k^\prime}\AN_{k^\prime}-s_{k^\prime}\CR_{-k^\prime}\right)\nonumber
+\end{align}
+It would be possible to expand our flow equations to allow for linear terms in our Hamiltonian. In this case it would again be possible to obtain a closed set of flow equations. \\
+This can be avoided because the linear terms  $W_k \left(\AN_{ k}+\CR_{- k}\right)$ can be transformed out by applying the displacement operator 
+\begin{equation}
+\hat D(\underline\alpha)=\exp\left(\sum_k\alpha_k\CR_k-\mathrm{h.c.}\right)=\exp\left(-\underline\alpha^\dagger{\underline{\underline\Omega}}\ \underline{\hat a}\right)
+\end{equation}
+to the Hamiltonian \ref{ham_LLP_discrete}. Here we introduced the symplectic $2N\times2N$ matrix
+\begin{equation}
+{\underline{\underline\Omega}}=\begin{pmatrix}\underline{\underline E}_N & 0\\ 0 & -\underline{\underline E}_N\end{pmatrix}
+\end{equation}
+and the notation
+\begin{equation}
+\underline{\hat a} = \left(\AN_{k_1},...,\AN_{k_N},\CR_{k_1},...,\CR_{k_N}\right)^T
+\end{equation}
+for vectors of creation and annihilation operators as well as
+\begin{equation}
+\underline\alpha = \left(\alpha_{k_1},...,\alpha_{k_N},\alpha_{k_1}^*,...,\alpha_{k_N}^*\right)^T\in\C^{2N}
+\end{equation}
+for vectors of c-numbers. In this context $N$ is equal to the number of modes on our discrete grid.\par
+The displacement operator shifts creation and annihilation operators by a given c-number:
+\begin{subequations}
+\begin{align}
+\hat D^\dagger(\underline \alpha)\AN_{k_i}\hat D(\underline\alpha)&=\AN_{k_i}+\alpha_{k_i}\\
+\hat D^\dagger(\underline \alpha)\CR_{k_i}\hat D(\underline\alpha)&=\CR_{k_i}+\alpha_{k_i}^*
+\end{align}
+\end{subequations}
+This can be proved readily with the help of the Baker-Campbell-Hausdorff formula.
+Simliarly, one can convince oneself that
+\begin{subequations}
+\begin{align}
+\hat D(\underline \alpha)\AN_{k_i}\hat D^\dagger(\underline\alpha)&=\AN_{k_i}-\alpha_{k_i}\\
+\hat D(\underline \alpha)\CR_{k_i}\hat D^\dagger(\underline\alpha)&=\CR_{k_i}-\alpha_{k_i}^*.
+\end{align}
+\end{subequations}
+From this it follows immediately that the displacement operator is unitary, and therefore applying it to the discrete LLP-Hamiltonian does not change its spectrum.
+We obtain:
+\begin{align}
+\hat D^\dagger(\underline \alpha)\ham_{\mathrm{LLP}}^{\mathrm{discr.}}\hat D(\underline\alpha) &=g_{IB}n_0+\Sum_k \omega_{ k}(\CR_{ k}+\alpha_k^*)(\AN_{ k}+\alpha_k)\nonumber\\
+&+\sqrt{\frac{n_0\Delta k}{2\pi}}g_{IB}\Sum_k W_k \left(\AN_{ k}+\CR_{- k}+\alpha_k+\alpha_{-k}^*\right) \nonumber\\ 
+&+ \frac{g_{IB}\Delta k}{2\pi}\Sum_{k,k^\prime} \left(c_k(\CR_k+\alpha_k^*)-s_k(\AN_{-k}+\alpha_{-k})\right)\left(c_{k^\prime}(\AN_{k^\prime}+\alpha_{k^\prime})-s_{k^\prime}(\CR_{-k^\prime}+\alpha_{-k^\prime}^*)\right)
+\end{align}
+After using of the symmetry $W_k=W_{-k}$ and the associated symmetries for $c_k$ and $s_k$ and reordering the terms, we get the following condition that the displacement transformation turns our discrete LLP-Hamiltonian into a purely quadratic Hamiltonian:
+\begin{equation}\label{quadratic_condition_displacement}
+\forall k:\ 0\overset{!}{=}\omega_k\alpha_k^*+\tilde W_k^{(0)}+\Sum_{k^\prime}V_{k^\prime,k}^{(0)}\alpha_{k^\prime}^*+\Sum_{k^\prime}\alpha_{k^\prime}\left(W_{k,k^\prime}^{(0)}+W_{k^\prime,k}^{(0)}\right)
+\end{equation}
+We defined
+\begin{subequations}
+\begin{align}
+\tilde W_k^{(0)}&\defeq \frac{g_{IB}}{2\pi}\sqrt{n_0\Delta k} W_k\\
+V_{k,k^\prime}^{(0)}&\defeq\frac{g_{IB}}{2\pi}\Delta k(c_k c_{k^\prime}+s_{k}s_{k^\prime})\\
+W_{k,k^\prime}^{(0)}&\defeq -\frac{g_{IB}}{2\pi}\Delta k s_k c_{k^\prime}
+\end{align}
+\end{subequations}
+adopting the notation in the generic quadratic Hamiltonian \ref{def_purely_quadratic_hamiltonian}.\\
+The condition \ref{quadratic_condition_displacement} can be solved very efficiently and inexpensively using existing solvers for linear systems of equations, which is why the approach involving the displacement operator is generally favored to solving a larger set of ODEs to also suppress the linear parts in the flow. The solution $\underline\alpha$ obtained this way can then be substituted into the Hamiltonian which is then of purely quadratic form:
+\begin{equation}
+\ham_{\mathrm{LLP}}^{\mathrm{quadr.}}=\Sum_k (\omega_k +V_{k,k}^{(0)})\CR_k\AN_k+\Sum_{q\neq q^\prime}V_{q,q^\prime}^{(0)}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}^{(0)}\CR_p\CR_{p^\prime}+\mathrm{h.c.}\right)+g_{IB}n_0+\frac{g_{IB}}{2\pi}\Delta k\Sum_{k}s_k^2
+\end{equation}
+The flow equations \ref{feq_won_I}-\ref{feq_won_IV} for $\ham_{\mathrm{LLP}}^{\mathrm{quadr.}}$ define a system of $(2N^2+N+1)\in\mathcal O(N^2)$ ODEs and can be solved numerically using preexisting ODE solvers. We will use the \verb!ODEProblem! function from \julialogo's \verb!DifferentialEquations.jl! library with the \verb!Tsit5! integrator, a Runge-Kutta integrator of order 5(4) \cite{TSITOURAS2011770}, for its general robustness and versatility.\par
+Finally, concrete parameters for $c,\xi,\eta,\gamma,n_0$ have to be chosen. We refer to Catani's experimental results and set $\gamma=0.438$, $n_0\xi=1.05$ and choose our units s.t. $c=\xi=1$ \cite{Catani,Grusdt_2017}.
+Then the other constants introduced before can be calculated using the expressions introduced in section \ref{(Beyond) The Fröhlich Hamiltonian}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{With Dependence on the Occupation Numbers}
+\subsection{Useful Preliminaries}
+Consider some operator $\hat f$ which depends on a number operator $\hat n=\CR\AN$. The following relations will be used later:
+\begin{subequations}
+\label{fcom}
+\begin{align}
+\left[\CR,\hat f(\hat n) \right] &= \CR\left(\hat f(\hat n)-\hat f(\hat n+1)\right)\\ 
+\left[\AN,\hat f(\hat n) \right] &= \AN\left(\hat f(\hat n)-\hat f(\hat n-1)\right)\\
+\left[\hat f(\hat n),\CR \right] &= \left(\hat f(\hat n)-\hat f(\hat n-1)\right)\CR\\
+\left[\hat f(\hat n),\AN \right] &= \left(\hat f(\hat n)-\hat f(\hat n+1)\right)\AN
+\end{align}
+\end{subequations}
+These can be proved by induction for $\hat f(\hat n)=\hat n^k, k\in\N$ and from there simply extended to well-behaved $\hat f$ via power series. Equations \ref{fcom} are still valid for functions depending on $\left\{\hat n_k\right\}_k$, because all $\hat n_k$ pairwise commute.\\
+We will write $\hat f\left(\hat n_1,\hat n_2,\hdots\right)\eqdef \hat f$ and $\hat f\left(\hat n_1,\hat n_2,\hdots,\hat n_k\pm 1,\hat n_{k+1},\hdots\right)\eqdef \hat f(\hat n_k\pm1)$. In this notation it is understood that $\hat f(\hat n_k\pm1,\hat n_{k}\pm1)\eqdef\hat f(\hat n_k\pm2)$.\\
+Using this notation, it is evident that a simple induction for $n_1,n_2\in\N_0$ yields the following relation:
+\begin{align}
+&\left[\hat f(\hat n),\CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}} \right] \nonumber \\ \quad& 
+= \left(\hat f-\hat f\left(\hat n_{k_1}-1,\hat n_{k_2}-1,\hdots,\hat n_{k_{n_1}},\hat n_{k_1}+1,\hat n_{k_2}+1\hdots\hat n_{k_{n_2}}+1\right)\right)\CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}
+\end{align}
+Furthermore, applying the recurrence relation \ref{recurrence relation} can be used to successively normal order operators. Let $\hat O\defeq \CR_{k_1}\CR_{k_2}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}$. Then normal ordering w.r.t. the vacuum yields:
+\begin{subequations}
+\begin{align}
+\AN_q\NO\hat O\NO &=\NO\hat O\AN_q\NO + \sum\limits_{k}\NO \frac{\partial \hat O}{\partial\CR_k}\NO \nonumber \\
+ &= \NO\hat O\AN_q\NO + \sum\limits_{i=1}^{n_1}\delta_{k_i,q}\NO \CR_{k_1}\CR_{k_2}\cdots\CR_{k_{i-1}}\CR_{k_{i+1}}\cdots\CR_{k_{n_1}}\AN_{k_1}\AN_{k_2}\cdots\AN_{k_{n_2}}\NO \\
+\CR_q\NO\hat O\NO &= \NO \CR_q\hat O\NO
+\end{align}
+\end{subequations}
+\subsection{Deriving the Flow Equations}
+Following the same same procedure as in the heavy impurity limit, we first start by evaluating the canonical generator. It turns out that $\hat\eta$ conserves the structure of the original Hamiltonian while the flow Hamiltonian does not. Therefore, the sequence of higher and higher order terms has to be truncated at some point as discussed in section \ref{Truncation Schemes}. 
+Three simplifications will be made in order to obtain closed expressions for the flow equations:
+\begin{itemize}
+\item We will use a na\"ive and only partial normal ordering prescription where the contractions are defined with respect to the vacuum state and not the ground state of the diagonal Hamiltonian.
+\item The considered expressions will not be fully normal ordered because the coefficients $\hat\omega_k $, $\hat W_{p,p^\prime}$, and $\hat V_{q,q^\prime}$ are not normal ordered. This saves the rather tedious process of normal ordering arbitrary functions of number operators, which involves expanding the operator into a Newton series \cite{10.21468/SciPostPhys.10.1.007}, but may render the sequence less well-behaved when truncated to an order as low as two.
+\item  We will neglect all terms of order four or higher.
+\end{itemize}
+After evaluating the commutator of $\hat\eta$ and the full Hamiltonian where we made frequent use of the equations in \ref{fcom}, we end up with the flow equations \ref{feq_ndep_I}-\ref{feq_ndep_IV}. In first order, we can expect the off-diagonal elements to vanish if $\hat H \neq \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\ \forall q,q^\prime,q\neq q^\prime$ and $\hat H \neq \hat H(\hat n_p\pm 1,\hat n_{p^\prime}\pm 1)\ \forall p,p^\prime$ where we used \begin{equation}\hat H\defeq \Sum_k \hat\omega_k \NO\CR_k\AN_k\NO+\hat\epsilon. \end{equation}
+
+
+
+\subsection{Discussion of the Applicability of the Flow Equations to the Full LLP-Hamiltonian}
+Discretizing $\ham_{\mathrm{LLP}}(P)$ can be done analogously to how it was done in the heavy impurity limit. We obtain:
+\begin{align}
+\ham_{\mathrm{LLP}}^{\mathrm{discr.}}(P) &=g_{IB}n_0+\frac{1}{2M}\left(P-\Sum_k k \CR_k\AN_k \right)^2+\Sum_k\omega_{ k}\CR_{ k}\AN_{ k}\nonumber\\
+&+\sqrt{\frac{n_0\Delta k}{2\pi}}g_{IB}\Sum_k W_k \left(\AN_{ k}+\CR_{- k}\right) + \frac{g_{IB}\Delta k}{2\pi}\Sum_{k,k^\prime} \left(c_k\CR_k-s_k\AN_{-k}\right)\left(c_{k^\prime}\AN_{k^\prime}-s_{k^\prime}\CR_{-k^\prime}\right)
+\end{align}
+Because $\hat n_k=\CR_k\AN_k$ we can write this in the following way:
+\begin{align}
+\ham_{\mathrm{LLP}}^{\mathrm{discr.}}(P) &=\hat H(P)+ \frac{g_{IB}\Delta k}{2\pi}\Sum_{k\neq k^\prime}(c_kc_{k^\prime}+s_ks_{k^\prime})\CR_k\AN_{k^\prime}\nonumber\\
+&+\sqrt{\frac{n_0\Delta k}{2\pi}}g_{IB}\Sum_k W_k \left(\AN_{ k}+\CR_{- k}\right) - \frac{g_{IB}\Delta k}{2\pi}\Sum_{k,k^\prime} \left(c_ks_{k^\prime}\CR_k\CR_{k^\prime}+s_kc_{k^\prime}\AN_{k}\AN_{k^\prime}\right)
+\end{align}
+$\hat H$ contains the parts of the Hamiltonian which can be written in terms of number operators:
+\begin{equation}
+\hat H(P)\defeq g_{IB}n_0+\frac{g_{IB}}{2\pi}\Delta k\Sum_{k}s_k^2+\frac{1}{2M}\left(P-\Sum_k k \hat n_k \right)^2+\Sum_k\omega_{ k}\hat n_k+ \frac{g_{IB}\Delta k}{2\pi}\Sum_{k}(c_k^2+s_k^2)\hat n_k
+\end{equation}
+Then for $q,q^\prime,q\neq q^\prime$ we get:
+\begin{align}
+&\hat H(P,\hat n_q-1,\hat n_{q^\prime}+1)-\hat H(P)=\frac{1}{2M}\left(P+q-q^\prime-\Sum_k k \hat n_k \right)^2-\frac{1}{2M}\left(P-\Sum_k k \hat n_k \right)^2\nonumber \\
+&+\omega_{q^\prime}-\omega_q + \frac{g_{IB}\Delta k}{2\pi}(c_{q^\prime}^2+s_{q^\prime}^2-c_{q}^2-s_{q}^2) \\
+&=\frac{q-q^\prime}{2M}\left(2P-2\Sum_k k \hat n_k+q-q^\prime\right)+\omega_{q^\prime}-\omega_q + \frac{g_{IB}\Delta k}{2\pi}(c_{q^\prime}^2+s_{q^\prime}^2-c_{q}^2-s_{q}^2) 
+\end{align}
+It follows that for fixed $q,q^\prime$ and for fixed expectation values $\langle \hat n_k\rangle\eqdef n_k$ there exists one and only one $P$ s.t. $\hat H(P,n_q-1,n_{q^\prime}+1)-\hat H(P)=0$. For all other values of $P$, looking at the flow equations in first order, we expect the coefficients in front of $\CR_{q}\AN_{q^\prime}$ to vanish in the limit $\lambda\rightarrow\infty$.
+By similar reasoning, we can expect that $|\hat H(P,\hat n_p\pm1,\hat n_{p^\prime}\pm 1)-\hat H(P)|>0$ even for $p=\pm p^\prime$.\\
+This strongly suggests that the flow equations \ref{feq_ndep_I}-\ref{feq_ndep_IV} converge to a diagonal Hamiltonian as desired. \par
+Numerically diagonalizing the full LLP-Hamiltonian, which will not be done in this thesis, involves the following steps: 
+\begin{enumerate}
+\item First, the displacement operator has to be applied to the full Hamiltonian. The condition that we want all linear terms to vanish will give a set of $N$ non-linear equations which are again to be solved for $\underline\alpha$. 
+\item Then each coefficient appearing in the full Hamiltonian must be expanded in powers of $\hat n_k$. The resulting power series should not be truncated at less than quadratic order, otherwise nonlinearities will not be captured and the problem can be reduced to the case where none of the coefficients depend on the occupation numbers. \\ Even the coefficients which do not depend on the occupation numbers (such as $\omega_k$, $c_k$, $s_k$) must be expanded in terms of $\hat n_k$ because they can (and generally will) pick up non-trivial n-dependencies during the flow.
+\item The flow equations \ref{feq_ndep_I}-\ref{feq_ndep_IV} (which define the flow for \emph{operators}) must be reduced to flow equations for the \emph{expansion coefficients}. 
+\item The resulting system of coupled ODEs can then be solved as in the heavy impurity limit.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

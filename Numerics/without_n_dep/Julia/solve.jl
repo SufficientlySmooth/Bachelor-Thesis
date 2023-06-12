@@ -36,7 +36,7 @@ function f(u,p,t)
     om_ret = [sum([2*V[q,k]*V[k,q]*(om[k]-om[q])-2*(W[k,q]+W[q,k])*(om[k]+om[q])*(Wdag[q,k]+Wdag[k,q]) for q in 1:N]) for k in 1:N]
     
     V_ret = reshape([-V[q,q_]*(om[q]-om[q_])^2+sum([-(W[Int(q),p]+W[p,Int(q)])*(Wdag[p,Int(q_)]+Wdag[Int(q_),p])*(om[Int(q)]+om[Int(q_)]+2*om[p])+V[p,Int(q_)]*V[Int(q),p]*(om[Int(q)]+om[Int(q_)]-2*om[p]) for p in 1:N if p ∉ (Int(q),Int(q_))]) for q_ in 1:N for q in 1:N],(N,N)).*(ones(N,N)-Diagonal(ones(N)))
-    print("Calculated V")
+    
     W_ret = reshape([-W[p,p_]*(om[p]+om[p_])^2+sum([-V[p,q]*(om[q]+om[p_])*(W[p_,q]+W[q,p_])+V[p,q]*(om[p]-om[q])*(W[q,p_]+W[p_,q]) for q in 1:N if q!=p]) for p_ in 1:N for p in 1:N],(N,N))
 
     eps_ret = -2*ThreadsX.sum([(W[p,p_]+W[p_,p])*(om[p]+om[p_])*Wdag[p,p_] for p in 1:N for p_ in 1:N])

@@ -12,7 +12,7 @@
 \usepackage{fancyhdr}                                               %   for fancy template  -- https://www.ctan.org/pkg/fancyhdr
 \usepackage[Glenn]{fncychap}                                        %   for fancy chapter style -- https://ctan.org/pkg/fncychap
 \usepackage{import}                                                 %   for import of other files, i.e. a .tex file with pgfplots  -- https://www.ctan.org/pkg/import
-\usepackage[backend=bibtex,style=alphabetic,sorting=none]{biblatex}  %   for using bibliography, references and citations -- https://ctan.org/pkg/biblatex
+\usepackage[backend=bibtex,style=nature,sorting=none]{biblatex}  %   for using bibliography, references and citations -- https://ctan.org/pkg/biblatex
 \usepackage[babel=true]{csquotes}                                   %   for using quotations -- https://ctan.org/pkg/csquotes
 \usepackage{epigraph}                                               %   for quotes at the beginning of a chapter -- https://ctan.org/pkg/epigraph
 \usepackage{comment}                                                %   for extra comment features  -- https://www.ctan.org/pkg/comment
@@ -343,4 +343,7 @@
 \makeatletter
 \renewcommand{\@chapapp}{Section}
 \makeatother
+
+%Command for Julia Logo
+\newcommand{\julialogo}{\raisebox{-0.5\dp\strutbox}{\includegraphics[height=1em]{figures/julialogo.pdf}}}
 
