@@ -49,8 +49,8 @@ def animate_VW(inp,t,eta):
     axes[0].set_ylabel(r"$k\xi$")
     #axes[1].set_ylabel(r"$k\xi$")
     
-    axes[0].set_title(r"$V$")
-    axes[1].set_title(r"$W$")
+    axes[0].set_title(r"$V[c/\xi]$")
+    axes[1].set_title(r"$W[c/\xi]$")
     fig.suptitle(r"$\eta=%.3f,\lambda = %.2f$"%(eta,0))
     
     plt.colorbar(im2, extend='max')

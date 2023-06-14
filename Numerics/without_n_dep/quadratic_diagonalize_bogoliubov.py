@@ -48,35 +48,38 @@ def get_eigvals(A,B):
 def find_right_eigvals(eigvals_ord,eigvecs_ord):
 
     right_eigvals = []
+    conj_eigvals = []
     right_eigvals_err = np.zeros(len(eigvals_ord))
     for i, vecs in enumerate(eigvecs_ord):
         vec0 = vecs[0]
         vec1 = vecs[1] 
+        print(eigvals_ord[i])
         matrix_element_0 = np.conj(vec0.T)@Omega@vec0
         matrix_element_1 = np.conj(vec1.T)@Omega@vec1
         if (matrix_element_0>0) and (matrix_element_1<0):# and not np.abs(np.imag(eigvals_ord[i][0]))<1e-10:
             right_eigvals.append(eigvals_ord[i][0])
+            conj_eigvals.append(-eigvals_ord[i][1])
         elif (matrix_element_1>0) and (matrix_element_0<0):# and not np.abs(np.imag(eigvals_ord[i][1]))<1e-10:           
             right_eigvals.append(eigvals_ord[i][1])
+            conj_eigvals.append(-eigvals_ord[i][0])
         else:
             right_eigvals.append(0)
             print("eta=",eta,"--------",matrix_element_0,matrix_element_1,"\n")
-            if eta == -8:
-                eigvals_8 = right_eigvals 
             print(eigvals_ord[i],"\n")
             right_eigvals_err[i]=(max(np.abs(eigvals_ord[i])))
+            conj_eigvals.append(0)
             
-    return right_eigvals, right_eigvals_err
+    return right_eigvals, conj_eigvals, right_eigvals_err
 
 def ground_state_energy(right_eigvals,right_eigvals_err,E_0,A):
     err = 1/2*np.sum(right_eigvals_err)
     return E_0-1/2*np.sum(np.diag(A))+1/2*np.sum(right_eigvals), err #see eq. 33 in Practial Course manual
 
-
+right_eigvals_list = []
 
 for FILENAME in [file for file in os.listdir(PATH) if not "_t_" in file]:
     eta = float(FILENAME.split(',')[0].split('=')[-1])
-    if abs(eta)<=12:
+    if eta<=-3:
         path_inp = PATH+FILENAME
         om0,V0,W,eps = qs.unpack_arr(np.load(path_inp),200)
         V = V0 + np.diag(om0) # - np.diag(np.diag(V0)) #
@@ -85,10 +88,10 @@ for FILENAME in [file for file in os.listdir(PATH) if not "_t_" in file]:
         B = 2*W
         
         eigvals_ord, eigvecs_ord = get_eigvals(A,B)
-        right_eigvals, right_eigvals_err = find_right_eigvals(eigvals_ord,eigvecs_ord)
-
+        right_eigvals, conj_eigvals, eigvals_err = find_right_eigvals(eigvals_ord,eigvecs_ord)
+        right_eigvals_list.append(right_eigvals)
         etas.append(eta)
-        gs, gs_err = ground_state_energy(right_eigvals,right_eigvals_err,eps,A)
+        gs, gs_err = ground_state_energy(conj_eigvals,eigvals_err,eps,A)
         epss.append(gs)
         epss_err.append(gs_err)
 

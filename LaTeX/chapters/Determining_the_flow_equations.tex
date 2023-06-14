@@ -40,15 +40,15 @@ This can be avoided because the linear terms  $W_k \left(\AN_{ k}+\CR_{- k}\righ
 \hat D(\underline\alpha)=\exp\left(\sum_k\alpha_k\CR_k-\mathrm{h.c.}\right)=\exp\left(-\underline\alpha^\dagger{\underline{\underline\Omega}}\ \underline{\hat a}\right)
 \end{equation}
 to the Hamiltonian \ref{ham_LLP_discrete}. Here we introduced the symplectic $2N\times2N$ matrix
-\begin{equation}
+\begin{equation}\label{symplectic_matrix}
 {\underline{\underline\Omega}}=\begin{pmatrix}\underline{\underline E}_N & 0\\ 0 & -\underline{\underline E}_N\end{pmatrix}
 \end{equation}
 and the notation
-\begin{equation}
+\begin{equation}\label{cr_an_vector}
 \underline{\hat a} = \left(\AN_{k_1},...,\AN_{k_N},\CR_{k_1},...,\CR_{k_N}\right)^T
 \end{equation}
 for vectors of creation and annihilation operators as well as
-\begin{equation}
+\begin{equation}\label{c-number_vector}
 \underline\alpha = \left(\alpha_{k_1},...,\alpha_{k_N},\alpha_{k_1}^*,...,\alpha_{k_N}^*\right)^T\in\C^{2N}
 \end{equation}
 for vectors of c-numbers. In this context $N$ is equal to the number of modes on our discrete grid.\par
@@ -88,12 +88,45 @@ W_{k,k^\prime}^{(0)}&\defeq -\frac{g_{IB}}{2\pi}\Delta k s_k c_{k^\prime}
 \end{subequations}
 adopting the notation in the generic quadratic Hamiltonian \ref{def_purely_quadratic_hamiltonian}.\\
 The condition \ref{quadratic_condition_displacement} can be solved very efficiently and inexpensively using existing solvers for linear systems of equations, which is why the approach involving the displacement operator is generally favored to solving a larger set of ODEs to also suppress the linear parts in the flow. The solution $\underline\alpha$ obtained this way can then be substituted into the Hamiltonian which is then of purely quadratic form:
-\begin{equation}
+\begin{equation}\label{Ham_LLP_qudratic}
 \ham_{\mathrm{LLP}}^{\mathrm{quadr.}}=\Sum_k (\omega_k +V_{k,k}^{(0)})\CR_k\AN_k+\Sum_{q\neq q^\prime}V_{q,q^\prime}^{(0)}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}^{(0)}\CR_p\CR_{p^\prime}+\mathrm{h.c.}\right)+g_{IB}n_0+\frac{g_{IB}}{2\pi}\Delta k\Sum_{k}s_k^2
 \end{equation}
 The flow equations \ref{feq_won_I}-\ref{feq_won_IV} for $\ham_{\mathrm{LLP}}^{\mathrm{quadr.}}$ define a system of $(2N^2+N+1)\in\mathcal O(N^2)$ ODEs and can be solved numerically using preexisting ODE solvers. We will use the \verb!ODEProblem! function from \julialogo's \verb!DifferentialEquations.jl! library with the \verb!Tsit5! integrator, a Runge-Kutta integrator of order 5(4) \cite{TSITOURAS2011770}, for its general robustness and versatility.\par
 Finally, concrete parameters for $c,\xi,\eta,\gamma,n_0$ have to be chosen. We refer to Catani's experimental results and set $\gamma=0.438$, $n_0\xi=1.05$ and choose our units s.t. $c=\xi=1$ \cite{Catani,Grusdt_2017}.
 Then the other constants introduced before can be calculated using the expressions introduced in section \ref{(Beyond) The Fröhlich Hamiltonian}.
+\subsection{Benchmark: Exact Diagonalization via Bogoliubov Transformation}
+The purely quadratic Hamiltonian \ref{Ham_LLP_qudratic} can be exactly diagonalized by Bogoliubov Transformations \cite{PracticalTraining}. Using the short hand notations \ref{cr_an_vector} and \ref{c-number_vector} as well as \ref{symplectic_matrix}, our quadratic Hamiltonian can be written in the form:
+\begin{align}
+\ham &= E_0 + \Sum_{k,k^\prime}\CR_k A_{k,k^\prime}\AN_{k^\prime}+\frac12\Sum_{k,k^\prime}\left(\CR_k B_{k,k^\prime}\CR_{k^\prime}+\mathrm{h.c.}\right)\\
+&=E_0-\frac12\Sum_k A_{k,k}+\frac12\underline\CR\begin{pmatrix}A & B\\ B^* & A^*\end{pmatrix}\underline\AN\\
+&=E_0-\frac12\Sum_k A_{k,k}+\frac12\underline{\CR}\ {\underline{\underline{\Omega}}}\ {\underline{\underline{\mathscr{H}}}}\ {\underline{\AN}}
+\end{align}
+where we introduced
+\begin{equation}
+{\underline{\underline{\mathscr{H}}}}\defeq\begin{pmatrix}A & B\\ -B^* & -A^*\end{pmatrix}\in\C^{2N\times 2N}
+\end{equation}
+and
+\begin{equation}
+A=\left(A_{k,k^\prime}\right)_{k,k^\prime=1,...,N},\ B=\left(B_{k,k^\prime}\right)_{k,k^\prime=1,...,N}
+\end{equation}
+As shown in \cite{PracticalTraining}, the Bogoliubov Transformation
+\begin{equation} \underline\AN\mapsto  \underline{\underline{U_B}}\ \underline\AN\end{equation}
+defined by the matrix 
+\begin{equation}
+\underline{\underline{U_B}}\defeq \begin{pmatrix}U^* & -V^*\\ -V & U\end{pmatrix}
+\end{equation}
+conserves the bosonic commutation relations iff $\underline{\underline{U_B}}$ is a symplectic matrix:
+\begin{equation}\underline{\underline{U_B}}\ {\underline{\underline{\Omega}}}\ \underline{\underline{U_B}}^\dagger={\underline{\underline{\Omega}}}.\end{equation}
+It can be shown that there exists $\underline{\underline{U_B}}$ s.t.
+\begin{equation}
+\underline{\underline{U_B}}^\dagger {\underline{\underline{\Omega}}}\ {\underline{\underline{\mathscr{H}}}}\ \underline{\underline{U_B}}=\mathrm{diag}\left(\lambda_1,...,\lambda_N,\lambda_1^*,...,\lambda_N^*\right)
+\end{equation}
+The values $\{\lambda_j^{(*)}\}_{j=1,...,N}$ can by obtained by solving the eigenvalue problem of ${\underline{\underline{\mathscr{H}}}}$. For this the eigenvalues always occur in pairs $(\lambda_j,-\lambda_j^*)$. $ \lambda_j$ is characterized by the fact that its associated eigenvector $\underline w_j$has a positive matrix element:
+\begin{equation}
+\underline w_j^\dagger{\underline{\underline{\Omega}}}\ \underline w_j=+1
+\end{equation}
+The associated eigenvector to $-\lambda_j^*$ always has a negative matrix element. \par
+The results from a Bogoliubov transformation will be be compared to the flow equations in section \ref{results}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{With Dependence on the Occupation Numbers}
 \subsection{Useful Preliminaries}
@@ -162,7 +195,7 @@ Numerically diagonalizing the full LLP-Hamiltonian, which will not be done in th
 \begin{enumerate}
 \item First, the displacement operator has to be applied to the full Hamiltonian. The condition that we want all linear terms to vanish will give a set of $N$ non-linear equations which are again to be solved for $\underline\alpha$. 
 \item Then each coefficient appearing in the full Hamiltonian must be expanded in powers of $\hat n_k$. The resulting power series should not be truncated at less than quadratic order, otherwise nonlinearities will not be captured and the problem can be reduced to the case where none of the coefficients depend on the occupation numbers. \\ Even the coefficients which do not depend on the occupation numbers (such as $\omega_k$, $c_k$, $s_k$) must be expanded in terms of $\hat n_k$ because they can (and generally will) pick up non-trivial n-dependencies during the flow.
-\item The flow equations \ref{feq_ndep_I}-\ref{feq_ndep_IV} (which define the flow for \emph{operators}) must be reduced to flow equations for the \emph{expansion coefficients}. 
+\item The flow equations \ref{feq_ndep_I}-\ref{feq_ndep_IV} (which define the flow for \emph{operators}) must be reduced to flow equations for the \emph{expansion coefficients} (see Appendix \ref{Systematically Expanding the Flow Equations}). 
 \item The resulting system of coupled ODEs can then be solved as in the heavy impurity limit.
 \end{enumerate}
 

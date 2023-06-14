@@ -68,7 +68,6 @@ epss_err = []
 
 for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file][::-1]:
     eta = float(FILENAME.split(',')[0].split('=')[-1])
-    
     t_filename = "sol_full_t"+FILENAME[13:]
     path_inp = PATH+FILENAME
     path_t = PATH+t_filename
@@ -77,7 +76,7 @@ for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file][::-1]:
     
     om0,V0,W,eps = qs.unpack_arr(inp.T[-1],200)
     V = V0 + np.diag(om0) # - np.diag(np.diag(V0)) #
-    
+    print(min((om0)))
     A = V
     B = 2*W
     

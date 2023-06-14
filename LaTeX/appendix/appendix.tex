@@ -3,7 +3,7 @@
 \chapter{Detailed Calculations}\label{Detailed Calculations}
 \thispagestyle{empty}
 
-\section{Deriving the flow equations in the case of no n-dependence}\label{Deriving the flow equations in the case of no n-dependence}s
+\section{Deriving the flow equations in the case of no n-dependence}\label{Deriving the flow equations in the case of no n-dependence}
 First the canonical generator $\hat\eta$ has to be evaluated:
 \begin{align}
 \hat\eta&\defeq\hat\eta(\lambda)\defeq\left[\ham_0,\ham_{\mathrm{int}}\right] = \left[\Sum_k \omega_k \CR_k\AN_k,\Sum_{q\neq q^\prime}V_{q,q^\prime}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}\CR_p\CR_{p^\prime}+W_{p,p^\prime}^*\AN_p\AN_{p^\prime}\right)\right]  \\ \quad& 
@@ -466,7 +466,7 @@ The three operators $\hat\psi,\hat\theta,\hat\phi$ are based on their definition
 \hat\phi_{p,p^\prime}&=\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)\\
 \hat\psi_{p,p^\prime}&=\hat W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)
 \end{align}
-\subsection{Systematically Expanding the Flow Equations in Powers of $\mathbf{\hat n}$}
+\subsection{Systematically Expanding the Flow Equations in Powers of n}\label{Systematically Expanding the Flow Equations}
 We start by defining quadratic expansion coefficients for $\hat V_{q,q^\prime},  \hat W_{p,p^\prime}$ and $\hat H$:
 \begin{subequations}
 \begin{align}
@@ -506,10 +506,11 @@ The three operators $\hat\psi,\hat\theta,\hat\phi$ become:
 \hat\psi_{p,p^\prime}&=\hat W^\dagger_{p,p^\prime} \left(\hat H - \hat H(\hat n_p-1,\hat n_{p^\prime}+1)\right)=\hat W_{p,p^\prime}\hat H_{p,p^\prime}(+,+)\nonumber\\
 &\approx  {w_{p,p^\prime}^{\circ}}^*h^{\circ}_{p,p^\prime}(+,+)+\Sum_k \left(h^\circ_{p,p^\prime}(+,+) {w_{p,p^\prime}^{(k)}}^* + {w_{p,p^\prime}^{\circ}}^*h^{(k)}_{p,p^\prime}(+,+)\right)\hat n_k \nonumber\\
 &+ \Sum_{k,k^\prime} \left( h^\circ_{p,p^\prime}(+,+) {w_{p,p^\prime}^{(k,k^\prime)}}^*+{w_{p,p^\prime}^{(k)}}^*h^{(k^\prime)}_{p,p^\prime}(+,+)\right)\hat n_k\hat n_{k^\prime}\nonumber\\
-&= {\phi_{p,p^\prime}^{\circ}}^* + \Sum_k {\phi_{p,p^\prime}^{(k)}}^*\hat n_k + \Sum_{k,k^\prime} {\phi_{p,p^\prime}^{(k,k^\prime)}}^*\hat n_k\hat n_ {k^\prime}
+&\eqdef {\psi_{p,p^\prime}^{\circ}} + \Sum_k {\psi_{p,p^\prime}^{(k)}}\hat n_k + \Sum_{k,k^\prime} {\psi_{p,p^\prime}^{(k,k^\prime)}}\hat n_k\hat n_ {k^\prime}
 \end{align}
 \end{subequations}
-
+The above expressions for the products of two operators quadratic in n or for the differences of the form $\hat H - \hat H(\hat n_{\tilde k}+\alpha,\hat n_{\tilde k^\prime}+\beta)$
+ can now be written down completely analogously for arbitrary quadratic operators. The flow equations for the expansion coefficients result from comparing the coefficients in the expressions  \ref{feq_ndep_I}-\ref{feq_ndep_IV}.
 
 
 

@@ -48,9 +48,9 @@ def visualize(sol,t,N,eta):
     axes[2].set_xlabel(r"$k\xi$")
     axes[3].set_xlabel(r"$k\xi$")
     axes[1].set_title(r"$\lambda = %.2f$"%t[-1])
-    axes[0].set_ylabel(r"$V$")
+    axes[0].set_ylabel(r"$V[c/\xi]$")
     axes[0].set_title(r"$\lambda = 0$")
-    axes[2].set_ylabel(r"$W$")
+    axes[2].set_ylabel(r"$W[c/\xi]$")
     #fig.suptitle(r"$\eta = %.3f$"%eta)
     
     # add space for colour bar
