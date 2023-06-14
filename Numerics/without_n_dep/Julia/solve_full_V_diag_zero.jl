@@ -10,7 +10,7 @@ N = 200
 n = 500 #for how many time steps we want to save the solution
 PATH  = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit Quadratic Hamiltonians/"
 SAVEPATH = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit_sol_files/N=200,different etas, full, V_diag is zero/"
-eta_bounds = (-10,-10)
+eta_bounds = (-6,-5)
 for name in readdir(PATH)#[end:-1:1]
     eta_str = split(split(name,'=')[2],',')[1]
     eta = parse(Float64,eta_str)

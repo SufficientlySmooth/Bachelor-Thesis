@@ -464,10 +464,75 @@ The three operators $\hat\psi,\hat\theta,\hat\phi$ are based on their definition
 \begin{align}
 \hat\theta_{q,q^\prime}&=\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right)\\
 \hat\phi_{p,p^\prime}&=\hat W_{p,p^\prime}\left(\hat H-\hat H(\hat n_{p^\prime}-1,\hat n_p -1)\right)\\
-\hat\psi_{p,p^\prime}&=W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)
+\hat\psi_{p,p^\prime}&=\hat W_{p,p^\prime}^\dagger\left(\hat H-\hat H(\hat n_{p^\prime}+1,\hat n_p +1)\right)
 \end{align}
-\chapter{The second appendix}
-\thispagestyle{empty}
+\subsection{Systematically Expanding the Flow Equations in Powers of $\mathbf{\hat n}$}
+We start by defining quadratic expansion coefficients for $\hat V_{q,q^\prime},  \hat W_{p,p^\prime}$ and $\hat H$:
+\begin{subequations}
+\begin{align}
+\hat V_{q,q^\prime}&\approx  v_{q,q^\prime}^{\circ} + \Sum_k v_{q,q^\prime}^{(k)}\hat n_k + \Sum_{k,k^\prime} v_{q,q^\prime}^{(k,k^\prime)}\hat n_k\hat n_ {k^\prime}\\
+\hat W_{p,p^\prime}&\approx  w_{p,p^\prime}^{\circ} + \Sum_k w_{p,p^\prime}^{(k)}\hat n_k + \Sum_{k,k^\prime} w_{p,p^\prime}^{(k,k^\prime)}\hat n_k\hat n_ {k^\prime}\\
+\hat H&\approx  h^{\circ} + \Sum_k h^{(k)}\hat n_k + \Sum_{k,k^\prime} h^{(k,k^\prime)}\hat n_k\hat n_ {k^\prime}
+\end{align}
+\end{subequations}
+Then, in quadratic order, we get:
+\begin{subequations}
+\begin{align}
+\hat V_{q,q^\prime} \hat H &\approx v_{q,q^\prime}^{\circ}\hat H+h^{\circ}V_{q,q^\prime}+\Sum_{k,k^\prime} v_{q,q^\prime}^{(k)}h^{(k^\prime)}\hat n_k\hat n_{k^\prime}\nonumber\\ 
+ & = v_{q,q^\prime}^{\circ}h^{\circ}+\Sum_k \left(h^\circ v_{q,q^\prime}^{(k)} + v_{q,q^\prime}^{\circ}h^{(k)}\right)\hat n_k + \Sum_{k,k^\prime} \left( h^\circ v_{q,q^\prime}^{(k,k^\prime)}+v_{q,q^\prime}^{\circ} h^{(k,k^\prime)}+v_{q,q^\prime}^{(k)}h^{(k^\prime)}\right)\hat n_k\hat n_{k^\prime}\\
+\hat W_{p,p^\prime} \hat H &\approx w_{p,p^\prime}^{\circ}\hat H+h^{\circ}W_{p,p^\prime}+\Sum_{k,k^\prime} w_{p,p^\prime}^{(k)}h^{(k^\prime)}\hat n_k\hat n_{k^\prime}\nonumber\\ 
+ & = w_{p,p^\prime}^{\circ}h^{\circ}+\Sum_k \left(h^\circ w_{p,p^\prime}^{(k)} + w_{p,p^\prime}^{\circ}h^{(k)}\right)\hat n_k + \Sum_{k,k^\prime} \left( h^\circ w_{p,p^\prime}^{(k,k^\prime)}+w_{p,p^\prime}^{\circ} h^{(k,k^\prime)}+w_{p,p^\prime}^{(k)}h^{(k^\prime)}\right)\hat n_k\hat n_{k^\prime}
+\end{align}
+\end{subequations}
+Now let $\alpha,\beta\in\{\pm 1\}$:
+
+\begin{align}
+\hat H_{\tilde k,\tilde k^\prime}(\alpha,\beta)&\defeq\hat H - \hat H(\hat n_{\tilde k}+\alpha,\hat n_{\tilde k^\prime}+\beta) = -\alpha h^{(\tilde k)}-\beta h^{(\tilde k^\prime)}-\left(h^{(\tilde k,\tilde k)}+h^{(\tilde k^\prime,\tilde k^\prime)}\right)\nonumber\\ &-\alpha\beta\left(h^{(\tilde k,\tilde k^\prime)}+h^{(\tilde k^\prime,\tilde k)}\right)
+-\beta \Sum_{k} (h^{(k,\tilde k^\prime)}+h^{(\tilde k^\prime,k)})\hat n_k-\alpha \Sum_{k}( h^{(k,\tilde k)}+ h^{(\tilde k,k)})\hat n_k\nonumber\\
+&\eqdef h_{\tilde k,\tilde k^\prime}^{\circ}(\alpha,\beta) + \Sum_k h_{\tilde k,\tilde k^\prime}^{(k)}(\alpha,\beta)\hat n_k  
+\end{align}
+
+The three operators $\hat\psi,\hat\theta,\hat\phi$ become:
+\begin{subequations}
+\begin{align}
+\hat\theta_{q,q^\prime}&=\hat V_{q,q^\prime} \left(\hat H - \hat H(\hat n_q-1,\hat n_{q^\prime}+1)\right)=\hat V_{q,q^\prime}\hat H_{q,q^\prime}(-,+)\nonumber\\
+&\approx  v_{q,q^\prime}^{\circ}h^{\circ}_{q,q^\prime}(-,+)+\Sum_k \left(h^\circ_{q,q^\prime}(-,+) v_{q,q^\prime}^{(k)} + v_{q,q^\prime}^{\circ}h^{(k)}_{q,q^\prime}(-,+)\right)\hat n_k \nonumber\\
+&+ \Sum_{k,k^\prime} \left( h^\circ_{q,q^\prime}(-,+) v_{q,q^\prime}^{(k,k^\prime)}+v_{q,q^\prime}^{(k)}h^{(k^\prime)}_{q,q^\prime}(-,+)\right)\hat n_k\hat n_{k^\prime}\nonumber\\
+&\eqdef \theta_{q,q^\prime}^{\circ} + \Sum_k \theta_{q,q^\prime}^{(k)}\hat n_k + \Sum_{k,k^\prime} \theta_{q,q^\prime}^{(k,k^\prime)}\hat n_k\hat n_ {k^\prime}\\
+\hat\phi_{p,p^\prime}&=\hat W_{p,p^\prime} \left(\hat H - \hat H(\hat n_p-1,\hat n_{p^\prime}+1)\right)=\hat W_{p,p^\prime}\hat H_{p,p^\prime}(-,-)\nonumber\\
+&\approx  w_{p,p^\prime}^{\circ}h^{\circ}_{p,p^\prime}(-,-)+\Sum_k \left(h^\circ_{p,p^\prime}(-,-) w_{p,p^\prime}^{(k)} + w_{p,p^\prime}^{\circ}h^{(k)}_{p,p^\prime}(-,-)\right)\hat n_k \nonumber\\
+&+ \Sum_{k,k^\prime} \left( h^\circ_{p,p^\prime}(-,-) w_{p,p^\prime}^{(k,k^\prime)}+w_{p,p^\prime}^{(k)}h^{(k^\prime)}_{p,p^\prime}(-,-)\right)\hat n_k\hat n_{k^\prime}\nonumber\\
+&\eqdef \phi_{p,p^\prime}^{\circ} + \Sum_k \phi_{p,p^\prime}^{(k)}\hat n_k + \Sum_{k,k^\prime} \phi_{p,p^\prime}^{(k,k^\prime)}\hat n_k\hat n_ {k^\prime}\\
+\hat\psi_{p,p^\prime}&=\hat W^\dagger_{p,p^\prime} \left(\hat H - \hat H(\hat n_p-1,\hat n_{p^\prime}+1)\right)=\hat W_{p,p^\prime}\hat H_{p,p^\prime}(+,+)\nonumber\\
+&\approx  {w_{p,p^\prime}^{\circ}}^*h^{\circ}_{p,p^\prime}(+,+)+\Sum_k \left(h^\circ_{p,p^\prime}(+,+) {w_{p,p^\prime}^{(k)}}^* + {w_{p,p^\prime}^{\circ}}^*h^{(k)}_{p,p^\prime}(+,+)\right)\hat n_k \nonumber\\
+&+ \Sum_{k,k^\prime} \left( h^\circ_{p,p^\prime}(+,+) {w_{p,p^\prime}^{(k,k^\prime)}}^*+{w_{p,p^\prime}^{(k)}}^*h^{(k^\prime)}_{p,p^\prime}(+,+)\right)\hat n_k\hat n_{k^\prime}\nonumber\\
+&= {\phi_{p,p^\prime}^{\circ}}^* + \Sum_k {\phi_{p,p^\prime}^{(k)}}^*\hat n_k + \Sum_{k,k^\prime} {\phi_{p,p^\prime}^{(k,k^\prime)}}^*\hat n_k\hat n_ {k^\prime}
+\end{align}
+\end{subequations}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{appendix}
