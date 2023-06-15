@@ -14,18 +14,18 @@ $\hat\eta(\lambda)$ is called the generator of the unitary transformation $\hat 
 \begin{equation}\label{FEQ_ODE_def}
 \frac{\mathrm d\ham(\lambda)}{\mathrm d\lambda} = \left[\hat\eta(\lambda),\ham(\lambda)\right].
 \end{equation}
-This is what we will refer to as the flow equation for the Hamiltonian $\ham (\lambda)$. From now on, the $\lambda-$dependence of $\hat\eta,\ham$ and $\hat U$ will usually be omitted. \\
+This is what we will refer to as the flow equation for the Hamiltonian $\ham (\lambda)$. From now on, the $\lambda-$dependence of $\hat\eta,\ham$ and $\hat U$ will usually be notationally omitted. \\
 For every $\hat U$ there exists one and only one $\hat\eta$ which generates the unitary transformations defined by $\hat U$. However, there may be several $\hat U$ which let $\ham(\lambda = 0)\eqdef \ham^{(0)}$ flow to (the same) diagonal Hamiltonian $\ham(\lambda=\infty)\eqdef \ham^{(\infty)}$ so there is in general more than one good choice for $\hat\eta$. \\
 It turns out that in most cases 
 \begin{equation}\label{FEQ_eta_def}
 \hat\eta = \left[\ham_{\mathrm{diag.}},\ham \right],
 \end{equation}
 where $\ham_{\mathrm{diag.}}$ is the diagonal part of the Hamiltonian, achieves the desired diagonalization.  \\
-We are often in a situation where a given system described by $\ham_0$ with known eigenenergies  and eigenstates is well understood if certain interaction terms $\ham_{\mathrm{int}}$ are neglected. In this case, we can write $\ham = \ham_0 + \ham_{\mathrm{int}}$ and thus
+We are often in a situation where a given system described by $\ham_0$ with known eigenenergies  and eigenstates is well understood if certain interaction terms $\ham_{\mathrm{int}}$ are omitted. In this case, we can write $\ham = \ham_0 + \ham_{\mathrm{int}}$ and thus
 \begin{equation}\label{FEQ_can_eta_def}
 \hat\eta = \left[\ham_0, \ham_{\mathrm{int}}\right].
 \end{equation}
-This choice is called the canonical generator and is also the choice for the generator that will be adopted in this thesis.. \\
+This choice for $\hat \eta$ is called the canonical generator and is also the choice for the generator that will be adopted in this thesis.. \\
 A good benchmark that indicates how diagonal the interaction Hamiltonian is at a given point in the flow, is to check if the the trace of its square becomes smaller in the flow:
 \begin{equation}\label{check_trace}
 \frac{\mathrm d}{\mathrm d \lambda}\mathrm{Tr}\left(\ham^2_{\mathrm{int}}\right)\leq 0
@@ -71,13 +71,13 @@ With respect to which state the Hamiltonian should be normal ordered, i.e. with 
 \begin{equation}
 |GS(\lambda)\rangle = \hat U(\lambda)\hat U^\dagger(\lambda=\infty)|GS\rangle.
 \end{equation}
-Intuitively, this is clear: We first let the flow run backwards from $\lambda=\infty$ to $\lambda = 0$ and then let $|GS(\lambda=0)\rangle$ flow until $|GS(\lambda)\rangle$ which is the correct ground state in the basis of a given point in the flow.\\
+Intuitively, this is clear: We first let the flow run backwards from $\lambda=\infty$ to $\lambda = 0$ and then let $|GS(\lambda=0)\rangle$ flow until $|GS(\lambda)\rangle$ which is the correct ground state in the basis of a given point $\lambda$ in the flow.\\
 A possible solution to our two problems is to first start with normal ordering w.r.t. some arbitrary state (e.g. the vacuum) to get a first guess for the ground state of the diagonal Hamiltonian and to iteratively improve that guess by repeatedly traversing the flow. \par
 Although this method has not found widespread adoption when using the flow equation approach because the error induced by a \grqq na\"ive\grqq\  normal ordering prescription is usually not large, and it may sometimes be easier just to consider more terms in the flow instead of working with the correct normal ordering prescription, it is important not to forget that not all normal ordered expansions and truncation schemes are equally good and can introduce differently sized errors.
 
 \section{The Bose Polaron Problem}
 \subsection{(Beyond) The Fröhlich Hamiltonian}\label{(Beyond) The Fröhlich Hamiltonian}
-The Fröhlich Hamiltonian is a model that describes the interaction between a single quantum particle and a phonon reservoir, such as a crystal lattice or a Bose-Einstein condensate (BEC). It was introduced by Herbert Fröhlich in 1954 to study the effect of electron-phonon coupling on the electrical conductivity of polar crystals \cite{doi:10.1080/00018735400101213}. The Fröhlich Hamiltonian can also be used to describe the interaction of an impurity with the Bogoliubov phonons of an BEC, which leads to the formation of a quasiparticle called the Bose polaron because the impurity atom becomes \grqq dressed\grqq\ in a cloud of phonons. This dressing changes the properties of the impurity, such as its effective mass and mobility.\par 
+The Fröhlich Hamiltonian is a model Hamiltonian that describes the interaction between a single quantum particle and a phonon reservoir, such as a crystal lattice or a Bose-Einstein condensate (BEC). It was introduced by Herbert Fröhlich in 1954 to study the effect of electron-phonon coupling on the electrical conductivity of polar crystals \cite{doi:10.1080/00018735400101213}. The Fröhlich Hamiltonian can also be used to describe the interaction of an impurity with the Bogoliubov phonons of an BEC, which leads to the formation of a quasiparticle called the Bose polaron because the impurity atom becomes \grqq dressed\grqq\ in a cloud of phonons. This dressing changes important properties of the impurity, such as its effective mass and mobility.\par 
 We follow \cite{Grusdt_2017} and write the Fröhlich Hamiltonian in one dimension in the following form:
 \begin{equation}\label{Fröhlich}
 \ham_F = g_{IB}n_0+\frac{\hat p^2}{2M}+\int\mathrm d k\omega_{ k}\CR_{ k}\AN_{ k}+\sqrt{\frac{n_0}{2\pi}}g_{IB}\int\mathrm d k W_k e^{ik\hat x}\left(\AN_{ k}+\CR_{- k}\right)
@@ -91,7 +91,7 @@ where we introduced $\xi$ as the healing length of the Bose condensate and $c$ a
 W_k = \left(\frac{(\xi k)^2}{2+(\xi k)^2}\right)^{1/4}
 \end{equation}
 and the change in phase depends on the position operator of the impurity (again in first quantization).\par
-It has been shown that in order to accurately describe the effective mass of Bose polarons, the Fröhlich Hamiltonian alone does not suffice and two-phonon scattering terms have to be included in the Hamiltonian \cite{Grusdt_2017}. The inclusion of those leads to very good agreement of experiment and theory. It should be noted at this point that a 1D model is not only interesting from a theoretical perspective, since experimental setups in one dimension are possible and have successfully been realized \cite{Catani}.\\
+It has been shown that in order to accurately describe the effective mass of Bose polarons, the Fröhlich Hamiltonian alone does not suffice and two-phonon scattering terms have to be included in the Hamiltonian \cite{Grusdt_2017}. It should be noted at this point that a 1D model is not only interesting from a theoretical perspective, since experimental setups in one dimension are possible and have successfully been realized \cite{Catani}. The inclusion of two-phonon scattering terms leads to very good agreement of experiment and theory when the coupling between the impurity and the phonons is not too strong \cite{Grusdt_2017}. \\
 The aforementioned two-phonon scattering terms are quadratic and are again proportional to the boson-impurity coupling constant:
 \begin{equation}
 \ham_{2\mathrm{ph}}=\frac{g_{IB}}{2\pi}\int\mathrm d k\mathrm d k^\prime \left(c_k\CR_k-s_k\AN_{-k}\right)\left(c_{k^\prime}\AN_{k^\prime}-s_{k^\prime}\CR_{-k^\prime}\right)e^{i(k-k^\prime)x}

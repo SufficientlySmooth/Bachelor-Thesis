@@ -6,8 +6,8 @@ In the purely quadratic case where the coefficients do not depend on the occupat
 \ham \defeq \ham_0+\ham_{\mathrm{int}} \defeq \Sum_k \omega_k \CR_k\AN_k+\Sum_{q\neq q^\prime}V_{q,q^\prime}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}\CR_p\CR_{p^\prime}+\mathrm{h.c.}\right)
 \end{equation}
  and no truncation scheme as discussed in section \ref{Truncation Schemes} has to be employed. For details of the calculations consult section \ref{Deriving the flow equations in the case of no n-dependence}.\par 
-There we followed precisely the recipe described in section \ref{General Mechanism}: First the canonical generator \ref{FEQ_eta_def} is calculated. Then the derivative of the flow Hamiltonian is calculated via the commutator of the generator and the Hamiltonian in equation \ref{FEQ_ODE_def}. The flow equations then follow by a simple comparison of coefficients from the quadratic Hamiltonian (plus a constant energy $\epsilon$) ansatz for the flow Hamiltonian.
-Furthermore note that the flow equations \ref{feq_won_I}-\ref{feq_won_IV} suggest that they are exact in the sense that if the flow is completely traversed, the flow Hamiltonian will be exactly diagonal because in first order
+There we followed precisely the recipe described in section \ref{General Mechanism}: First the canonical generator \ref{FEQ_eta_def} is calculated. Then the derivative of the flow Hamiltonian is calculated via the commutator of the generator and the Hamiltonian in equation \ref{FEQ_ODE_def}. The flow equations then follow by a simple comparison of coefficients from the quadratic Hamiltonian (plus a constant energy $\epsilon$) ansatz for the flow Hamiltonian.\par
+Note that the flow equations \ref{feq_won_I}-\ref{feq_won_IV} suggest that they are exact in the sense that if the flow is completely traversed, the flow Hamiltonian will be exactly diagonal because in first order
 \begin{subequations}
 \begin{align}
 V_{q,q^\prime}&\sim \exp\left(-(\omega_q-\omega_{q^\prime})^2\right)\xlongrightarrow{\lambda\rightarrow\infty}0\\
@@ -16,11 +16,11 @@ W_{p,p^\prime}&\sim \exp\left(-(\omega_p+\omega_{p^\prime})^2\right)\xlongrighta
 \end{subequations}
 assuming that there are no degeneracies present. If there were, it would mean that  $(\omega_q-\omega_{q^\prime})^2=0$ for some pair $q,q^\prime$. However, even the occurence of (near-)degeneracies does not necessarily imply that the corresponding matrix elements do not decay \cite{PhysRevD.49.4214}. This is because the second order terms coupling the ODEs for the different matrix elements are non-trivial and might, depending on the initial condition, even sufficiently suppress degenerate matrix elements. \\
 Consequently, applying the equations to a concrete problem provides the best test of their performance and convergence properties.\\
-Checking the condition \ref{check_trace} is a strong indicator for good convergence properties but does not necessarily imply that all elements in $\ham_{\mathrm{int}}$ converge to 0, which is why we waive the explicit evaluation of the conditions \ref{useless_check}.
+Checking the condition \ref{check_trace} is a strong indicator for good convergence properties but does not necessarily imply that all elements in $\ham_{\mathrm{int}}$ converge to 0, which is why we waive the explicit evaluation of the conditions \ref{useless_check} which imply \ref{check_trace}.
 \subsection{Application to the 1D Bose Polaron Model}
-In the heavy impurity limit $M\rightarrow \infty$, the dependence of the occupation numbers in the LLP-Hamiltonian \ref{ham_LLP} vanishes and we almost have a purely quadratic Hamiltonian as discussed in the previous  section. Before we discuss the significance of the the linear term in the LLP-Hamiltonian we will address the fact that the integrals in there have to discretized for numerical treatment.\\
+In the heavy impurity limit $M\rightarrow \infty$, the dependence of the occupation numbers in the LLP-Hamiltonian \ref{ham_LLP} vanishes and we almost have a purely quadratic Hamiltonian \ref{def_purely_quadratic_hamiltonian} as discussed in the previous section. Before we discuss the significance of the the linear term in the LLP-Hamiltonian we will address the fact that the integrals in there have to discretized for numerical treatment.\\
 To this end, we will restrict ourselves to a discrete number of modes $k$ where $0<\Lambda_{IR}\leq |k|\leq\Lambda_{UV}<\infty$ . $\Lambda_{IR}$ denotes the infrared and $\Lambda_{UV}$ denotes the ultraviolet cut-off. We will work with values $\Lambda_{IR}\xi= 10^{-1}$ and $\Lambda_{UV}\xi= 10^1$. \\
-Considering a larger number of $k$ values is generally better, but involves significant computational cost. The spacing between two adjacent $k$ values will be $\Delta k=\frac{2\pi}{L}$ where $L$ is a constant which describes the size of the system. \\
+Considering a larger number of $k$ values is generally better, but involves significant computational cost. That is why the spacing $\Delta k=\frac{2\pi}{L}$ (where $L$ is a constant which describes the size of the system) between two adjacent $k$ values will be not be chosen too small. Typical values are of order $\Delta k\sim 10^{-1}\xi$.  \\
 This allows us to write integrals as sums according to 
 \begin{equation}
 \int\mathrm d k\rightarrow \Delta k\Sum_k
@@ -35,7 +35,7 @@ and the LLP-Hamiltonian becomes:
 \ham_{\mathrm{LLP}}^{\mathrm{discr.}} &=g_{IB}n_0+\Sum_k \omega_{ k}\CR_{ k}\AN_{ k}+\sqrt{\frac{n_0\Delta k}{2\pi}}g_{IB}\Sum_k W_k \left(\AN_{ k}+\CR_{- k}\right) \\ &+ \frac{g_{IB}\Delta k}{2\pi}\Sum_{k,k^\prime} \left(c_k\CR_k-s_k\AN_{-k}\right)\left(c_{k^\prime}\AN_{k^\prime}-s_{k^\prime}\CR_{-k^\prime}\right)\nonumber
 \end{align}
 It would be possible to expand our flow equations to allow for linear terms in our Hamiltonian. In this case it would again be possible to obtain a closed set of flow equations. \\
-This can be avoided because the linear terms  $W_k \left(\AN_{ k}+\CR_{- k}\right)$ can be transformed out by applying the displacement operator 
+However, this can be avoided because the linear terms  $W_k \left(\AN_{ k}+\CR_{- k}\right)$ can be transformed out by applying the displacement operator 
 \begin{equation}
 \hat D(\underline\alpha)=\exp\left(\sum_k\alpha_k\CR_k-\mathrm{h.c.}\right)=\exp\left(-\underline\alpha^\dagger{\underline{\underline\Omega}}\ \underline{\hat a}\right)
 \end{equation}
@@ -91,7 +91,7 @@ The condition \ref{quadratic_condition_displacement} can be solved very efficien
 \begin{equation}\label{Ham_LLP_qudratic}
 \ham_{\mathrm{LLP}}^{\mathrm{quadr.}}=\Sum_k (\omega_k +V_{k,k}^{(0)})\CR_k\AN_k+\Sum_{q\neq q^\prime}V_{q,q^\prime}^{(0)}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}^{(0)}\CR_p\CR_{p^\prime}+\mathrm{h.c.}\right)+g_{IB}n_0+\frac{g_{IB}}{2\pi}\Delta k\Sum_{k}s_k^2
 \end{equation}
-The flow equations \ref{feq_won_I}-\ref{feq_won_IV} for $\ham_{\mathrm{LLP}}^{\mathrm{quadr.}}$ define a system of $(2N^2+N+1)\in\mathcal O(N^2)$ ODEs and can be solved numerically using preexisting ODE solvers. We will use the \verb!ODEProblem! function from \julialogo's \verb!DifferentialEquations.jl! library with the \verb!Tsit5! integrator, a Runge-Kutta integrator of order 5(4) \cite{TSITOURAS2011770}, for its general robustness and versatility.\par
+The flow equations \ref{feq_won_I}-\ref{feq_won_IV} for $\ham_{\mathrm{LLP}}^{\mathrm{quadr.}}$ define a system of $(2N^2+N+1)\in\mathcal O(N^2)$ ODEs and can be solved numerically using preexisting ODE solvers. We will use the \verb!ODEProblem! functionality from \julialogo's \verb!DifferentialEquations.jl! library in combination with the \verb!Tsit5! integrator, a Runge-Kutta integrator of order 5(4) \cite{TSITOURAS2011770}, for its general robustness and versatility.\par
 Finally, concrete parameters for $c,\xi,\eta,\gamma,n_0$ have to be chosen. We refer to Catani's experimental results and set $\gamma=0.438$, $n_0\xi=1.05$ and choose our units s.t. $c=\xi=1$ \cite{Catani,Grusdt_2017}.
 Then the other constants introduced before can be calculated using the expressions introduced in section \ref{(Beyond) The Fröhlich Hamiltonian}.
 \subsection{Benchmark: Exact Diagonalization via Bogoliubov Transformation}
@@ -110,7 +110,7 @@ and
 A=\left(A_{k,k^\prime}\right)_{k,k^\prime=1,...,N},\ B=\left(B_{k,k^\prime}\right)_{k,k^\prime=1,...,N}
 \end{equation}
 As shown in \cite{PracticalTraining}, the Bogoliubov Transformation
-\begin{equation} \underline\AN\mapsto  \underline{\underline{U_B}}\ \underline\AN\end{equation}
+\begin{equation}\label{Bogoliubov Transformation Def} \underline\AN\mapsto  \underline{\underline{U_B}}\ \underline\AN\end{equation}
 defined by the matrix 
 \begin{equation}
 \underline{\underline{U_B}}\defeq \begin{pmatrix}U^* & -V^*\\ -V & U\end{pmatrix}
@@ -126,7 +126,7 @@ The values $\{\lambda_j^{(*)}\}_{j=1,...,N}$ can by obtained by solving the eige
 \underline w_j^\dagger{\underline{\underline{\Omega}}}\ \underline w_j=+1
 \end{equation}
 The associated eigenvector to $-\lambda_j^*$ always has a negative matrix element. \par
-The results from a Bogoliubov transformation will be be compared to the flow equations in section \ref{results}.
+The results from a Bogoliubov transformation will be be compared to the flow equations in section \ref{Results}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{With Dependence on the Occupation Numbers}
 \subsection{Useful Preliminaries}

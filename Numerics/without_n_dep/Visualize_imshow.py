@@ -44,6 +44,8 @@ def visualize(sol,t,N,eta):
     im3 = axes[2].imshow(W_beg, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
     im4 = axes[3].imshow(W_end, aspect='auto', cmap='binary',vmin = 1e-5, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
     
+    for axis in axes:
+        axis.grid(visible=False)
 
     axes[2].set_xlabel(r"$k\xi$")
     axes[3].set_xlabel(r"$k\xi$")
