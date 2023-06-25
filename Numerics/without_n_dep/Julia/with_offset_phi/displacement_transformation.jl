@@ -2,7 +2,7 @@
 import NPZ, NLsolve
 using NPZ, NLsolve
 
-PATH = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit Quadratic Hamiltonians/N=100,lambda_IR=0.1+phi,lmabda_UV=10+phi,phi=1/"
+PATH = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit Quadratic Hamiltonians/N=40,lambda_IR=0.1+phi,lambda_UV=10+phi,phi=0.1/"
 
 function om(k,consts)
     xi,cc,lamb_IR,lamb_UV,m_b,eta,n0,gamma,a_bb,g_bb,g_ib,dk,L,phi = consts
@@ -124,7 +124,7 @@ function get_quadratic_Hamiltonian(grid,consts)
     return omega0_arr(grid,consts),V0_arr(grid,consts),W0_arr(grid,consts),eps
 end
 
-for eta in LinRange(-10,10,401)
+for eta in LinRange(-10,10,201)
     print("eta = ", eta, "\n")
     xi = 1 #characteristic length (BEC healing length)
     cc = 1 #c in free Bogoliubov dispersion (speed of sound)
@@ -132,13 +132,13 @@ for eta in LinRange(-10,10,401)
     lamb_UV = 1e1 #ultra-violet cutoff
     m_b = 1/(sqrt(2)*cc*xi) #reduced mass = boson mass in the limit of infinite impurity mass
     #eta = 1 #will be varied between -10...10 later
-    phi = 1 #offset phi/L for k values
+    phi = 0.1 #offset phi/L for k values
     n0 = 1.05/xi #
     gamma = 0.438
     g_bb = gamma*n0/m_b
     a_bb = -2/(m_b*g_bb)
     g_ib = eta*g_bb
-    dk = 2*1e-1
+    dk = 5*1e-1
     L = 2*pi/dk
     consts = (xi,cc,lamb_IR,lamb_UV,m_b,eta,n0,gamma,a_bb,g_bb,g_ib,dk,L,phi)
 

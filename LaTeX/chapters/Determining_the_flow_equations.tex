@@ -21,9 +21,9 @@ Checking the condition \ref{check_trace} is a strong indicator for good converge
 In the heavy impurity limit $M\rightarrow \infty$, the dependence of the occupation numbers in the LLP-Hamiltonian \ref{ham_LLP} vanishes and we almost have a purely quadratic Hamiltonian \ref{def_purely_quadratic_hamiltonian} as discussed in the previous section. Before we discuss the significance of the the linear term in the LLP-Hamiltonian we will address the fact that the integrals in there have to discretized for numerical treatment.\\
 To this end, we will restrict ourselves to a discrete number of modes $k$ where $0<\Lambda_{IR}\leq |k|\leq\Lambda_{UV}<\infty$ . $\Lambda_{IR}$ denotes the infrared and $\Lambda_{UV}$ denotes the ultraviolet cut-off. We will work with values $\Lambda_{IR}\xi= 10^{-1}$ and $\Lambda_{UV}\xi= 10^1$. \\
 Considering a larger number of $k$ values is generally better, but involves significant computational cost. That is why the spacing $\Delta k=\frac{2\pi}{L}$ (where $L$ is a constant which describes the size of the system) between two adjacent $k$ values will be not be chosen too small. Typical values are of order $\Delta k\sim 10^{-1}\xi$.  \\
-This allows us to write integrals as sums according to 
+This allows us to approximate integrals by sums
 \begin{equation}
-\int\mathrm d k\rightarrow \Delta k\Sum_k
+\int\mathrm d k\rightarrow \Delta k\Sum_k.
 \end{equation}
 The commutation relations of the creation and annihilation operators in $\ham_{\mathrm{LLP}}$ are $\left[\AN_k,\CR_{k^\prime}\right]=\delta(k-k^\prime)$. Our new discrete operators will obey the same commutation relation with a Kronecker-delta instead of the Dirac-delta.
 The transition from the continuous to the discrete case is done by coarsening the annihilation and creation operators
@@ -139,7 +139,7 @@ The symplectic condition cannot be satisfied if not all eigenvalues are real. Fo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{With Dependence on the Occupation Numbers}
 \subsection{Useful Preliminaries}
-Consider some operator $\hat f$ which depends on a number operator $\hat n=\CR\AN$. The following relations will be used later:
+Consider some operator $\hat f$ which depends on a number operator $\hat n=\CR\AN$. The following relations will be used when deriving the flow equations:
 \begin{subequations}
 \label{fcom}
 \begin{align}

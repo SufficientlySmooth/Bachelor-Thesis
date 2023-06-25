@@ -14,7 +14,7 @@ plt.rcParams.update({
 })
 
 
-N = 100
+N = 40
 lambda_UV = 10
 
 
@@ -35,10 +35,10 @@ def visualize(sol,t,N,eta):
     vmax_V = max(np.append(V_end.flatten(),V_beg.flatten()))
     vmax_W = max(np.append(W_end.flatten(),W_beg.flatten()))
     vmax = max(vmax_V,vmax_W)
-    vmin_V = min(np.append(V_end.flatten()[V_end.flatten()>1e-10],V_beg.flatten()[V_beg.flatten()>1e-10]))
-    vmin_W = min(np.append(W_end.flatten()[W_end.flatten()>1e-10],W_beg.flatten()[W_beg.flatten()>1e-10]))
-    vmin = min(vmin_V,vmin_W)
-    print(vmin)
+    #vmin_V = min(np.append(V_end.flatten()[V_end.flatten()>1e-10],V_beg.flatten()[V_beg.flatten()>1e-10]))
+    #vmin_W = min(np.append(W_end.flatten()[W_end.flatten()>1e-10],W_beg.flatten()[W_beg.flatten()>1e-10]))
+    #vmin = min(vmin_V,vmin_W)
+    #print(vmin)
     vmin = 1e-5
     
     fig, axes = plt.subplots(nrows=2, ncols=2)
@@ -64,19 +64,20 @@ def visualize(sol,t,N,eta):
     fig.subplots_adjust(right=0.85)
     cbar_ax = fig.add_axes([0.88, 0.15, 0.04, 0.7])
     fig.colorbar(im2, cax=cbar_ax)
-    plt.savefig('visualize_imshow_N=100,phi=1\\eta=%.3f_full.pdf'%eta,dpi = 300)
+    plt.savefig('visualize_imshow_N=40,phi=0.1\\eta=%.3f_full.pdf'%eta,dpi = 300)
 
 #visualize(inp,t,N)
 
 #animate_VW(inp,t)
-PATH  = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=100,lambda_IR=0.1+phi,lmabda_UV=10+phi,phi=1\\"
+PATH  = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=40,different etas_full_with_phi,phi=0.1\\"
 for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file]:
     eta = float(FILENAME.split(',')[0].split('=')[-1])
-    t_filename = "sol_full_t"+FILENAME[13:]
-    path_inp = PATH+FILENAME
-    path_t = PATH+t_filename
-
+    if not eta == 0:
+        t_filename = "sol_full_t"+FILENAME[13:]
+        path_inp = PATH+FILENAME
+        path_t = PATH+t_filename
     
-    inp = np.load(path_inp)
-    t = np.load(path_t)
-    visualize(inp,t,N,eta)
+        
+        inp = np.load(path_inp)
+        t = np.load(path_t)
+        visualize(inp,t,N,eta)

@@ -14,8 +14,8 @@ $\hat\eta(\lambda)$ is called the generator of the unitary transformation $\hat 
 \begin{equation}\label{FEQ_ODE_def}
 \frac{\mathrm d\ham(\lambda)}{\mathrm d\lambda} = \left[\hat\eta(\lambda),\ham(\lambda)\right].
 \end{equation}
-This is what we will refer to as the flow equation for the Hamiltonian $\ham (\lambda)$. From now on, the $\lambda-$dependence of $\hat\eta,\ham$ and $\hat U$ will usually be notationally omitted. \\
-For every $\hat U$ there exists one and only one $\hat\eta$ which generates the unitary transformations defined by $\hat U$. However, there may be several $\hat U$ which let $\ham(\lambda = 0)\eqdef \ham^{(0)}$ flow to (the same) diagonal Hamiltonian $\ham(\lambda=\infty)\eqdef \ham^{(\infty)}$ so there is in general more than one good choice for $\hat\eta$. \\
+This is what we will refer to as the flow equation for the Hamiltonian $\ham (\lambda)$. From now on, the $\lambda-$dependence of $\hat\eta,\ham$ and $\hat U$ will usually be notationally dropped. \\
+For every $\hat U$ there exists one and only one $\hat\eta$ which generates the unitary transformations defined by $\hat U$. However, there may be several $\hat U$ which let $\ham(\lambda = 0)\eqdef \ham^{(0)}$ flow to (the evidently unique) diagonal Hamiltonian $\ham(\lambda=\infty)\eqdef \ham^{(\infty)}$ so in general there is more than one good choice for $\hat\eta$. \\
 It turns out that in most cases 
 \begin{equation}\label{FEQ_eta_def}
 \hat\eta = \left[\ham_{\mathrm{diag.}},\ham \right],
@@ -35,7 +35,7 @@ It can be proved \cite[pp. 27-28]{kehrein2006flow} that this is always the case 
 \mathrm{Tr}\left(\ham_0\ham_{\mathrm{int}}\right)=\mathrm{Tr}\left(\frac{\mathrm d\ham_0}{\mathrm d\lambda} \ham_{\mathrm{int}}\right)=0
 \end{align}
 \subsection{Normal Ordering}
-Normal ordering plays an essential role in successfully applying to flow equation approach to realistic Hamiltonians. In our definition of normal ordering, we follow \cite[pp. 62-63]{kehrein2006flow} which in turn is based upon unpublished notes by F. Wegner.\\
+Normal ordering plays an essential role in successfully applying to flow equation approach to realistic Hamiltonians. In our definition of normal ordering, we closely follow \cite[pp. 62-63]{kehrein2006flow} which in turn is based upon unpublished notes by F. Wegner.\\
 Let $\hat\alpha_k\in\{\AN_k,\CR_k\}$ and consider some normalized reference state $|\psi_{NO}\rangle$. Moreover, we define the contractions 
 \begin{equation}\label{contractions_def}
 C_{k,l}\defeq \langle \psi_{NO}|\hat\alpha_k\hat\alpha_l|\psi_{NO}\rangle.
@@ -109,7 +109,7 @@ For future reference, we will now also introduce the 1D boson–boson s-wave sca
 a_{BB}=-\frac{2}{m_Bg_{BB}}
 \end{equation}
 where \begin{equation}m_B = \frac{1}{\sqrt{2c\xi}}\end{equation} is the mass of the bosons
-and the dimenionless parameter 
+and the dimensionless parameter 
 \begin{equation}
 \eta\defeq \frac{g_{IB}}{g_{BB}}
 \end{equation}
@@ -119,7 +119,7 @@ For small $\eta$, the Fröhlich Hamiltonian describes the physics of the impurit
 \ham = \ham_F + \ham_{2\mathrm{ph}}
 \end{equation}
 \subsection{The Lee-Low-Pine (LLP) Transformation}
-The Lee-Low-Pine (LLP) transformation \cite{LLP} dramatically simplifies the solving the full Hamiltonian \ref{full_ham}. By making use of the fact that the total system momentum is conserved (which follows from the translational invariance of $\ham$) it allows us to transform to a reference frame co-moving to the impurity with the impurity in its center. \\
+The Lee-Low-Pine (LLP) transformation \cite{LLP} dramatically simplifies the solving of the full Hamiltonian \ref{full_ham}. By making use of the fact that the total system momentum is conserved (which follows from the translational invariance of $\ham$) it allows us to transform to a reference frame co-moving to the impurity with the impurity in its center. \\
 We take advantage of the fact that the total momentum operator is 
 \begin{equation}
 \hat P_{\mathrm{tot}} = \int\mathrm d k k \CR_k\AN_k + \hat p

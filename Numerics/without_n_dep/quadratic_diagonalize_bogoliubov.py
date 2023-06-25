@@ -129,6 +129,7 @@ for FILENAME in [file for file in os.listdir(PATH) if not "_t_" in file]:
 
     path_inp = PATH+FILENAME
     om0,V0,W0,eps = qs.unpack_arr(np.load(path_inp),N)
+
     V = V0 + np.diag(om0) # - np.diag(np.diag(V0)) #
     W = 1/2 * (W0 + W0.T)
     #print("eta=",eta,"eps=",eps)

@@ -6,16 +6,16 @@ using NPZ,DifferentialEquations, LinearAlgebra
 #using Base.Threads
 #import Base.Threads.@threads
 
-N = 100
-n = 500 #for how many time steps we want to save the solution
-PATH  = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit Quadratic Hamiltonians/N=100,lambda_IR=0.1+phi,lmabda_UV=10+phi,phi=1/"
-SAVEPATH = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit_sol_files/N=100,lambda_IR=0.1+phi,lmabda_UV=10+phi,phi=1/"
-eta_bounds = (-10,0)
-for name in readdir(PATH)#[end:-1:1]
+N = 40
+n = 200 #for how many time steps we want to save the solution
+PATH  = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit Quadratic Hamiltonians/N=40,lambda_IR=0.1+phi,lambda_UV=10+phi,phi=0.1/"
+SAVEPATH = "C:/Users/Jan-Philipp/Documents/Eigene Dokumente/Physikstudium/6. Semester/Bachelorarbeit_sol_files/N=40,different etas_full_with_phi,phi=0.1/"
+eta_bounds = (-7,-1)
+for name in readdir(PATH)[end:-1:1]
     eta_str = split(split(name,'=')[2],',')[1]
     eta = parse(Float64,eta_str)
     FILENAME = "sol_quadrant_"*name
-    if FILENAME ∉ readdir(SAVEPATH) && eta >= eta_bounds[1] && eta < eta_bounds[2] && isinteger(5*eta)
+    if FILENAME ∉ readdir(SAVEPATH) && eta >= eta_bounds[1] && eta < eta_bounds[2]# && isinteger(2*eta)
         print("Solving "*name)
         flat = npzread(PATH*name)
 
