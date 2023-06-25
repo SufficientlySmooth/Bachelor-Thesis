@@ -11,7 +11,7 @@ As seen in Figure \ref{FlowIllustration}, the flow equations achieve the desired
 \ham^\prime \defeq \Sum_{k}\left(\tilde\omega_k \CR_k\AN_k + \tilde V_{k,-k}\CR_k\AN_{-k}\right)
 \end{equation}
 for some $\tilde\omega_k,\tilde V_{k,k^\prime}$.\\
-In principle, this could be brought into diagonal form by performing a Bogoliubov transformation for each summand by hand. But we will use the more general Bogoliubov transformation \ref{Bogoliubov Transformation Def} instead because, as can be seen in the figure \ref{FlowIllustrationInsufficient}, there are interaction strengths where not all $W_{k,k^\prime}$ vanish.
+In principle, this could be brought into diagonal form by performing a Bogoliubov transformation for each summand by hand. But we will use the more general Bogoliubov transformation \ref{Bogoliubov Transformation Def}\footnote{For the numerics we again refer to the source code "Bogoliubov\_Transformation.py" in \url{https://github.com/SufficientlySmooth/Bachelor-Thesis-Numerics}} instead because, as can be seen in the figure \ref{FlowIllustrationInsufficient}, there are interaction strengths where not all $W_{k,k^\prime}$ vanish.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/plots/PDF/FlowIllustration\_insufficient\_convergence.pdf}
@@ -24,7 +24,7 @@ One might think that we are therefore at an inherently poor starting point for m
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/plots/PDF/GS_energies_bog_flow_comp.pdf}
-    \caption[Ground state energy of Bose Polaron for different $\eta$]{The left subplot shows the ground state energy for different $\eta$. The results are obtained via three different approaches: First a Bogoliubov transformation\footnote{For the numerics we again refer to the source code "Bogoliubov\_Transformation.py" in \url{https://github.com/SufficientlySmooth/Bachelor-Thesis-Numerics}} is applied directly to the Hamiltonian \ref{Ham_LLP_qudratic}. Second, the ground state energy is given by the constant $\epsilon$ in the flow Hamiltonian \ref{Flow_Hamiltonian_for_purely_quadratic_case} if all off-diagonal elements are neglected after a sufficiently long traversal of the flow. Third, the off-diagonal elements are not neglected but instead set to zero by a Bogoliubov Transformation of the flow Hamiltonian after traversing the flow for as long as in the second case.
+    \caption[Ground state energy of Bose Polaron for different $\eta$]{The left subplot shows the ground state energy for different $\eta$. The results are obtained via three different approaches: First a Bogoliubov transformation is applied directly to the Hamiltonian \ref{Ham_LLP_qudratic}. Second, the ground state energy is given by the constant $\epsilon$ in the flow Hamiltonian \ref{Flow_Hamiltonian_for_purely_quadratic_case} if all off-diagonal elements are neglected after a sufficiently long traversal of the flow. Third, the off-diagonal elements are not neglected but instead set to zero by a Bogoliubov Transformation of the flow Hamiltonian after traversing the flow for as long as in the second case.
 The right subplot shows the difference between the ground state energy and the constant terms in the Hamiltonian \ref{Ham_LLP_qudratic} to highlight the (slight) differences between the three approaches.\\
 }
     \label{GSenergiesBogFlow}
@@ -105,6 +105,7 @@ Since the symmetry of the diagonal part of the original Hamiltonian is now broke
     \caption[End of the spectrum of the Hamiltonian with twisted boundary conditions]{This plot shows how the smallest eigenvalues change in $\eta$ analogously to Figure \ref{EndOfSpectrumAnalysis} when twisted boundary conditions are in place. We notice a slight discrepancy between the results obtained via Bogoliubov Transformation and via the Flow Equations.}
     \label{ConvergenceTwistedSmallEigenvalues}
 \end{figure}
+However, it is assumed that these discrepancies can be largely resolved by refining the $k$ grid, since we have very good agreement between the two methods for the top and bottom eigenvalues. Smaller distances between neighboring $k$ values mean, of course, smaller distances between the eigenvalues of the Hamiltonian and thus smaller distances between the eigenvalues we obtain via the flow equations and the Bogoliubov transformation, respectively.
 
 
 
