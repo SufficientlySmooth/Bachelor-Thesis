@@ -219,6 +219,7 @@ ax1.plot(np.array(etas_bog)[eta_filter_bog],np.array(gs_energies_bog)[eta_filter
 ax1.plot(etas,gs_energies_flow,marker='x',color='lime',linestyle='None',label='after partially traversed flow',markersize=4)
 ax1.plot(etas,gs_energies_flow_and_bog,marker='+',color='firebrick',linestyle='None',label='flow and Bogoliubov',markersize=4)
 ax1.axhline(energy_limit,linestyle='dotted',marker='None',label=r'GS in limit $\eta\rightarrow\pm\infty$')
+#ax1.axvline(-2/0.483,linestyle='dashed',marker='None',label=r'critical value $\eta_c$')
 
 ax2.plot(np.array(etas_bog)[eta_filter_bog],np.array(change_gs_energy_bog)[eta_filter_bog],marker='x',color='steelblue',linestyle='None',label='direct Bogoliubov',markersize=2)
 ax2.plot(etas,change_gs_energy_flow,marker='x',color='lime',linestyle='None',label='after partially traversed flow',markersize=4)

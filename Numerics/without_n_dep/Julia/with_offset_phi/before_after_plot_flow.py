@@ -14,7 +14,7 @@ plt.rcParams.update({
 })
 
 
-N = 40
+N = 100
 lambda_UV = 10
 
 
@@ -44,13 +44,14 @@ def visualize(sol,t,N,eta):
     fig, axes = plt.subplots(nrows=2, ncols=2)
     
     axes = axes.flatten()
-    im1 = axes[0].imshow(V_beg, aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
-    im2 = axes[1].imshow(V_end, aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
-    im3 = axes[2].imshow(W_beg, aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
-    im4 = axes[3].imshow(W_end, aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im1 = axes[0].imshow(V_beg[:,::-1], aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im2 = axes[1].imshow(V_end[:,::-1], aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im3 = axes[2].imshow(W_beg[:,::-1], aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
+    im4 = axes[3].imshow(W_end[:,::-1], aspect='auto', cmap='binary',vmin = vmin, vmax = vmax,norm='log',extent = [-lambda_UV,lambda_UV,-lambda_UV,lambda_UV])
     
     for axis in axes:
         axis.grid(visible=False)
+        axis.invert_yaxis()
 
     axes[2].set_xlabel(r"$k\xi$")
     axes[3].set_xlabel(r"$k\xi$")
@@ -60,16 +61,17 @@ def visualize(sol,t,N,eta):
     axes[2].set_ylabel(r"$W[c/\xi]$")
     #fig.suptitle(r"$\eta = %.3f$"%eta)
     
+    
     # add space for colour bar
     fig.subplots_adjust(right=0.85)
     cbar_ax = fig.add_axes([0.88, 0.15, 0.04, 0.7])
     fig.colorbar(im2, cax=cbar_ax)
-    plt.savefig('visualize_imshow_N=40,phi=0.1\\eta=%.3f_full.pdf'%eta,dpi = 300)
+    plt.savefig('visualize_imshow_N=100,phi=1\\eta=%.3f_full.pdf'%eta,dpi = 300)
 
 #visualize(inp,t,N)
 
 #animate_VW(inp,t)
-PATH  = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=40,different etas_full_with_phi,phi=0.1\\"
+PATH  = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=100,lambda_IR=0.1+phi,lmabda_UV=10+phi,phi=1\\"
 for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file]:
     eta = float(FILENAME.split(',')[0].split('=')[-1])
     if not eta == 0:
