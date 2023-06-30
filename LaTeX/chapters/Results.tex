@@ -10,7 +10,7 @@ As seen in Figure \ref{FlowIllustration}, the flow equations achieve the desired
 \begin{equation}
 \ham^\prime \defeq \Sum_{k}\left(\tilde\omega_k \CR_k\AN_k + \tilde V_{k,-k}\CR_k\AN_{-k}\right)
 \end{equation}
-for some $\tilde\omega_k,\tilde V_{k,k^\prime}$.\\
+for some $\tilde\omega_k,\tilde V_{k,-k}$.\\
 In principle, this could be brought into diagonal form by performing a Bogoliubov transformation for each summand by hand. But we will use the more general Bogoliubov transformation \ref{Bogoliubov Transformation Def}\footnote{For the numerics we again refer to the source code "Bogoliubov\_Transformation.py" in \url{https://github.com/SufficientlySmooth/Bachelor-Thesis-Numerics}} instead because, as can be seen in the figure \ref{FlowIllustrationInsufficient}, there are interaction strengths where not all $W_{k,k^\prime}$ vanish.
 \begin{figure}[H]
     \centering
@@ -39,12 +39,12 @@ But an accurate prediction of the ground state energy does not necessarily imply
     \label{SpectrumAnalysis}
 \end{figure}
 For example, the difference in the ground state energy in Figure \ref{GSenergiesBogFlow} for $\eta\approx -3.5$, which becomes especially clear when looking at the right subplot, can be explained by the fact that in this regime imaginary eigenvalues are to be expected (see Figure \ref{SpectrumAnalysis}). The flow equations cannot "see" these eigenvalues because the original Hamiltonian is real and the flow equations are algebraically closed in the sense that the flow cannot generate terms from $\C\setminus \R$ if it starts with purely real terms. If the flow equation approach is when complex eigenvalues occur, those will be encoded in behaviour as seen in Figure \ref{FlowIllustrationInsufficient} where not all off-diagonal terms vanish. \\
-An important a side note: The fact that imaginary eigenvalues occur principally means that formula \ref{GS_energy_formula} does not hold. However, Kain and Ling \cite{PhysRevA.98.033610} argued that it is still applicable if the imaginary parts are relatively small. Looking at the maximal eigenvalues $\sim 70c/\xi$ and the imaginary parts in Figure \ref{SpectrumAnalysis} justifies our use of formula \ref{GS_energy_formula} when calculating the ground state energy for Figure \ref{GSenergiesBogFlow}\\
+An important side note: The fact that imaginary eigenvalues occur principally means that formula \ref{GS_energy_formula} does not hold. However, Kain and Ling \cite{PhysRevA.98.033610} argued that it is still applicable if the imaginary parts are relatively small. Looking at the maximal eigenvalues $\sim 70c/\xi$ and the imaginary parts in Figure \ref{SpectrumAnalysis} justifies our use of formula \ref{GS_energy_formula} when calculating the ground state energy for Figure \ref{GSenergiesBogFlow}.\\
 The thermodynamic instability region for $-3.5\gtrsim\eta$, on the other hand, is correctly predicted in accordance with the results obtained by a Bogoliubov transformation, since negative eigenvalues are generally unproblematic for the flow equations, even though a more complicated convergence behavior may result from these negative eigenvalues, as we observed in Figure \ref{FlowIllustrationInsufficient}.
 
 \subsection{Analysis of the Spectrum}
 We have seen that the flow equation approach allows for accurate predictions of the ground state energy. The fact that the flow equations simply gloss over the imaginary eigenvalues that can be seen by a Bogoliubov Transformation leads to less good predictions in a small regime around the $\eta$ where the ground state energy diverges. Yet the relative error of these predictions is still small because the absolute error of $\Delta E_0$ in Figure \ref{GSenergiesBogFlow} is bounded whereas the ground energy is not.\\
-In the previous section we have also seen that the flow equations predict the negative eigenvalues correctly. Moreover,  Figure \ref{SpectrumAnalysis} showed that the smallest positive real eigenvalue is (almost) constant across the range of $\eta$ we investigated. This is also true for most of the other positive eigenvalues, and only the end of the spectrum shows interesting behavior, so we will take a closer at that.
+In the previous section we have also seen that the flow equations predict the negative eigenvalues correctly. Moreover,  Figure \ref{SpectrumAnalysis} showed that the smallest positive real eigenvalue is (almost) constant across the range of $\eta$ we investigated. This is also true for most of the other positive eigenvalues, and only the end of the spectrum shows interesting behavior, so we will take a closer look at that.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/plots/PDF/SpectralAnalysis.pdf}
@@ -74,7 +74,7 @@ We will now try to improve the convergence properties of the off-diagonal matrix
 \left\{\Delta k_n\right\}_{n\in\Z}\rightarrow \left\{\Delta k_n+\frac{\varphi}{L}\right\}_{n\in\Z}
 \end{equation}
  which (slightly) shifts the grid of $k$-values and thereby breaks the symmetry $k\leftrightarrow -k$ by introducing a phase parameter $\varphi\in\R$. Obviously, the original, symmetrical grid is recovered in the limit $\varphi\rightarrow 0$. 
-This transformation is not merely a mathematically convenient trick but is also physically meaningful. If we consider our BEC in which the impurity is immersed arranged in circular form we expect periodic boundary conditions
+This transformation is not merely a mathematically convenient trick but is also physically meaningful. If we consider our bosonic bath in which the impurity is immersed arranged in circular form we expect periodic boundary conditions
 \begin{equation}
 \psi(x)=\psi(x+L)
 \end{equation}
@@ -115,5 +115,12 @@ The right convergence to the spectrum of the Hamiltonian thanks to the twisted b
     \label{ConvergenceImprovementsTwisted}
 \end{figure}
  %Kain and Ling \cite{PhysRevA.98.033610} investigated the same problem for a similar set of parameters. Apart from exact diagonalization by Bogoliubov transformation they also used a mean-field
-
+\section{Qualitative Convergence Analysis}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figures/plots/PDF/Convergence_analysis,N=40.pdf}
+    \caption[Convergence behavior of the spectrum for selected $\eta$]{This plot illustrates that the rate of convergence is not uniform across the spectrum by plotting how the largest and smallest positive eigenvalues for two selected $\eta$ evolve in the flow. It becomes evident that larger eigenvalues converge considerably faster than smaller eigenvalues.}
+    \label{ConvergenceRate}
+\end{figure}
+Looking qualitatively at the convergence behavior of the eigenvalues whose flow evolution is shown in Figure \ref{ConvergenceRate}, it seems likely that the discrepancies between the flow equation approach and the exact solution for small eigenvalues are largely due to the fact that the lower end of the spectrum converges much slower than the upper part of the spectrum. This is to be expected since $\partial_\lambda\omega_k$ in the flow equation \ref{feq_won_I} is smaller for smaller $|\omega_k|$. Furthermore, when using the canonical generator, the flow equation approach always works by first first decoupling matrix elements that couple modes with large energy differences. This means that $V_{k,k^\prime},W_{k,k^\prime}$ generally converge faster if $\omega_k,\omega_{k^\prime}$ are larger and that the flow equations work their way through Hilbert space starting by transforming states whose energies are high. Thus, the flow transforms the states associated with lower energies later, and the corresponding eigenvalues also settle to a constant value later in the flow.
 

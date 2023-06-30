@@ -1,11 +1,11 @@
-\chapter{Determining the Flow Equations}\label{Determining the Flow Equations}
+\chapter{Deriving the Flow Equations}\label{Determining the Flow Equations}
 \section{Purely Quadratic Case}
-\subsection{Deriving the Flow Equations}
+\subsection{Applying the Formalism}
 In the purely quadratic case where the coefficients do not depend on the occupation numbers and where a static impurity is considered, exact flow equations \ref{feq_won_I}-\ref{feq_won_IV} can be derived. In particular, the flow Hamiltonian $\ham(\lambda)$ is of the same quadratic form as the original Hamiltonian
 \begin{equation}\label{def_purely_quadratic_hamiltonian}
 \ham \defeq \ham_0+\ham_{\mathrm{int}} \defeq \Sum_k \omega_k \CR_k\AN_k+\Sum_{q\neq q^\prime}V_{q,q^\prime}\CR_q\AN_{q^\prime}+\Sum_{p,p^\prime}\left(W_{p,p^\prime}\CR_p\CR_{p^\prime}+\mathrm{h.c.}\right)
 \end{equation}
- and no truncation scheme as discussed in Section \ref{Truncation Schemes} has to be employed. For details of the calculations consult Section \ref{Deriving the flow equations in the case of no n-dependence}.\par 
+ and no truncation scheme as discussed in Section \ref{Truncation Schemes} has to be employed. For details of the calculations consult Section \ref{Deriving the Flow Equations in the Case of No n-Dependence}.\par 
 We followed precisely the recipe introduced in Section \ref{General Mechanism}: First the canonical generator \ref{FEQ_eta_def} is calculated (see equation \ref{eta_wo_n_final}). Then the derivative of the flow Hamiltonian is calculated via the commutator of the generator and the Hamiltonian in equation \ref{FEQ_ODE_def}. The relevant terms \ref{wo_n_I}-\ref{wo_n_IV} are evaluated separately by only making use of the bosonic commutation relations. The flow equations then follow by a simple comparison of coefficients from the quadratic Hamiltonian (plus a constant energy $\epsilon$) ansatz for the flow Hamiltonian.\par
 Note that the resulting flow equations \ref{feq_won_I}-\ref{feq_won_IV} suggest that they are exact in the sense that if the flow is completely traversed, the flow Hamiltonian will be exactly diagonal because in first order
 \begin{subequations}
@@ -39,7 +39,7 @@ and the LLP-Hamiltonian becomes:
 It would be conceivable to extend our flow equations to allow for linear terms in our Hamiltonian. In this case, it would again be possible to obtain a closed set of flux equations. \\
 However, this can be avoided because the linear terms  $W_k \left(\AN_{ k}+\CR_{- k}\right)$ can be eliminated by applying the displacement operator 
 \begin{equation}
-\hat D(\underline\alpha)=\exp\left(\sum_k\alpha_k\CR_k-\mathrm{h.c.}\right)=\exp\left(-\underline\alpha^\dagger{\underline{\underline\Omega}}\ \underline{\hat a}\right)
+\hat D(\underline\alpha)\defeq\exp\left(\sum_k\alpha_k\CR_k-\mathrm{h.c.}\right)=\exp\left(-\underline\alpha^\dagger{\underline{\underline\Omega}}\ \underline{\hat a}\right)
 \end{equation}
 to the discrete LLP-Hamiltonian \cite{PracticalTraining}. Here we introduced the symplectic $2N\times2N$ matrix
 \begin{equation}\label{symplectic_matrix}
@@ -170,7 +170,7 @@ Furthermore, applying the recurrence relation \ref{recurrence relation} can be u
 \CR_q\NO\hat O\NO &= \NO \CR_q\hat O\NO
 \end{align}
 \end{subequations}
-\subsection{Deriving the Flow Equations}
+\subsection{Applying the Formalism}
 Following the same same procedure as in the heavy impurity limit, we first start by evaluating the canonical generator. It turns out that $\hat\eta$ conserves the structure of the original Hamiltonian (cf. eq. \ref{psiphitheta_def}) while the flow Hamiltonian does not (cf. eq. \ref{com_eta_Hint_A} ff.) . Therefore, the sequence of higher and higher order terms has to be truncated at some point as discussed in Section \ref{Truncation Schemes}. 
 Three simplifications will be made in order to obtain closed expressions for the flow equations:
 \begin{itemize}
@@ -182,7 +182,7 @@ After evaluating the commutator of $\hat\eta$ and the full Hamiltonian where we 
 The next section will address whether we can expect this to hold true.
 
 
-\subsection{Discussion of the Applicability of the Flow Equations to the Full LLP-Hamiltonian}
+\subsection{Discussion of the Applicability of the Flow Equations}
 Discretizing $\ham_{\mathrm{LLP}}(p)$ can be done analogously to how it was done in the heavy impurity limit. We obtain:
 \begin{align}
 \ham_{\mathrm{LLP}}^{\mathrm{discr.}}(P) &=g_{IB}n_0+\frac{1}{2M}\left(p-\Sum_k k \CR_k\AN_k \right)^2+\Sum_k\omega_{ k}\CR_{ k}\AN_{ k}\nonumber\\
