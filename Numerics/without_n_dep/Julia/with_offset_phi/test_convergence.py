@@ -29,6 +29,36 @@ def unpack_arr(flat,N):
 
 fig,(ax1,ax2)=plt.subplots(2,1,figsize=(10,10/np.sqrt(2)),sharex=True) 
 
+ax3 = fig.add_subplot(111, zorder=-1)
+#ax3.grid(visible=True, which='minor', color="grey", linestyle='-',linewidth=.008, alpha=.2)
+
+for _, spine in ax3.spines.items():
+   spine.set_visible(False)
+#ax1.grid()
+#ax2.grid()
+
+
+ax3.tick_params(labelleft=False, labelbottom=False, left=False, right=False,length=0)
+ax3.set_xlim(0.00000001,30)
+#
+ax3.get_shared_x_axes().join(ax3, ax1)
+ax3.set_xscale('symlog')
+
+#ax2.set_xscale('log')
+#ax3.grid(axis="x")
+ax3.tick_params(labelleft=False, labelbottom=False, left=False, right=False,length=0)
+ax1.grid(visible=True, which='minor', color="grey", linestyle='-',linewidth=.008, alpha=.2)
+ax2.grid(visible=True, which='minor', color="grey", linestyle='-',linewidth=.008, alpha=.2)
+#ax3.set_xticks([])
+ax3.set_yticks([])
+#print(ax3.xaxis.get_minor_locator())
+#ax3.set_xticks([0,1,10])
+
+"""
+for line in ax3.get_xminorgridlines():
+    print(line.set_color('red'))
+"""
+
 #ax1.grid(visible=True, which='minor', color="grey", linestyle='-',linewidth=.008, alpha=.2)
 #ax2.grid(visible=True, which='minor', color="grey", linestyle='-',linewidth=.008, alpha=.2)
 for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file]:
@@ -96,8 +126,21 @@ kwargs.update(transform=ax2.transAxes)  # switch to the bottom axes
 ax2.plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
 ax2.plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagonal
 
+#ax1.grid(visible=True, which='minor', color="grey", linestyle='-',linewidth=.008, alpha=.2)
+#ax2.grid(visible=True, which='minor', color="grey", linestyle='-',linewidth=.008, alpha=.2)
+
+#ygridlines = ax3.get_xticklines()
+
+#gridline_of_interest = ygridlines[0]
+#gridline_of_interest.set_visible(False)
+
 #ax1.legend(loc='best',fontsize=14,ncols=2)
+for xmin in ax3.xaxis.get_minorticklocs():
+  if not xmin == 30:
+      ax3.axvline(x=xmin, linestyle='-',linewidth=.008, alpha=.2,color='grey')
+
 plt.tight_layout()
+fig.subplots_adjust(wspace=0, hspace=.03)
 plt.savefig('Convergence_analysis,N=40.pdf',dpi=300)
 plt.show()
 

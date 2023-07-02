@@ -16,7 +16,7 @@ plt.rcParams.update({
     "text.usetex": True
 })
 
-N = 200
+N = 40
 lambda_UV = 10
 
 def unpack_arr(flat,N):
@@ -30,8 +30,8 @@ def unpack_arr(flat,N):
     return om0,V,W,eps
 
 def animate_VW(inp,t,eta):
-    fps = 50
-    nSeconds = 10
+    fps = 25
+    nSeconds = 8
 
     snapshots_V = [ unpack_arr(np.abs(inp.T[i]),N)[1] for i in range( nSeconds * fps ) ]
     snapshots_W = [ unpack_arr(np.abs(inp.T[i]),N)[2] for i in range( nSeconds * fps ) ]
@@ -72,14 +72,14 @@ def animate_VW(inp,t,eta):
                                    interval = 500 / fps, # in ms
                                    )
     
-    anim.save('test_anim,eta=%.3f_full.mp4'%eta, fps=fps, extra_args=['-vcodec', 'libx264'])
+    anim.save('test_anim,eta=%.3f_full.mp4'%eta, fps=fps, extra_args=['-vcodec', 'libx264'],dpi=300)
     
 #animate_VW(inp,t)
-PATH  = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=200,different etas_full_with_phi=0.1\\"
+PATH  = "C:\\Users\\Jan-Philipp\\Documents\\Eigene Dokumente\\Physikstudium\\6. Semester\\Bachelorarbeit_sol_files\\N=40,different etas_full_with_phi,phi=0.1\\"
 for FILENAME in [file for file in os.listdir(PATH) if not "_t" in file]:
-    print("Animating "+FILENAME)
     eta = float(FILENAME.split(',')[0].split('=')[-1])
-    if not (eta == 0 or eta == -2 or eta==-10):
+    if not (eta == 0 or eta == -2 or eta==-10) and 2*eta%1==0 and eta > 0:
+        print("Animating "+FILENAME)
         t_filename = "sol_full_t"+FILENAME[13:]
         path_inp = PATH+FILENAME
         path_t = PATH+t_filename

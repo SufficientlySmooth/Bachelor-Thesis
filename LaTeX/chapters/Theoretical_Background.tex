@@ -1,41 +1,43 @@
 \chapter{Theoretical Background}\label{Theoretical Background}
 \section{The Flow Equation Approach}
-This section is intended to be a concise and rather operational overview on the flow equation approach. S. Kehrein \cite{kehrein2006flow}  provides an excellent in-depth introduction on which most of the discussion in this section is based.
+In this section we introduce the mechanism and general idea behind the flow equation approach. Then we will axiomatically define normal ordering for its relevance to our subsequent discussion about truncation schemes. \\
+After that, we will give a brief overview of the Bose polaron problem. The Hamiltonian which will be introduced there can be brought into the purely quadratic form required for our flow equations derived in Section \ref{Determining the Flow Equations} by a Lee-Low-Pines transformation, an introduction to which will be given at the end of this section. %. This is why we close this section by sketching the idea behind the Lee-Low-Pines transformation.
 \subsection{General Mechanism}\label{General Mechanism}
-We start with some Hamiltonian $\ham$ and our goal is to continuously transform $\ham$ into an unitarily equivalent diagonal Hamiltonian. This sequence of transformations $\hat U$ is ordered by a flow parameter $\lambda$ with $\left[\lambda\right]=\mathrm{Energy}^{-2}$ and will be chosen such that the off-diagonal elements in  
+Since this section is intended to be a concise and rather operational overview on the flow equation approach, we refer to S. Kehrein's in-depth and very pedagogical introduction for further reading \cite{kehrein2006flow}. This is also the textbook on which this section is based on, unless indicated otherwise.\par 
+Our starting point will be some Hamiltonian $\ham$ and our goal will be to continuously transform $\ham$ into an unitarily equivalent diagonal Hamiltonian. This sequence of transformations $\hat U$ is ordered by a flow parameter $\lambda$ with $\left[\lambda\right]=\mathrm{Energy}^{-2}$ and will be chosen such that the off-diagonal elements in  
 \begin{equation}\label{FEQ_U_def}
 \ham(\lambda)=\hat U(\lambda)\ham (\lambda = 0)\hat U^\dagger (\lambda)
 \end{equation}
 vanish in the limit $\lambda\rightarrow\infty$. $\hat U(\lambda)$ is connected to $\hat\eta(\lambda)$ by
 \begin{equation}
-\hat\eta(\lambda)\defeq\frac{\mathrm d\hat U(\lambda)}{\mathrm d\lambda}\hat U^\dagger(\lambda)%\defeq\hat\eta
+\hat\eta(\lambda)\defeq\frac{\mathrm d\hat U(\lambda)}{\mathrm d\lambda}\hat U^\dagger(\lambda)=-\hat\eta^\dagger(\lambda)%\defeq\hat\eta
 \end{equation}
 %Stone's theorem on one-parameter unitary groups \cite{doi:10.1073/pnas.16.2.172} guarantees the existence of $\hat \eta(\lambda)$ which is anti-hermitian, i.e. $\hat\eta(\lambda) = -\hat\eta^\dagger(\lambda)$, and fulfills 
 %\begin{equation}
 %\hat U(\lambda) = e^{\hat\eta(\lambda)}.
 %\end{equation} 
-where $\hat\eta(\lambda)$ is called the generator of the unitary transformation $\hat U(\lambda)$ or the generator of the flow. Applying the Baker-Campbell-Hausdorff formula to equation \ref{FEQ_U_def}, or simply differentiating both sides of equation \ref{FEQ_U_def} with respect to $\lambda$, yields
+where $\hat\eta(\lambda)$ is called the antihermitian generator of the unitary transformation $\hat U(\lambda)$ or simply the generator of the flow. Applying the Baker-Campbell-Hausdorff formula to equation \ref{FEQ_U_def}, or simply differentiating both sides of equation \ref{FEQ_U_def} with respect to $\lambda$, yields
 \begin{equation}\label{FEQ_ODE_def}
 \frac{\mathrm d\ham(\lambda)}{\mathrm d\lambda} = \left[\hat\eta(\lambda),\ham(\lambda)\right].
 \end{equation}
 This differential equation is what we will refer to as the flow equation for the Hamiltonian $\ham (\lambda)$. 
 The explicit computation of the unitary transformation from the generator of the transformation is generally complicated and usually not of interest because it is not required for finding the diagonal Hamiltonian. It involves the $\lambda$-ordering operator 
 \begin{equation}
-T_\lambda\left(\hat\eta(\lambda_1)\ldots\hat\eta(\lambda_n)\right)\defeq\hat\eta(\max\limits_{i=1,\ldots,n}\lambda_i)\ldots\hat\eta(\min\limits_{i=1,\ldots,n}\lambda_i)
+\hat T_\lambda\left(\hat\eta(\lambda_1)\ldots\hat\eta(\lambda_n)\right)\defeq\hat\eta(\max\limits_{i=1,\ldots,n}\lambda_i)\ldots\hat\eta(\min\limits_{i=1,\ldots,n}\lambda_i)
 \end{equation}
-which commutes generators with the larger flow parameters further to the left.
-Then 
+which commutes generators with larger flow parameters further to the left.
+Then the unitary transformation is given by
 \begin{align}
-\hat U(\lambda)&=T_\lambda\exp\left(\int_0^\lambda\mathrm d\lambda^\prime \hat\eta(\lambda^\prime)\right)\\
-&=1+\Sum_{n=1}^\infty \frac1{n!}\int_0^\lambda\mathrm d\lambda_1\ldots\mathrm d\lambda_nT_\lambda\left(\hat\eta(\lambda_1)\ldots\hat\eta(\lambda_n)\right).
+\hat U(\lambda)&=\hat T_\lambda\exp\left(\int_0^\lambda\mathrm d\lambda^\prime \hat\eta(\lambda^\prime)\right)\\
+&=1+\Sum_{n=1}^\infty \frac1{n!}\int_0^\lambda\mathrm d\lambda_1\ldots\mathrm d\lambda_n\hat T_\lambda\left(\hat\eta(\lambda_1)\ldots\hat\eta(\lambda_n)\right).
 \end{align}
 From now on, the $\lambda-$dependence of $\hat\eta,\ham$ and $\hat U$ will usually be notationally dropped. \\
 For every $\hat U$ there exists one and only one $\hat\eta$ which generates the unitary transformation defined by $\hat U$. However, there may be several $\hat U$ which let $\ham(\lambda = 0)\eqdef \ham^{(0)}$ flow to (the evidently unique) diagonal Hamiltonian $\ham(\lambda=\infty)\eqdef \ham^{(\infty)}$ so in general there is more than one good choice for $\hat\eta$. \\
-It turns out that in most cases 
+It turns out that in most cases setting
 \begin{equation}\label{FEQ_eta_def}
 \hat\eta = \left[\ham_{\mathrm{diag.}},\ham \right],
 \end{equation}
-where $\ham_{\mathrm{diag.}}$ is the diagonal part of the Hamiltonian, achieves the desired diagonalization.  \\
+where $\ham_{\mathrm{diag.}}$ is the diagonal part of the Hamiltonian, achieves the desired diagonalization.  \par
 We are often in a situation where a given system described by $\ham_0$ with known eigenenergies  and eigenstates is well understood if certain interaction terms $\ham_{\mathrm{int}}$ are omitted. In this case, we can write $\ham = \ham_0 + \ham_{\mathrm{int}}$ and thus
 \begin{equation}\label{FEQ_can_eta_def}
 \hat\eta = \left[\ham_0, \ham_{\mathrm{int}}\right].
@@ -49,7 +51,8 @@ It can be proved \cite[pp. 27-28]{kehrein2006flow} that this is always the case 
 \begin{align}\label{useless_check}
 \mathrm{Tr}\left(\ham_0\ham_{\mathrm{int}}\right)=\mathrm{Tr}\left(\frac{\mathrm d\ham_0}{\mathrm d\lambda} \ham_{\mathrm{int}}\right)=0
 \end{align}
-Note, however, that a complete diagonalization of the Hamiltonian may not always be worthwhile, since for practically relevant Hamiltonians one almost always has to introduce approximations in order to obtain closed-form flow equations. Therefore, it may sometimes be desirable to perform only weak unitary transformations by designing the flow such that it converges only to the block diagonal form \cite{Wegner_2006}. In this thesis we will construct the flow so that it in fact flows to a diagonal Hamiltonian, but it is still good to keep in mind that the flow equation approach can be useful even if it is only used to transform the Hamiltonian into a block-diagonal form that may be easier to diagonalize by other methods such as block-wise exact diagonalization.\\ 
+Note, however, that a complete diagonalization of the Hamiltonian may not always be worthwhile, since for practically relevant Hamiltonians one almost always has to introduce approximations in order to obtain closed-form flow equations \cite{Wegner_2006}. Thus, in some cases, one might want to perform only weak unitary transformations, making the flow converge only to a block diagonal form \cite{Wegner_2006}. \\
+In this thesis we will construct the flow so that it in fact flows to a diagonal Hamiltonian, but it is still good to keep in mind that the flow equation approach can be useful even if it is only used to transform the Hamiltonian into a block diagonal form that may be easier to diagonalize by other methods such as block-wise exact diagonalization.\\ 
 In the following section, we will introduce normal ordering - an important concept for controlling the error in the aforementioned often-needed approximations.
 \subsection{Normal Ordering}
 Normal ordering plays an essential role in successfully applying to flow equation approach to realistic Hamiltonians. In our definition of normal ordering, we closely follow \cite[pp. 62-63]{kehrein2006flow} which in turn is based upon unpublished notes by F. Wegner.\\
@@ -62,7 +65,7 @@ Then it follows that
 \left[\hat\alpha_k,\hat\alpha_l\right] = C_{k,l}-C_{l,k}
 \end{equation}
 which can be proved readily by applying the canonical commutation relations to equation \ref{contractions_def} and by using the normalization of $|\psi_{NO}\rangle$.
-Normal ordering of a operator $\hat O$ composed of creation and annihilation operators is defined by the following three rules:
+The normal ordering of an operator $\hat O$ composed of creation and annihilation operators is defined by the following three rules:
 \begin{enumerate}
 \item c-numbers are unaffected by normal ordering:
 \begin{equation}
@@ -83,19 +86,20 @@ Furthermore, when the normal ordering is performed with respect to the vacuum, n
 \subsection{Truncation Schemes}\label{Truncation Schemes}
 The crux of the flow equation approach lies in the fact that for many Hamiltonians, the flow creates higher and higher interaction terms. To illustrate this, consider a Hamiltonian which can be split into a quadratic $\ham_0$ and a quartic $\ham_{\mathrm{int}}$, i.e. they contain terms with two respectively four creation or annihilation operators. \\
 Evaluating the commutator \ref{FEQ_can_eta_def} yields a generator which is still of the same structure as the original Hamiltonian. However, evaluating equation \ref{FEQ_ODE_def}  yields fourth order terms from the commutators of quadratic and quartic terms and sixth order terms from the commutators of quartic and quartic terms. This might suggest that the flow Hamiltonian is of order six, but then also the commutators of these sixth order terms with the canonical generator with terms up to quartic order have to be considered, which in turn creates terms of order eight and so forth. \par
-It follows that, for practical purposes, this sequence must be truncated at some point. Normal ordering can be thought of as a procedure to organize the higher order terms generated in the flow, because the normal ordered expression consisting of all quadratic creation or annihilation operator terms contains all the information about the particle energies, and the normal ordered expression consisting of all quartic creation or annihilation operator terms contains all the information about the two-particle interaction and so on. Without normal ordering, for example, fourth-order terms might also contribute to one-particle energies. Thus, a normally ordered expression organizes its terms by the order of their interaction. Since higher order interactions generally contribute less than lower order interactions, this is the correct way to truncate a sequence. \par
+It follows that, for practical purposes, this sequence must be truncated at some point. Normal ordering can be thought of as a procedure to organize the higher order terms generated in the flow, because the normal ordered expression consisting of all quadratic creation or annihilation operator terms contains all the information about the particle energies, and the normal ordered expression consisting of all quartic creation or annihilation operator terms contains all the information about the two-particle interaction and so on \cite{kehrein2006flow}. Without normal ordering, for example, fourth-order terms might also contribute to one-particle energies. Thus, a normally ordered expression organizes its terms by the order of their interaction. Since higher order interactions generally contribute less than lower order interactions, this is the correct way to truncate a sequence. \par
 With respect to which state the Hamiltonian should be normal ordered, i.e. with respect to which state the contractions \ref{contractions_def} should be defined, is subtle. It should be defined with respect to the ground state $|GS\rangle$ of the diagonal Hamiltonian $\ham^{(\infty)}$, because we want the interaction terms to be ordered by their interaction order in our actual physical system. But there are two problems with this: First, the ground state of the diagonal Hamiltonian is not necessarily known; second, this state changes because the basis changes at each step of the flow, i.e. 
 \begin{equation}
 |GS(\lambda)\rangle = \hat U(\lambda)\hat U^\dagger(\lambda=\infty)|GS\rangle.
 \end{equation}
 Intuitively, this is clear: We first let the flow run backwards from $\lambda=\infty$ to $\lambda = 0$ and then let $|GS(\lambda=0)\rangle$ flow until $|GS(\lambda)\rangle$ which is the correct ground state in the basis of a given point $\lambda$ in the flow.\\
 A possible solution to our two problems is to first start with normal ordering w.r.t. some arbitrary state (e.g. the vacuum) to get a first guess for the ground state of the diagonal Hamiltonian and to iteratively improve that guess by repeatedly traversing the flow. \par
-Although this method has not found widespread adoption when using the flow equation approach because the error induced by a \grqq na\"ive\grqq\  normal ordering prescription is usually not large, and it may sometimes be easier just to consider more terms in the flow instead of working with the correct normal ordering prescription, it is important not to forget that not all normal ordered expansions and truncation schemes are equally good and can introduce differently sized errors.
+Although this method has not found widespread adoption when using the flow equation approach because the error induced by a \grqq na\"ive\grqq\  normal ordering prescription is usually not large \cite{kehrein2006flow}, and it may sometimes be easier just to consider more terms in the flow instead of working with the correct normal ordering prescription, it is important not to forget that not all normal ordered expansions and truncation schemes are equally well-behaved and can introduce differently sized errors.
 
 \section{The Bose Polaron Problem}
 \subsection{(Beyond) The Fröhlich Hamiltonian}\label{(Beyond) The Fröhlich Hamiltonian}
-The Fröhlich Hamiltonian is a model Hamiltonian that describes the interaction between a single quantum particle and a phonon reservoir, such as a crystal lattice or a Bose-Einstein condensate (BEC). It was introduced by Herbert Fröhlich in 1954 to study the effect of electron-phonon coupling on the electrical conductivity of polar crystals \cite{doi:10.1080/00018735400101213}. The Fröhlich Hamiltonian can also be used to describe the interaction of an impurity with the Bogoliubov phonons of an BEC% or an lattice of atoms
-, which leads to the formation of a quasiparticle called the Bose polaron because the impurity atom becomes \grqq dressed\grqq\ in a cloud of phonons. This dressing changes important properties of the impurity, such as its effective mass and mobility.\\ 
+The Fröhlich Hamiltonian is a model Hamiltonian that describes the interaction between a single quantum particle and a phonon reservoir, such as a crystal lattice.% or a Bose-Einstein condensate (BEC) \cite{Grusdt_2017}. 
+It was introduced by Herbert Fröhlich in 1954 to study the effect of electron-phonon coupling on the electrical conductivity of polar crystals \cite{doi:10.1080/00018735400101213} but can also be used to describe the interaction of an impurity with the Bogoliubov phonons of an BEC \cite{Myśliwy2020}.% or an lattice of atoms  
+This interaction leads to the formation of a quasiparticle called the Bose polaron because the impurity atom becomes \grqq dressed\grqq\ in a cloud of phonons, which changes important properties of the impurity, such as its effective mass and mobility \cite{Grusdt_2017}.\\ 
 We follow Grusdt \emph{et al.} \cite{Grusdt_2017} and write the Fröhlich Hamiltonian in one dimension in the following form:
 \begin{equation}\label{Fröhlich}
 \ham_F = g_{IB}n_0+\frac{\hat p^2}{2M}+\int\mathrm d k\omega_{ k}\CR_{ k}\AN_{ k}+\sqrt{\frac{n_0}{2\pi}}g_{IB}\int\mathrm d k W_k e^{ik\hat x}\left(\AN_{ k}+\CR_{- k}\right)
@@ -105,7 +109,7 @@ Here $g_{IB}$ is the boson-impurity coupling constant which characterizes the st
 w_k=ck\sqrt{1+\frac12\xi^2k^2}
 \end{equation}
 where we introduced $\xi$ as the healing length %of the Bose condensate 
-and $c$ as the speed of sound.% in the condensate. 
+and $c$ as the speed of sound. % in the condensate. 
 The last term describes interactions between the impurity and the phonons. It can be thought of modeling a process where a phonon in mode $k$ is first absorbed and then reemitted as a phonon in mode $-k$ with an appropriate change in both amplitude and phase. For this process, the scattering amplitude is
 \begin{equation}\label{W_k_def}
 W_k = \left(\frac{(\xi k)^2}{2+(\xi k)^2}\right)^{1/4}
@@ -116,7 +120,7 @@ It has been shown that in order to accurately describe the effective mass of Bos
 \ham = \ham_F + \ham_{2\mathrm{ph}}.
 \end{equation}
 It should be noted at this point that a 1D model is not only interesting from a theoretical perspective, since experimental setups in one dimension are possible and have successfully been realized \cite{Catani}. The inclusion of two-phonon scattering terms leads to very good agreement of experiment and theory when the coupling between the impurity and the phonons is not too strong \cite{Grusdt_2017}. \\
-The aforementioned two-phonon scattering terms are quadratic and are again proportional to the boson-impurity coupling constant:
+The aforementioned two-phonon scattering terms are quadratic and are again proportional to the boson-impurity coupling constant \cite{Grusdt_2017, PracticalTraining}:
 \begin{equation}
 \ham_{2\mathrm{ph}}=\frac{g_{IB}}{2\pi}\int\mathrm d k\mathrm d k^\prime \left(c_k\CR_k-s_k\AN_{-k}\right)\left(c_{k^\prime}\AN_{k^\prime}-s_{k^\prime}\CR_{-k^\prime}\right)e^{i(k-k^\prime)x}
 \end{equation}
