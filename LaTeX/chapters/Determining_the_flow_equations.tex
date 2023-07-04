@@ -131,7 +131,7 @@ The values $\{\lambda_j^{(*)}\}_{j=1,...,N}$ can be obtained by solving the eige
 \begin{equation}\label{GS_energy_formula}
 E_{GS}=E_0-\frac12\Sum_k A_{k,k}+\Sum_k \lambda_k
 \end{equation}
-Additionally, we can make use of the fact that the real eigenvalues always occur in pairs $(\lambda_j,-\lambda_j^*)$. To see this, we introduce the operator \begin{equation}\underline{\underline{\vartheta}}:\C^{2N}\rightarrow \C^{2N},\begin{pmatrix} \underline u\\ \underline v\end{pmatrix}\mapsto \begin{pmatrix} \underline v^*\\ \underline u^*\end{pmatrix}\ \mathrm{where}\ \underline u,\underline v\in\C^N.\end{equation}
+Furthermore, we can make use of the fact that the real eigenvalues always occur in pairs $(\lambda_j,-\lambda_j^*)$. To see this, we introduce the operator \begin{equation}\underline{\underline{\vartheta}}:\C^{2N}\rightarrow \C^{2N},\begin{pmatrix} \underline u\\ \underline v\end{pmatrix}\mapsto \begin{pmatrix} \underline v^*\\ \underline u^*\end{pmatrix}\ \mathrm{where}\ \underline u,\underline v\in\C^N.\end{equation}
 The relations 
 \begin{equation}\label{theta_Omega_relation}
 \left\{\underline{\underline{\vartheta}},{\underline{\underline{\Omega}}}\right\}=0
@@ -144,7 +144,8 @@ The $ \lambda_j$ in equation \ref{diagonalization_bog_crux} are characterized by
 \end{equation}
 The corresponding eigenvector to $-\lambda_j^*$ always has a negative matrix element. This follows immediately from the relation \ref{theta_Omega_relation} and the fact that obviously $\underline{\underline{\vartheta}}^2=\underline{\underline{E}}_{2N}$.\\
 It is necessary to classify the eigenvalues in this way, because only then the symplectic condition \ref{symplectic_U_B} holds.  \par
-This condition cannot be satisfied if not all eigenvalues are real. For example, if one eigenvalue is in $i\R$, the corresponding state is clearly not describable by ladder operators, i.e. the spectrum is no longer discretized, and is (dynamically) unstable. Then any small perturbation might irreversibly change the systems state from equilibrium \cite{PhysRevA.98.033610}. If at least one real eigenvalue is strictly negative, this indicates "a state [which] cannot be created adiabatically by gradually reducing the entropy associated with the thermal energy" \cite{PhysRevA.98.033610}. This is called a thermodynamic instability. Both types of instabilities are observed when the results of a Bogoliubov transformation are compared with the flow equations in Section \ref{Results}.
+This condition cannot be satisfied if not all eigenvalues are real. For example, if one eigenvalue is in $i\R$, the corresponding state is clearly not describable by ladder operators, i.e. the spectrum is no longer discretized, and is (dynamically) unstable. Then any small perturbation might irreversibly change the systems state from equilibrium \cite{PhysRevA.98.033610}. If at least one real eigenvalue is strictly negative, this indicates "a state [which] cannot be created adiabatically by gradually reducing the entropy associated with the thermal energy" \cite{PhysRevA.98.033610}. This is called a thermodynamic instability. In our case this means the existence of a bound state whose binding energy is given by the (single) negative eigenvalue.\\
+Both types of instabilities are observed when the results of a Bogoliubov transformation are compared with the flow equations in Section \ref{Results}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{With Dependence on the Occupation Numbers}
 \subsection{Useful Preliminaries}
@@ -215,7 +216,7 @@ Considering the vacuum, 0 is in the spectrum of \ref{dangerous_maths} iff
 \begin{equation}\label{unhappy_p}
 \frac{q-q^\prime}{2M}\left(2p+q-q^\prime\right)+\omega_{q^\prime}-\omega_q + \frac{g_{IB}\Delta k}{2\pi}(c_{q^\prime}^2+s_{q^\prime}^2-c_{q}^2-s_{q}^2)=0.
 \end{equation}
-This condition can hold for at most one $p$. For most other values of $p$, \ref{nasty} should be relatively well-behaved.
+For fixed $q,q^\prime$ this condition can hold for at most one $p$. For most other values of $p$, \ref{nasty} should be relatively well-behaved.
 %Thanks to the term $\Sum_k k \hat n_k$ and because $q\neq q^\prime$ this operator is never the zero operator. 
 %For fixed $q\neq q^\prime$ there will exist one and only one $p$ s.t. the expectation value of \ref{n_test_eq_thinking} is 0. For all other values of $p$, looking at the flow equations in first order, we expect the coefficients in front of $\CR_{q}\AN_{q^\prime}$ to vanish in the limit $\lambda\rightarrow\infty$.
 The same reasoning applies to $\hat H(p,\hat n_p\pm1,\hat n_{p^\prime}\pm 1)-\hat H(p)$ and $\hat W_{p,p^\prime}$ to reach a similar conclusion. Of course, for the countable number of original eigenstates different from the vacuum analogous conditions to equation \ref{unhappy_p} can be derived.\\
